@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { dict, Lang } from '../../components/i18n';
 
