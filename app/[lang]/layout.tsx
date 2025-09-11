@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import '../../styles/globals.css';
 import Link from 'next/link';
-import { dict, Lang } from '@/components/i18n';
+import { dict, Lang } from '../../components/i18n';
 
 export async function generateMetadata({ params }: { params: { lang: Lang } }): Promise<Metadata> {
   const t = dict[params.lang];
