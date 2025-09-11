@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { dict, Lang } from '@/components/i18n';
+import { dict, Lang } from '../../components/i18n';
 
 export default function Page({ params }: { params: { lang: Lang } }) {
   const t = dict[params.lang];
