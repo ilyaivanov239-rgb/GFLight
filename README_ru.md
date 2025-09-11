@@ -6,6 +6,7 @@
 ```bash
 npm i
 npm run dev
+
 ```
 Откройте http://localhost:3000 — будет редирект на `/en`.
 
