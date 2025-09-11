@@ -1,21 +1,24 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const PUBLIC_FILE = /\.(.*)$/;
+// Обрабатываем только "страницы", исключаем статику и API
+export const config = {
+  matcher: ['/((?!_next|.*\\..*|api).*)'],
+};
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // пропускаем статику и API
-  if (PUBLIC_FILE.test(pathname) || pathname.startsWith('/api')) return;
-
-  // если уже есть язык в пути — ничего не делаем
-  const hasLocale = ['en','ru','pt'].some(
+  // если уже есть язык в пути — просто пропускаем дальше
+  const hasLocale = ['en', 'ru', 'pt'].some(
     (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`)
   );
-  if (hasLocale) return;
+  if (hasLocale) {
+    return NextResponse.next();
+  }
 
-  // иначе редиректим на английский
-  req.nextUrl.pathname = `/en${pathname}`;
-  return NextResponse.redirect(req.nextUrl);
+  // иначе редиректим на английскую версию
+  const url = req.nextUrl.clone();
+  url.pathname = `/en${pathname}`;
+  return NextResponse.redirect(url);
 }
