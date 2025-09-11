@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "title": "Glare Free Light — Iluminação sem encandeamento",
+    "description": "Iluminação para interiores, fachadas e paisagens. Conforto visual elevado, óptica precisa e integração discreta."
+  },
+  "nav": {
+    "about": "Sobre",
+    "services": "Serviços",
+    "projects": "Portfólio",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "badge": "Iluminação técnica sem encandear",
+    "title": "A luz muda tudo.",
+    "subtitle": "Projetamos iluminação para interiores, fachadas e paisagens — juntando óptica de precisão, estética e conforto visual."
+  },
+  "cta": {
+    "talk": "Falar com especialista",
+    "viewProjects": "Ver projectos"
+  },
+  "about": {
+    "eyebrow": "Quem somos",
+    "title": "Especialistas em luz sem brilho indesejado",
+    "paragraphs": [
+      "Trabalhamos com arquitectos, designers e clientes finais em Portugal e na EMEA. Da concepção à entrega, garantimos fotometria adequada e integração discreta.",
+      "Há mais de dez anos a conceber e executar projectos de iluminação de luxo — museus, fachadas e interiores privados."
+    ],
+    "bullets": [
+      "Cálculo luminotécnico & UGR",
+      "Selecção de ópticas e cut‑off",
+      "Detalhes construtivos prontos a instalar",
+      "Mockups e afinações em obra"
+    ],
+    "factsTitle": "Factos rápidos",
+    "baseLabel": "Base",
+    "segmentsLabel": "Segmentos",
+    "segments": "Residencial, Horeca, Retalho, Escritórios",
+    "collabLabel": "Colaboração",
+    "collab": "Parcerias com ateliers de arquitectura"
+  },
+  "services": {
+    "eyebrow": "O que fazemos",
+    "title": "Serviços de iluminação end‑to‑end",
+    "items": [
+      {
+        "title": "Projecto de iluminação",
+        "desc": "Conceito, cálculo e especificação com foco no conforto e eficiência."
+      },
+      {
+        "title": "Fornecimento & comissionamento",
+        "desc": "Luminárias, drivers e controlo; mockups e afinação no local."
+      },
+      {
+        "title": "Consultoria técnica",
+        "desc": "Auditorias, UGR/GR, luminâncias e conformidade normativa."
+      }
+    ]
+  },
+  "philo": {
+    "eyebrow": "Filosofia",
+    "title": "Os nossos princípios",
+    "points": [
+      "Alto conforto visual",
+      "Respeito pela arquitectura — má iluminação de fachadas pode arruinar o aspecto",
+      "Excelente leitura de fachadas e interiores à noite",
+      "Equipamento de topo",
+      "Abordagem criativa"
+    ]
+  },
+  "projects": {
+    "eyebrow": "Trabalhos",
+    "title": "Projectos em destaque",
+    "items": [
+      {
+        "title": "Museu do Hermitage",
+        "desc": "Iluminação vertical uniforme e acentos nas vitrines para volumes legíveis."
+      },
+      {
+        "title": "Museu da Cosmonáutica",
+        "desc": "Exposição a 15 m com óptica de 6° — efeito de 'luz lunar' com sombras contrastadas."
+      },
+      {
+        "title": "Museu Ferroviário Russo",
+        "desc": "Projectores de calha, óptica estreita e elevado conforto visual."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Fale connosco",
+    "formTitle": "Enviar mensagem",
+    "name": "Nome",
+    "subject": "Assunto",
+    "message": "Conte-nos sobre o projecto",
+    "privacyNote": "Ao enviar, concorda com a nossa política de privacidade.",
+    "send": "Enviar",
+    "mailSubject": "Pedido de orçamento"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  }
+}

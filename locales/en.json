@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "title": "Glare Free Light — Lighting design without glare",
+    "description": "Interior, facade and landscape lighting. High visual comfort, precise optics, and discreet integration."
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "projects": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Technical lighting without glare",
+    "title": "Light changes everything.",
+    "subtitle": "We design lighting for interiors, facades and landscapes — combining precise optics, aesthetics and visual comfort."
+  },
+  "cta": {
+    "talk": "Talk to an expert",
+    "viewProjects": "See projects"
+  },
+  "about": {
+    "eyebrow": "Who we are",
+    "title": "Specialists in light without unwanted glare",
+    "paragraphs": [
+      "We work with architects, designers and end clients across Portugal and EMEA. From concept to delivery we ensure proper photometry and discreet integration.",
+      "Over a decade designing and executing luxury lighting projects — museums, facades and private interiors."
+    ],
+    "bullets": [
+      "Lighting calculations & UGR",
+      "Optics selection and cut-off",
+      "Build-ready details",
+      "Mockups and on-site tuning"
+    ],
+    "factsTitle": "Quick facts",
+    "baseLabel": "Base",
+    "segmentsLabel": "Segments",
+    "segments": "Residential, Hospitality, Retail, Offices",
+    "collabLabel": "Collaboration",
+    "collab": "Partnerships with architecture studios"
+  },
+  "services": {
+    "eyebrow": "What we do",
+    "title": "End‑to‑end lighting services",
+    "items": [
+      {
+        "title": "Lighting design",
+        "desc": "Concept, calculation and specifications focused on visual comfort and efficiency."
+      },
+      {
+        "title": "Supply & commissioning",
+        "desc": "Luminaires, drivers and control; mockups and on‑site aiming."
+      },
+      {
+        "title": "Technical consulting",
+        "desc": "Audits, UGR/GR, luminance and code compliance."
+      }
+    ]
+  },
+  "philo": {
+    "eyebrow": "Philosophy",
+    "title": "Our principles",
+    "points": [
+      "High visual comfort",
+      "Respect for architecture — poor facade lighting can ruin the appearance",
+      "Excellent nighttime reading of facades and interiors",
+      "Top‑tier equipment quality",
+      "Creative approach"
+    ]
+  },
+  "projects": {
+    "eyebrow": "Works",
+    "title": "Selected projects",
+    "items": [
+      {
+        "title": "The State Hermitage Museum",
+        "desc": "Uniform vertical lighting and accent display cases for readable volumes."
+      },
+      {
+        "title": "State Museum of Cosmonautics",
+        "desc": "15‑m exhibits with 6° optics recreating lunar lighting with strong contrast."
+      },
+      {
+        "title": "Russian Railway Museum",
+        "desc": "Track projectors, narrow optics and high visual comfort."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Get in touch",
+    "formTitle": "Send a message",
+    "name": "Name",
+    "subject": "Subject",
+    "message": "Tell us about the project",
+    "privacyNote": "By sending you agree with our privacy policy.",
+    "send": "Send",
+    "mailSubject": "Request for quote"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
