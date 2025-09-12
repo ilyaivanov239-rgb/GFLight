@@ -58,9 +58,12 @@ export default function RootLayout({
         {/* Header */}
         <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
           <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
-            <Link href={`/${params.lang}`} className="font-semibold text-lg">
-              Glare Free Light
-            </Link>
+            <Link href={`/${params.lang}`} className="select-none" aria-label="GFLight — home">
+  <span className="block text-2xl md:text-3xl leading-none tracking-tight">
+    <span className="font-extrabold">GF</span><span className="font-semibold">Light</span>
+  </span>
+</Link>
+
 
             <nav className="hidden md:flex items-center gap-8 text-[17px]">
               <a href="#about" className="hover:opacity-80 transition">{l.about}</a>
