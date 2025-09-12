@@ -19,7 +19,7 @@ export default function Page() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 max-w-3xl px-6">
           <h1 className="text-white text-4xl md:text-6xl font-bold mb-6">
             {t?.hero?.title ?? 'Glare Free Light'}
