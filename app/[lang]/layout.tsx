@@ -4,21 +4,6 @@ import Link from 'next/link';
 import '../../styles/globals.css';
 import { dict, type Lang } from '../../components/i18n'; // meta берём из словаря; меню — локальные подписи
 
-import { Manrope } from 'next/font/google';
-const manrope = Manrope({ subsets: ['latin', 'cyrillic'], weight: ['300','400','600','700','800'] });
-
-export default function RootLayout({ children, params }: { children: React.ReactNode; params:{lang:'ru'|'en'|'pt'} }) {
-  // ...
-  return (
-    <html lang={params.lang}>
-      <body className={`${manrope.className} bg-slate-50 text-slate-900 antialiased scroll-smooth`}>
-        {/* ... */}
-      </body>
-    </html>
-  );
-}
-
-
 export async function generateMetadata({
   params,
 }: {
