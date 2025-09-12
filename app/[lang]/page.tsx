@@ -45,41 +45,46 @@ const ctaContact =
 
   return (
     <main>
+     
       {/* HERO */}
-      <section
-        className="relative h-[600px] flex items-center justify-center text-center"
-        style={{
-          backgroundImage: "url('/images/bg/Hero.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
+<section
+  className="relative min-h-[480px] h-[70vh] md:h-[600px] flex items-center justify-center text-center"
+  style={{
+    backgroundImage: "url('/images/bg/Hero.jpg')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
+>
+  {/* градиент для лучшей читаемости текста */}
+  <div className="absolute inset-0 md:bg-gradient-to-r md:from-black/60 md:via-black/30 md:to-transparent bg-black/45" />
+
+  <div className="relative z-10 max-w-3xl px-6">
+    <h1 className="text-white text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] mb-4">
+      {t?.hero?.title ?? 'GFLight'}
+    </h1>
+
+    <p className="text-white/90 text-base md:text-xl leading-relaxed max-w-2xl mx-auto mb-6">
+      {t?.hero?.subtitle ??
+        'We design lighting for interiors, facades and landscapes — combining optics, aesthetics and visual comfort.'}
+    </p>
+
+    {/* кнопки: на мобиле — в столбик */}
+    <div className="mt-2 flex flex-col sm:flex-row justify-center gap-3 w-full max-w-md mx-auto">
+      <Link
+        href={`/${lang}/#services`}
+        className="w-full sm:w-auto px-6 py-3 bg-white text-black rounded-xl shadow hover:bg-gray-200 transition text-center"
       >
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative z-10 max-w-3xl px-6">
-          <h1 className="text-white text-4xl md:text-6xl font-bold mb-6">
-            {t?.hero?.title ?? 'Glare Free Light'}
-          </h1>
-          <p className="text-white/90 text-lg md:text-xl mb-8">
-            {t?.hero?.subtitle ?? 'Lighting solutions for interiors, facades and landscapes'}
-          </p>
-          <div className="flex justify-center gap-4">
-            <Link
-  href={`/${lang}/#services`}
-  className="px-6 py-3 bg-white text-black rounded-xl shadow hover:bg-gray-200 transition"
->
-  {ctaServices}
-</Link>
-
-<Link
-  href={`/${lang}/#contact`}
-  className="px-6 py-3 bg-transparent border border-white text-white rounded-xl hover:bg-white hover:text-black transition"
->
-  {ctaContact}
-</Link>
-
-          </div>
-        </div>
-      </section>
+        {ctaServices}
+      </Link>
+      <Link
+        href={`/${lang}/#contact`}
+        className="w-full sm:w-auto px-6 py-3 bg-transparent border border-white text-white rounded-xl hover:bg-white hover:text-black transition text-center"
+      >
+        {ctaContact}
+      </Link>
+    </div>
+  </div>
+</section>
 
      
 
