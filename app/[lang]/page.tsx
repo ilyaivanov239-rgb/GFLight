@@ -63,25 +63,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ABOUT — новый блок */}
-      <section id="about" className="py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">
-          {(t as any)?.about?.title ?? 'О нас'}
-        </h2>
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-          <p className="text-gray-700 text-lg leading-relaxed">
-            {(t as any)?.about?.text ??
-              'Проектируем свет, который подчёркивает архитектуру и не слепит. Работаем с архитекторами и дизайнерами.'}
-          </p>
-          <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50">
-            <img
-              src="/images/about/office.jpg"
-              alt="About"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
+     
 
       {/* SERVICES — твой блок, без изменений */}
       <section id="services" className="py-20 px-6 max-w-6xl mx-auto text-center">
@@ -151,6 +133,25 @@ export default function Page() {
           ))}
         </div>
       </section>
+{/* ABOUT — теперь ниже FAQ */}
+<section id="about" className="py-20 px-6 max-w-6xl mx-auto">
+  <h2 className="text-3xl font-bold mb-8">
+    {(t as any)?.about?.title ?? 'О нас'}
+  </h2>
+  <div className="grid md:grid-cols-2 gap-10 items-start">
+    <p className="text-gray-700 text-lg leading-relaxed">
+      {(t as any)?.about?.text ??
+        'Проектируем свет, который подчёркивает архитектуру и не слепит. Работаем с архитекторами и дизайнерами.'}
+    </p>
+    <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img
+        src="/images/about/office.jpg"
+        alt="About"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+</section>
 
       {/* CONTACT — твой блок, без изменений */}
       <section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
