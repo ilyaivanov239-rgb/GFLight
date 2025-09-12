@@ -56,7 +56,7 @@ const ctaContact =
   }}
 >
   {/* градиент для лучшей читаемости текста */}
-  <div className="absolute inset-0 md:bg-gradient-to-r md:from-black/60 md:via-black/30 md:to-transparent bg-black/45" />
+  <div className="absolute inset-0 md:bg-gradient-to-r md:from-black/35 md:via-black/10 md:to-transparent bg-black/15" />
 
   <div className="relative z-10 max-w-3xl px-6">
     <h1 className="text-white text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] mb-4">
