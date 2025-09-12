@@ -66,13 +66,13 @@ export default function RootLayout({
 
 
             <nav className="hidden md:flex items-center gap-8 text-[17px]">
-              <a href="#about-section" className="hover:opacity-80 transition">{l.about}</a>
-              <a href="#services" className="hover:opacity-80 transition">{l.services}</a>
-              <a href="#projects" className="hover:opacity-80 transition">{l.projects}</a>
-              <a href="#brands" className="hover:opacity-80 transition">{l.brands}</a>
-              <a href="#faq" className="hover:opacity-80 transition">{l.faq}</a>
-              <a href="#contact" className="hover:opacity-80 transition">{l.contact}</a>
-            </nav>
+  <a href="#services" className="hover:opacity-80 transition">{l.services}</a>
+  <a href="#projects" className="hover:opacity-80 transition">{l.projects}</a>
+  <a href="#brands"   className="hover:opacity-80 transition">{l.brands}</a>
+  <a href="#faq"      className="hover:opacity-80 transition">{l.faq}</a>
+  <a href="#about"    className="hover:opacity-80 transition">{l.about}</a>   {/* ← перенесли сюда */}
+  <a href="#contact"  className="hover:opacity-80 transition">{l.contact}</a>
+</nav>
 
             {/* Language switcher */}
             <div className="flex items-center gap-2">
