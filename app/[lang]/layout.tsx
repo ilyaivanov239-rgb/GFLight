@@ -3,6 +3,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import '../../styles/globals.css';
 import { dict, type Lang } from '../../components/i18n'; // meta берём из словаря; меню — локальные подписи
+import { Manrope } from 'next/font/google';
+
+const manrope = Manrope({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['300','400','600','700','800'],
+  display: 'swap',
+});
 
 export async function generateMetadata({
   params,
@@ -20,7 +27,7 @@ export async function generateMetadata({
       type: 'website',
       images: ['/og-image.jpg'],
     },
-    twitter: {
+  twitter: {
       card: 'summary_large_image',
       title: t?.meta?.title ?? 'Glare Free Light',
       description: t?.meta?.description ?? 'Technical lighting without glare',
@@ -54,25 +61,24 @@ export default function RootLayout({
 
   return (
     <html lang={params.lang}>
-      <body className="bg-slate-50 text-slate-900 antialiased scroll-smooth">
+      <body className={`${manrope.className} bg-slate-50 text-slate-900 antialiased scroll-smooth`}>
         {/* Header */}
         <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
           <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
             <Link href={`/${params.lang}`} className="select-none" aria-label="GFLight — home">
-  <span className="block text-2xl md:text-3xl leading-none tracking-tight">
-    <span className="font-extrabold">GF</span><span className="font-semibold">Light</span>
-  </span>
-</Link>
-
+              <span className="block text-2xl md:text-3xl leading-none tracking-tight">
+                <span className="font-extrabold">GF</span><span className="font-semibold">Light</span>
+              </span>
+            </Link>
 
             <nav className="hidden md:flex items-center gap-8 text-[17px]">
-  <a href="#services" className="hover:opacity-80 transition">{l.services}</a>
-  <a href="#projects" className="hover:opacity-80 transition">{l.projects}</a>
-  <a href="#brands"   className="hover:opacity-80 transition">{l.brands}</a>
-  <a href="#faq"      className="hover:opacity-80 transition">{l.faq}</a>
-  <a href="#about"    className="hover:opacity-80 transition">{l.about}</a>   {/* ← перенесли сюда */}
-  <a href="#contact"  className="hover:opacity-80 transition">{l.contact}</a>
-</nav>
+              <a href="#services" className="hover:opacity-80 transition">{l.services}</a>
+              <a href="#projects" className="hover:opacity-80 transition">{l.projects}</a>
+              <a href="#brands"   className="hover:opacity-80 transition">{l.brands}</a>
+              <a href="#faq"      className="hover:opacity-80 transition">{l.faq}</a>
+              <a href="#about"    className="hover:opacity-80 transition">{l.about}</a>
+              <a href="#contact"  className="hover:opacity-80 transition">{l.contact}</a>
+            </nav>
 
             {/* Language switcher */}
             <div className="flex items-center gap-2">
@@ -98,7 +104,7 @@ export default function RootLayout({
 
         <footer className="border-t border-slate-200 mt-24">
           <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
-            © {new Date().getFullYear()} Glare Free Light. All rights reserved.
+            © {new Date().getFullYear()} GFLight. All rights reserved.
           </div>
         </footer>
       </body>
