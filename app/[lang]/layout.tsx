@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import '../../styles/globals.css';
-import { dict, Lang } from '../../components/i18n'; // только для meta, меню — свои подписи
+import { dict, Lang } from '../../components/i18n'; // meta берём из словаря; меню — локальные подписи
 
-// Метаданные: берём безопасно из словаря, чтобы не падать, если чего-то нет
 export async function generateMetadata({
   params,
 }: {
   params: { lang: Lang };
 }): Promise<Metadata> {
-  const t = dict(params.lang) as any;
+  // ✅ dict — объект, читаем по ключу языка
+  const t = (dict as Record<Lang, any>)[params.lang];
 
   return {
     title: t?.meta?.title ?? 'Glare Free Light',
@@ -31,7 +31,7 @@ export async function generateMetadata({
   };
 }
 
-// Подписи меню — локальные (не из словаря), чтобы не ломать билд
+// Подписи меню — локальные, чтобы не зависеть от словаря и не ломать билд
 const NAV_LABELS: Record<
   Lang,
   { about: string; services: string; projects: string; brands: string; faq: string; contact: string }
@@ -89,8 +89,6 @@ export default function RootLayout({
               <a href="#faq" className="hover:opacity-80 transition">{l.faq}</a>
               <a href="#contact" className="hover:opacity-80 transition">{l.contact}</a>
             </nav>
-
-            {/* переключатель языков оставляем как был (если он у вас есть в page/hero) */}
           </div>
         </header>
 
