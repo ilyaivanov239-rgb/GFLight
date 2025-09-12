@@ -1,17 +1,64 @@
+// app/[lang]/layout.tsx
 import type { Metadata } from 'next';
-import './globals.css';
 import Link from 'next/link';
-import { dict, Lang } from '@/components/i18n';
+import '../../styles/globals.css';
+import { dict, Lang } from '../../components/i18n'; // только для meta, меню — свои подписи
 
-export const metadata: Metadata = {
-  title: 'Glare Free Light',
-  description: 'Technical lighting without glare',
-  icons: { icon: '/favicon.ico' },
-  openGraph: {
-    title: 'Glare Free Light',
-    description: 'Technical lighting without glare',
-    images: ['/og-image.jpg'],
-    type: 'website',
+// Метаданные: берём безопасно из словаря, чтобы не падать, если чего-то нет
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Lang };
+}): Promise<Metadata> {
+  const t = dict(params.lang) as any;
+
+  return {
+    title: t?.meta?.title ?? 'Glare Free Light',
+    description: t?.meta?.description ?? 'Technical lighting without glare',
+    openGraph: {
+      title: t?.meta?.title ?? 'Glare Free Light',
+      description: t?.meta?.description ?? 'Technical lighting without glare',
+      type: 'website',
+      images: ['/og-image.jpg'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t?.meta?.title ?? 'Glare Free Light',
+      description: t?.meta?.description ?? 'Technical lighting without glare',
+      images: ['/og-image.jpg'],
+    },
+    icons: { icon: '/favicon.ico' },
+  };
+}
+
+// Подписи меню — локальные (не из словаря), чтобы не ломать билд
+const NAV_LABELS: Record<
+  Lang,
+  { about: string; services: string; projects: string; brands: string; faq: string; contact: string }
+> = {
+  ru: {
+    about: 'О нас',
+    services: 'Услуги',
+    projects: 'Проекты',
+    brands: 'Бренды',
+    faq: 'FAQ',
+    contact: 'Контакты',
+  },
+  en: {
+    about: 'About',
+    services: 'Services',
+    projects: 'Projects',
+    brands: 'Brands',
+    faq: 'FAQ',
+    contact: 'Contact',
+  },
+  pt: {
+    about: 'Sobre',
+    services: 'Serviços',
+    projects: 'Projetos',
+    brands: 'Marcas',
+    faq: 'FAQ',
+    contact: 'Contato',
   },
 };
 
@@ -22,46 +69,35 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lang: Lang };
 }) {
-  const t = dict[params.lang];
-
-  // Fallback на случай, если в JSON ещё нет новых ключей
-  const nav = {
-    about: t?.nav?.about ?? (params.lang === 'ru' ? 'О нас' : params.lang === 'pt' ? 'Sobre' : 'About'),
-    services: t?.nav?.services ?? (params.lang === 'ru' ? 'Услуги' : params.lang === 'pt' ? 'Serviços' : 'Services'),
-    projects: t?.nav?.projects ?? (params.lang === 'ru' ? 'Проекты' : params.lang === 'pt' ? 'Projetos' : 'Projects'),
-    brands: t?.nav?.brands ?? (params.lang === 'ru' ? 'Бренды' : params.lang === 'pt' ? 'Marcas' : 'Brands'),
-    faq: t?.nav?.faq ?? 'FAQ',
-    contact: t?.nav?.contact ?? (params.lang === 'ru' ? 'Контакты' : params.lang === 'pt' ? 'Contatos' : 'Contact'),
-  };
+  const l = NAV_LABELS[params.lang];
 
   return (
     <html lang={params.lang}>
       <body className="bg-slate-50 text-slate-900 antialiased">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
-          <div className="container mx-auto max-w-6xl px-4">
-            <nav className="flex h-16 items-center justify-between">
-              {/* Лого/название — сделаем крупнее */}
-              <Link href={`/${params.lang}`} className="font-semibold tracking-tight text-slate-900 text-xl md:text-2xl">
-                Glare Free Light
-              </Link>
+        <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+          <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
+            <Link href={`/${params.lang}`} className="font-semibold text-lg">
+              Glare Free Light
+            </Link>
 
-              <ul className="flex items-center gap-6 md:gap-10 text-[15px] md:text-[17px]">
-                <li><Link href={`/${params.lang}#about`}    className="hover:opacity-70">{nav.about}</Link></li>
-                <li><Link href={`/${params.lang}#services`} className="hover:opacity-70">{nav.services}</Link></li>
-                <li><Link href={`/${params.lang}#projects`} className="hover:opacity-70">{nav.projects}</Link></li>
-                <li><Link href={`/${params.lang}#brands`}   className="hover:opacity-70">{nav.brands}</Link></li>
-                <li><Link href={`/${params.lang}#faq`}      className="hover:opacity-70">{nav.faq}</Link></li>
-                <li><Link href={`/${params.lang}#contact`}  className="hover:opacity-70">{nav.contact}</Link></li>
-              </ul>
+            <nav className="hidden md:flex items-center gap-8 text-[17px]">
+              <a href="#about" className="hover:opacity-80 transition">{l.about}</a>
+              <a href="#services" className="hover:opacity-80 transition">{l.services}</a>
+              <a href="#projects" className="hover:opacity-80 transition">{l.projects}</a>
+              <a href="#brands" className="hover:opacity-80 transition">{l.brands}</a>
+              <a href="#faq" className="hover:opacity-80 transition">{l.faq}</a>
+              <a href="#contact" className="hover:opacity-80 transition">{l.contact}</a>
             </nav>
+
+            {/* переключатель языков оставляем как был (если он у вас есть в page/hero) */}
           </div>
         </header>
 
         <main>{children}</main>
 
-        <footer className="border-t border-slate-200">
-          <div className="container mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
+        <footer className="border-t border-slate-200 mt-24">
+          <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
             © {new Date().getFullYear()} Glare Free Light. All rights reserved.
           </div>
         </footer>
