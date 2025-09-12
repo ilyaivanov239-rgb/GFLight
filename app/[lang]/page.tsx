@@ -64,17 +64,19 @@ const ctaContact =
           </p>
           <div className="flex justify-center gap-4">
             <Link
-              href={`/${lang}/#services`}
-              className="px-6 py-3 bg-white text-black rounded-xl shadow hover:bg-gray-200 transition"
-            >
-              {t?.hero?.button1 ?? 'Our Services'}
-            </Link>
-            <Link
-              href={`/${lang}/#contact`}
-              className="px-6 py-3 bg-transparent border border-white text-white rounded-xl hover:bg-white hover:text-black transition"
-            >
-              {t?.hero?.button2 ?? 'Contact Us'}
-            </Link>
+  href={`/${lang}/#services`}
+  className="px-6 py-3 bg-white text-black rounded-xl shadow hover:bg-gray-200 transition"
+>
+  {ctaServices}
+</Link>
+
+<Link
+  href={`/${lang}/#contact`}
+  className="px-6 py-3 bg-transparent border border-white text-white rounded-xl hover:bg-white hover:text-black transition"
+>
+  {ctaContact}
+</Link>
+
           </div>
         </div>
       </section>
