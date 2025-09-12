@@ -134,7 +134,7 @@ export default function Page() {
         </div>
       </section>
 {/* ABOUT — теперь ниже FAQ */}
-<section id="about" className="py-20 px-6 max-w-6xl mx-auto">
+<section id="about-section" className="py-20 px-6 max-w-6xl mx-auto">
   <h2 className="text-3xl font-bold mb-8">
     {(t as any)?.about?.title ?? 'О нас'}
   </h2>
