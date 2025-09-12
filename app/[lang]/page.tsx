@@ -26,6 +26,22 @@ export default function Page() {
       { q: 'Берёте на себя поставку?', a: 'Да. Подбор, поставка, сопровождение монтажа.' },
       { q: 'Работаете только в Португалии?', a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.' },
     ]
+// Тексты CTA по умолчанию (если в dict нет hero.button1 / hero.button2)
+const CTA = {
+  ru: { services: 'Услуги', contact: 'Связаться' },
+  en: { services: 'Our Services', contact: 'Contact Us' },
+  pt: { services: 'Serviços', contact: 'Contactar' }, // PT-PT
+} as const;
+
+const ctaServices =
+  (t as any)?.hero?.button1 ||
+  (t as any)?.hero?.cta1 ||
+  CTA[lang].services;
+
+const ctaContact =
+  (t as any)?.hero?.button2 ||
+  (t as any)?.hero?.cta2 ||
+  CTA[lang].contact;
 
   return (
     <main>
