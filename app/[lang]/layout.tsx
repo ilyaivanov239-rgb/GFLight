@@ -2,14 +2,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import '../../styles/globals.css';
-import { dict, Lang } from '../../components/i18n'; // meta берём из словаря; меню — локальные подписи
+import { dict, type Lang } from '../../components/i18n'; // meta берём из словаря; меню — локальные подписи
 
 export async function generateMetadata({
   params,
 }: {
   params: { lang: Lang };
 }): Promise<Metadata> {
-  // ✅ dict — объект, читаем по ключу языка
   const t = (dict as Record<Lang, any>)[params.lang];
 
   return {
@@ -31,36 +30,18 @@ export async function generateMetadata({
   };
 }
 
-// Подписи меню — локальные, чтобы не зависеть от словаря и не ломать билд
+// Подписи меню — локальные
 const NAV_LABELS: Record<
   Lang,
   { about: string; services: string; projects: string; brands: string; faq: string; contact: string }
 > = {
-  ru: {
-    about: 'О нас',
-    services: 'Услуги',
-    projects: 'Проекты',
-    brands: 'Бренды',
-    faq: 'FAQ',
-    contact: 'Контакты',
-  },
-  en: {
-    about: 'About',
-    services: 'Services',
-    projects: 'Projects',
-    brands: 'Brands',
-    faq: 'FAQ',
-    contact: 'Contact',
-  },
-  pt: {
-    about: 'Sobre',
-    services: 'Serviços',
-    projects: 'Projetos',
-    brands: 'Marcas',
-    faq: 'FAQ',
-    contact: 'Contato',
-  },
+  ru: { about: 'О нас', services: 'Услуги', projects: 'Проекты', brands: 'Бренды', faq: 'FAQ', contact: 'Контакты' },
+  en: { about: 'About', services: 'Services', projects: 'Projects', brands: 'Brands', faq: 'FAQ', contact: 'Contact' },
+  pt: { about: 'Sobre', services: 'Serviços', projects: 'Projetos', brands: 'Marcas', faq: 'FAQ', contact: 'Contato' },
 };
+
+// Языки для переключателя
+const LANGS: Lang[] = ['ru', 'en', 'pt'];
 
 export default function RootLayout({
   children,
@@ -73,10 +54,10 @@ export default function RootLayout({
 
   return (
     <html lang={params.lang}>
-      <body className="bg-slate-50 text-slate-900 antialiased">
+      <body className="bg-slate-50 text-slate-900 antialiased scroll-smooth">
         {/* Header */}
         <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
-          <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
+          <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
             <Link href={`/${params.lang}`} className="font-semibold text-lg">
               Glare Free Light
             </Link>
@@ -89,6 +70,24 @@ export default function RootLayout({
               <a href="#faq" className="hover:opacity-80 transition">{l.faq}</a>
               <a href="#contact" className="hover:opacity-80 transition">{l.contact}</a>
             </nav>
+
+            {/* Language switcher */}
+            <div className="flex items-center gap-2">
+              {LANGS.map((lng) => (
+                <Link
+                  key={lng}
+                  href={`/${lng}`}
+                  prefetch={false}
+                  className={`px-2 py-1 rounded-md text-xs border transition ${
+                    lng === params.lang
+                      ? 'bg-slate-100 border-slate-300'
+                      : 'border-transparent hover:bg-slate-100 hover:border-slate-300'
+                  }`}
+                >
+                  {lng.toUpperCase()}
+                </Link>
+              ))}
+            </div>
           </div>
         </header>
 
