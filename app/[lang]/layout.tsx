@@ -1,28 +1,19 @@
 import type { Metadata } from 'next';
-import '../../styles/globals.css';
+import './globals.css';
 import Link from 'next/link';
-import { dict, Lang } from '../../components/i18n';
+import { dict, Lang } from '@/components/i18n';
 
-export async function generateMetadata({ params }: { params: { lang: Lang } }): Promise<Metadata> {
-  const t = dict[params.lang];
-  return {
-    title: t.meta.title,
-    description: t.meta.description,
-    openGraph: {
-      title: t.meta.title,
-      description: t.meta.description,
-      images: ['/og-image.jpg'],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: t.meta.title,
-      description: t.meta.description,
-      images: ['/og-image.jpg'],
-    },
-    icons: { icon: '/favicon.ico' },
-  };
-}
+export const metadata: Metadata = {
+  title: 'Glare Free Light',
+  description: 'Technical lighting without glare',
+  icons: { icon: '/favicon.ico' },
+  openGraph: {
+    title: 'Glare Free Light',
+    description: 'Technical lighting without glare',
+    images: ['/og-image.jpg'],
+    type: 'website',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -32,77 +23,46 @@ export default function RootLayout({
   params: { lang: Lang };
 }) {
   const t = dict[params.lang];
+
+  // Fallback на случай, если в JSON ещё нет новых ключей
+  const nav = {
+    about: t?.nav?.about ?? (params.lang === 'ru' ? 'О нас' : params.lang === 'pt' ? 'Sobre' : 'About'),
+    services: t?.nav?.services ?? (params.lang === 'ru' ? 'Услуги' : params.lang === 'pt' ? 'Serviços' : 'Services'),
+    projects: t?.nav?.projects ?? (params.lang === 'ru' ? 'Проекты' : params.lang === 'pt' ? 'Projetos' : 'Projects'),
+    brands: t?.nav?.brands ?? (params.lang === 'ru' ? 'Бренды' : params.lang === 'pt' ? 'Marcas' : 'Brands'),
+    faq: t?.nav?.faq ?? 'FAQ',
+    contact: t?.nav?.contact ?? (params.lang === 'ru' ? 'Контакты' : params.lang === 'pt' ? 'Contatos' : 'Contact'),
+  };
+
   return (
     <html lang={params.lang}>
-      <body className="bg-gradient-to-b from-white to-slate-50 text-slate-900">
+      <body className="bg-slate-50 text-slate-900 antialiased">
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-white/70 backdrop-blur border-b">
-          <nav className="container h-16 flex items-center justify-between">
-            <Link href={`/${params.lang}`} className="font-semibold">
-              Glare Free Light
-            </Link>
+        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
+          <div className="container mx-auto max-w-6xl px-4">
+            <nav className="flex h-16 items-center justify-between">
+              {/* Лого/название — сделаем крупнее */}
+              <Link href={`/${params.lang}`} className="font-semibold tracking-tight text-slate-900 text-xl md:text-2xl">
+                Glare Free Light
+              </Link>
 
-            <div className="hidden md:flex items-center gap-6 text-sm">
-              <a href="#about" className="hover:opacity-80">
-                {t.nav.about}
-              </a>
-              <a href="#services" className="hover:opacity-80">
-                {t.nav.services}
-              </a>
-              <a href="#projects" className="hover:opacity-80">
-                {t.nav.projects}
-              </a>
-              <a href="#contact" className="hover:opacity-80">
-                {t.nav.contact}
-              </a>
-            </div>
-
-            {/* Language switcher */}
-            <div className="flex items-center gap-2">
-              <Link
-                href={`/ru`}
-                className={`px-2 py-1 rounded-full text-xs border ${
-                  params.lang === 'ru'
-                    ? 'bg-slate-900 text-white border-slate-900'
-                    : 'border-slate-300 hover:bg-slate-100'
-                }`}
-              >
-                RU
-              </Link>
-              <Link
-                href={`/en`}
-                className={`px-2 py-1 rounded-full text-xs border ${
-                  params.lang === 'en'
-                    ? 'bg-slate-900 text-white border-slate-900'
-                    : 'border-slate-300 hover:bg-slate-100'
-                }`}
-              >
-                EN
-              </Link>
-              <Link
-                href={`/pt`}
-                className={`px-2 py-1 rounded-full text-xs border ${
-                  params.lang === 'pt'
-                    ? 'bg-slate-900 text-white border-slate-900'
-                    : 'border-slate-300 hover:bg-slate-100'
-                }`}
-              >
-                PT
-              </Link>
-            </div>
-          </nav>
+              <ul className="flex items-center gap-6 md:gap-10 text-[15px] md:text-[17px]">
+                <li><Link href={`/${params.lang}#about`}    className="hover:opacity-70">{nav.about}</Link></li>
+                <li><Link href={`/${params.lang}#services`} className="hover:opacity-70">{nav.services}</Link></li>
+                <li><Link href={`/${params.lang}#projects`} className="hover:opacity-70">{nav.projects}</Link></li>
+                <li><Link href={`/${params.lang}#brands`}   className="hover:opacity-70">{nav.brands}</Link></li>
+                <li><Link href={`/${params.lang}#faq`}      className="hover:opacity-70">{nav.faq}</Link></li>
+                <li><Link href={`/${params.lang}#contact`}  className="hover:opacity-70">{nav.contact}</Link></li>
+              </ul>
+            </nav>
+          </div>
         </header>
 
-        {/* Main content */}
         <main>{children}</main>
 
-        {/* Footer */}
-        <footer className="border-t py-10 bg-white">
-          <div className="container flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
-            <div className="text-sm text-slate-500">
-              © {new Date().getFullYear()} Glare Free Light
-            </div>
-            <div className="text-sm text-slate-500">{t.footer.rights}</div>
+        <footer className="border-t border-slate-200">
+          <div className="container mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
+            © {new Date().getFullYear()} Glare Free Light. All rights reserved.
           </div>
         </footer>
       </body>
