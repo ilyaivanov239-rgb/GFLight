@@ -83,22 +83,38 @@ const ctaContact =
 
      
 
-      {/* SERVICES — твой блок, без изменений */}
-      <section id="services" className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">{t?.services?.title ?? 'Services'}</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {(t?.services?.items ?? []).map((item: any, i: number) => (
-            <div key={i} className="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
-              <h3 className="font-semibold text-lg mb-2">
-                {typeof item === 'string' ? item : item.title}
-              </h3>
-              {typeof item !== 'string' && item.desc && (
-                <p className="text-gray-600">{item.desc}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* SERVICES */}
+<section id="services" className="py-20 px-6 max-w-6xl mx-auto">
+  <h2 className="text-3xl font-bold mb-12 text-center">
+    {t?.services?.title ?? 'Services'}
+  </h2>
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {(t?.services?.items ?? []).map((item: any, i: number) => (
+      <div key={i} className="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
+        <h3 className="font-semibold text-lg mb-2">
+          {typeof item === 'string' ? item : item.title}
+        </h3>
+
+        {typeof item !== 'string' && item.desc && (
+          <p className="text-gray-600 mb-4">{item.desc}</p>
+        )}
+
+        {typeof item !== 'string' && Array.isArray(item.features) && item.features.length > 0 && (
+          <ul className="space-y-2 text-sm text-gray-600">
+            {item.features.map((f: string, idx: number) => (
+              <li key={idx} className="pl-4 relative">
+                <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-gray-400" />
+                {f}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* PROJECTS — твой блок, без изменений */}
       <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
