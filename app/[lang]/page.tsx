@@ -94,22 +94,22 @@ const ctaContact =
      {/* SERVICES */}
 <section id="services" className="relative py-20">
   {/* фон секции */}
-  <div aria-hidden className="absolute inset-0 -z-10">
+  <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
     {/* вертикальный мягкий градиент */}
-    <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-100 to-white" />
     {/* точечная сетка */}
-    <div
-      className="absolute inset-0 opacity-30"
+   <div className="absolute inset-0 opacity-50"
       style={{
         backgroundImage:
-          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><circle cx='1' cy='1' r='1' fill='%23cbd5e1' opacity='.35'/></svg>\")",
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='1.5' cy='1.5' r='1.2' fill='%2394a3b8' opacity='.35'/></svg>\")",
+
         backgroundRepeat: 'repeat'
       }}
     />
   </div>
 
   {/* контент */}
-  <div className="px-6 max-w-6xl mx-auto">
+  <div className="relative z-10 px-6 max-w-6xl mx-auto">
     <h2 className="text-3xl font-bold mb-12 text-center">
       {t?.services?.title ?? 'Services'}
     </h2>
