@@ -99,13 +99,12 @@ const ctaContact =
     <div className="absolute inset-0 bg-gradient-to-b from-slate-100 to-white" />
     {/* точечная сетка */}
    <div
-  className="absolute inset-0 opacity-35"
+  className="absolute inset-0 opacity-[0.08]"
   style={{
-    // вертикальные + горизонтальные линии
     backgroundImage:
-      "linear-gradient(to right, rgba(148,163,184,.22) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,.22) 1px, transparent 1px)",
-    backgroundSize: "48px 48px",   // шаг сетки (можно 56px/64px)
-    backgroundPosition: "0 0"
+      "url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAI0lEQVQoU2NkYGD4z0AEYBxVhGEwCkYGwzEwGQYqGKwAAKp8B/3cY0wEAAAAASUVORK5CYII=\")",
+    backgroundRepeat: "repeat",
+    backgroundSize: "10px 10px"
   }}
 />
 
