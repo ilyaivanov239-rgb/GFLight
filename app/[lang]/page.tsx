@@ -100,12 +100,12 @@ const ctaContact =
   <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
     {(t?.services?.items ?? []).map((item: any, i: number) => (
       <div key={i} className="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
-        <h3 className="font-semibold text-lg mb-2">
+        <h3 className="text-center text-xl font-semibold mb-3">
           {typeof item === 'string' ? item : item.title}
         </h3>
 
         {typeof item !== 'string' && item.desc && (
-          <p className="text-gray-600 mb-4">{item.desc}</p>
+          <p className="text-gray-600 leading-relaxed mb-4">{item.desc}</p>
         )}
 
         {typeof item !== 'string' && Array.isArray(item.features) && item.features.length > 0 && (
