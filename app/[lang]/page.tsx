@@ -105,7 +105,7 @@ const ctaContact =
         </h3>
 
         {typeof item !== 'string' && item.desc && (
-          <p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] mb-4">
+          <p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4">
   {item.desc}
 </p>
         )}
