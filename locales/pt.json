@@ -39,23 +39,49 @@
     "collab": "Parcerias com ateliers de arquitectura"
   },
   "services": {
-    "eyebrow": "O que fazemos",
-    "title": "Para que normalmente nos procuram",
-    "items": [
-      {
-        "title": "Projecto de iluminação",
-        "desc": "Conceito, cálculo e especificação com foco no conforto e eficiência."
-      },
-      {
-        "title": "Fornecimento & comissionamento",
-        "desc": "Luminárias, drivers e controlo; mockups e afinação no local."
-      },
-      {
-        "title": "Consultoria técnica",
-        "desc": "Auditorias, UGR/GR, luminâncias e conformidade normativa."
-      }
-    ]
-  },
+  "eyebrow": "O que fazemos",
+  "title": "Para que normalmente nos procuram",
+  "items": [
+    {
+      "title": "Projeto de iluminação",
+      "desc": "Um projeto de iluminação bem feito considera todos os cenários e pormenores — sem erros nem retrabalhos.",
+      "features": [
+        "Trabalhamos com o modelo 3D do cliente ou construímo-lo a partir de desenhos 2D",
+        "Cálculo de iluminação em software profissional (DIALux/Relux)",
+        "Respeito pela arquitetura do espaço",
+        "Detalhe de soluções de montagem em conjunto com os autores do projeto"
+      ]
+    },
+    {
+      "title": "Visualização",
+      "desc": "Imagens 3D fotorrealistas mostram como o espaço ficará após a execução — sem “embelezamentos”.",
+      "features": [
+        "Renders honestos, sem pós-processamento artificial",
+        "Avaliação do conceito ainda antes da obra",
+        "Possibilidade de ajustes atempados"
+      ]
+    },
+    {
+      "title": "Fornecimento de equipamentos",
+      "desc": "Especificação e fornecimento de luminárias de marcas líderes — do estudo à logística.",
+      "features": [
+        "Especificação completa com todos os componentes",
+        "Modelos ideais para cada tarefa",
+        "Aprovisionamento direto aos fabricantes",
+        "Entrega no local do cliente"
+      ]
+    },
+    {
+      "title": "Ajuste em obra",
+      "desc": "Ajuste fino de direções e intensidades em obra, de acordo com as visualizações.",
+      "features": [
+        "Consultoria de instalação quando necessário",
+        "Afinação final das cenas de luz",
+        "Execução fiel do conceito de iluminação"
+      ]
+    }
+  ]
+},
   "philo": {
     "eyebrow": "Filosofia",
     "title": "Os nossos princípios",
