@@ -98,14 +98,17 @@ const ctaContact =
     {/* вертикальный мягкий градиент */}
     <div className="absolute inset-0 bg-gradient-to-b from-slate-100 to-white" />
     {/* точечная сетка */}
-   <div className="absolute inset-0 opacity-50"
-      style={{
-        backgroundImage:
-  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='1.5' cy='1.5' r='1.2' fill='%2394a3b8' opacity='.35'/></svg>\")",
+   <div
+  className="absolute inset-0 opacity-35"
+  style={{
+    // вертикальные + горизонтальные линии
+    backgroundImage:
+      "linear-gradient(to right, rgba(148,163,184,.22) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,.22) 1px, transparent 1px)",
+    backgroundSize: "48px 48px",   // шаг сетки (можно 56px/64px)
+    backgroundPosition: "0 0"
+  }}
+/>
 
-        backgroundRepeat: 'repeat'
-      }}
-    />
   </div>
 
   {/* контент */}
