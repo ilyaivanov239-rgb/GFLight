@@ -39,23 +39,49 @@
     "collab": "Partnerships with architecture studios"
   },
   "services": {
-    "eyebrow": "What we do",
-    "title": "What clients usually come to us for",
-    "items": [
-      {
-        "title": "Lighting design",
-        "desc": "Concept, calculation and specifications focused on visual comfort and efficiency."
-      },
-      {
-        "title": "Supply & commissioning",
-        "desc": "Luminaires, drivers and control; mockups and on‑site aiming."
-      },
-      {
-        "title": "Technical consulting",
-        "desc": "Audits, UGR/GR, luminance and code compliance."
-      }
-    ]
-  },
+  "eyebrow": "What we do",
+  "title": "What clients usually come to us for",
+  "items": [
+    {
+      "title": "Lighting design",
+      "desc": "A well-designed lighting project accounts for all nuances and scenarios — no mistakes or rework.",
+      "features": [
+        "We work with the client’s 3D model or build one from 2D drawings",
+        "Lighting calculations in professional software (DIALux/Relux)",
+        "Respect for the architecture of the space",
+        "Detailed mounting solutions developed together with the project authors"
+      ]
+    },
+    {
+      "title": "Visualization",
+      "desc": "Photorealistic 3D images show exactly how the space will look after implementation — without “beautification”.",
+      "features": [
+        "Honest renders without artificial post-processing",
+        "Evaluate the concept before execution",
+        "Ability to make adjustments early"
+      ]
+    },
+    {
+      "title": "Equipment supply",
+      "desc": "Specification and supply of luminaires from leading brands — from selection to logistics.",
+      "features": [
+        "Full specification including all components",
+        "Optimal luminaire models for each task",
+        "Procurement directly from manufacturers",
+        "Delivery to the client’s site"
+      ]
+    },
+    {
+      "title": "On-site aiming",
+      "desc": "Precise on-site aiming and intensity tuning according to the visualizations.",
+      "features": [
+        "Installation consulting when needed",
+        "Final tuning of lighting scenes",
+        "Accurate implementation of the lighting concept"
+      ]
+    }
+  ]
+},
   "philo": {
     "eyebrow": "Philosophy",
     "title": "Our principles",
