@@ -42,6 +42,8 @@ const ctaContact =
   (t as any)?.hero?.button2 ||
   (t as any)?.hero?.cta2 ||
   CTA[lang].contact;
+  const heroBtn =
+  "w-full sm:w-auto px-6 py-3 rounded-xl border border-white text-white bg-transparent hover:bg-white hover:text-black transition text-center";
 
   return (
     <main>
@@ -71,11 +73,12 @@ const ctaContact =
     {/* кнопки: на мобиле — в столбик */}
     <div className="mt-2 flex flex-col sm:flex-row justify-center gap-3 w-full max-w-md mx-auto">
       <Link
-        href={`/${lang}/#services`}
-        className="w-full sm:w-auto px-6 py-3 bg-white text-black rounded-xl shadow hover:bg-gray-200 transition text-center"
-      >
-        {ctaServices}
-      </Link>
+  href={`/${lang}/#services`}
+  className="w-full sm:w-auto px-6 py-3 bg-transparent border border-white text-white rounded-xl hover:bg-white hover:text-black transition text-center"
+>
+  {ctaServices}
+</Link>
+
       <Link
         href={`/${lang}/#contact`}
         className="w-full sm:w-auto px-6 py-3 bg-transparent border border-white text-white rounded-xl hover:bg-white hover:text-black transition text-center"
