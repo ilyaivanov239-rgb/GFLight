@@ -91,39 +91,63 @@ const ctaContact =
 
      
 
-      {/* SERVICES */}
-<section id="services" className="py-20 px-6 max-w-6xl mx-auto">
-  <h2 className="text-3xl font-bold mb-12 text-center">
-    {t?.services?.title ?? 'Services'}
-  </h2>
+     {/* SERVICES */}
+<section id="services" className="relative py-20">
+  {/* фон секции */}
+  <div aria-hidden className="absolute inset-0 -z-10">
+    {/* вертикальный мягкий градиент */}
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
+    {/* точечная сетка */}
+    <div
+      className="absolute inset-0 opacity-30"
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><circle cx='1' cy='1' r='1' fill='%23cbd5e1' opacity='.35'/></svg>\")",
+        backgroundRepeat: 'repeat'
+      }}
+    />
+  </div>
 
-  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-    {(t?.services?.items ?? []).map((item: any, i: number) => (
-      <div key={i} className="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
-        <h3 className="text-center text-xl font-semibold mb-3">
-          {typeof item === 'string' ? item : item.title}
-        </h3>
+  {/* контент */}
+  <div className="px-6 max-w-6xl mx-auto">
+    <h2 className="text-3xl font-bold mb-12 text-center">
+      {t?.services?.title ?? 'Services'}
+    </h2>
 
-        {typeof item !== 'string' && item.desc && (
-          <p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4">
-  {item.desc}
-</p>
-        )}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {(t?.services?.items ?? []).map((item: any, i: number) => (
+        <div
+          key={i}
+          className="bg-white/80 backdrop-blur-sm ring-1 ring-slate-200/70 rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+        >
+          <h3 className="text-center text-xl font-semibold mb-3">
+            {typeof item === 'string' ? item : item.title}
+          </h3>
 
-        {typeof item !== 'string' && Array.isArray(item.features) && item.features.length > 0 && (
-          <ul className="space-y-2 text-sm text-gray-600">
-            {item.features.map((f: string, idx: number) => (
-              <li key={idx} className="pl-4 relative">
-                <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-gray-400" />
-                {f}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    ))}
+          {typeof item !== 'string' && item.desc && (
+            <p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4">
+              {item.desc}
+            </p>
+          )}
+
+          {typeof item !== 'string' &&
+            Array.isArray(item.features) &&
+            item.features.length > 0 && (
+              <ul className="space-y-2 text-sm text-gray-600">
+                {item.features.map((f: string, idx: number) => (
+                  <li key={idx} className="pl-4 relative">
+                    <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-gray-400" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            )}
+        </div>
+      ))}
+    </div>
   </div>
 </section>
+
 
 
       {/* PROJECTS — твой блок, без изменений */}
