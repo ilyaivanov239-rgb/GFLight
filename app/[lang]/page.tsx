@@ -160,8 +160,17 @@ const ctaContact =
   </h2>
 
   <div className="grid md:grid-cols-3 gap-8 text-left">
-    {PROJECTS.slice(0, 3).map((p) => {
-      const m = p.meta[lang] ?? p.meta.en; // локализованный заголовок и тизер
+    {PROJECTS.slice(0, 3).map((p: any) => {
+      // Совместимо с двумя формами данных:
+      // новая: p.meta[lang].title / blurb
+      // старая: p.title[lang] / summary[lang]
+      const meta = p.meta?.[lang];
+      const title: string =
+        meta?.title ?? p.title?.[lang] ?? '';
+      const blurb: string =
+        meta?.blurb ?? p.summary?.[lang] ?? '';
+
+      const cover: string = p.cover ?? `/projects/${p.slug}/cover.jpg`;
 
       return (
         <Link
@@ -171,17 +180,15 @@ const ctaContact =
         >
           <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
             <img
-              src={p.cover}                 // или `/projects/${p.slug}/cover.jpg`
-              alt={m.title}
+              src={cover}
+              alt={title || p.slug}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </div>
 
           <div className="p-4">
-            <div className="font-medium">{m.title}</div>
-            {m.blurb && (
-              <p className="text-gray-600 mt-2 text-sm">{m.blurb}</p>
-            )}
+            <div className="font-medium">{title}</div>
+            {blurb && <p className="text-gray-600 mt-2 text-sm">{blurb}</p>}
           </div>
         </Link>
       );
