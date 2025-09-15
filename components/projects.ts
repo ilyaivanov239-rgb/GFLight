@@ -1,17 +1,13 @@
 // components/projects.ts
 export type Lang = 'ru' | 'en' | 'pt';
 
-type Localized = {
-  title: string;
-  blurb: string;   // короткое описание (карточка)
-  desc?: string;   // развёрнутое на странице (опционально)
-};
-
 export type Project = {
-  slug: string;           // используется в URL
-  cover: string;          // обложка (hero)
-  images: string[];       // галерея
-  meta: Record<Lang, Localized>;
+  slug: string;                               // используется в URL
+  cover: string;                              // обложка (hero)
+  images: string[];                           // галерея
+  title: Record<Lang, string>;                // заголовок
+  blurb: Record<Lang, string>;                // короткое описание (карточка)
+  desc?: Record<Lang, string>;                // развёрнутое описание (опционально)
 };
 
 // Порядок в массиве == порядок показа на главной
@@ -25,22 +21,15 @@ export const PROJECTS: Project[] = [
       '/projects/restaurant/2.jpg',
       '/projects/restaurant/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Ресторан',
-        blurb:
-          'Атмосферная подсветка залов, акценты на текстурах и высокий визуальный комфорт.',
-      },
-      en: {
-        title: 'Restaurant',
-        blurb:
-          'Atmospheric dining lighting with texture accents and high visual comfort.',
-      },
-      pt: {
-        title: 'Restaurante',
-        blurb:
-          'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
-      },
+    title: {
+      ru: 'Ресторан',
+      en: 'Restaurant',
+      pt: 'Restaurante',
+    },
+    blurb: {
+      ru: 'Атмосферная подсветка залов, акценты на текстурах и высокий визуальный комфорт.',
+      en: 'Atmospheric dining lighting with texture accents and high visual comfort.',
+      pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
     },
   },
 
@@ -53,22 +42,15 @@ export const PROJECTS: Project[] = [
       '/projects/cosmonautics/2.jpg',
       '/projects/cosmonautics/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Музей космонавтики',
-        blurb:
-          'Экспозиции высотой до 15 м, узкая оптика 6° — эффект «лунного света» и читаемые тени.',
-      },
-      en: {
-        title: 'Museum of Cosmonautics',
-        blurb:
-          'Up to 15 m exhibits, 6° optics — a “moonlight” effect with readable contrast.',
-      },
-      pt: {
-        title: 'Museu da Cosmonáutica',
-        blurb:
-          'Exposições até 15 m, óptica de 6° — efeito “luz da lua” com contraste legível.',
-      },
+    title: {
+      ru: 'Музей космонавтики',
+      en: 'Museum of Cosmonautics',
+      pt: 'Museu da Cosmonáutica',
+    },
+    blurb: {
+      ru: 'Экспозиции высотой до 15 м, узкая оптика 6° — эффект «лунного света» и читаемые тени.',
+      en: 'Up to 15 m exhibits, 6° optics — a “moonlight” effect with readable contrast.',
+      pt: 'Exposições até 15 m, óptica de 6° — efeito “luz da lua” com contraste legível.',
     },
   },
 
@@ -81,22 +63,15 @@ export const PROJECTS: Project[] = [
       '/projects/globalone/2.jpg',
       '/projects/globalone/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Офис GlobalOne',
-        blurb:
-          'Функциональная офисная световая среда: равномерность, акценты и комфорт UGR.',
-      },
-      en: {
-        title: 'GlobalOne Office',
-        blurb:
-          'Functional office lighting: uniformity, accents and comfortable UGR.',
-      },
-      pt: {
-        title: 'Escritório GlobalOne',
-        blurb:
-          'Iluminação funcional: uniformidade, acentos e conforto UGR.',
-      },
+    title: {
+      ru: 'Офис GlobalOne',
+      en: 'GlobalOne Office',
+      pt: 'Escritório GlobalOne',
+    },
+    blurb: {
+      ru: 'Функциональная офисная световая среда: равномерность, акценты и комфорт UGR.',
+      en: 'Functional office lighting: uniformity, accents and comfortable UGR.',
+      pt: 'Iluminação funcional: uniformidade, acentos e conforto UGR.',
     },
   },
 
@@ -109,22 +84,15 @@ export const PROJECTS: Project[] = [
       '/projects/hotel/2.jpg',
       '/projects/hotel/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Отель',
-        blurb:
-          'Интимная световая атмосфера для лобби и номеров — баланс теплоты и читаемости.',
-      },
-      en: {
-        title: 'Hotel',
-        blurb:
-          'Warm, intimate lighting for lobby and rooms with clear visual hierarchy.',
-      },
-      pt: {
-        title: 'Hotel',
-        blurb:
-          'Ambiente acolhedor no lobby e nos quartos com hierarquia visual clara.',
-      },
+    title: {
+      ru: 'Отель',
+      en: 'Hotel',
+      pt: 'Hotel',
+    },
+    blurb: {
+      ru: 'Интимная световая атмосфера для лобби и номеров — баланс теплоты и читаемости.',
+      en: 'Warm, intimate lighting for lobby and rooms with clear visual hierarchy.',
+      pt: 'Ambiente acolhedor no lobby e nos quartos com hierarquia visual clara.',
     },
   },
 
@@ -137,22 +105,15 @@ export const PROJECTS: Project[] = [
       '/projects/yachtclub/2.jpg',
       '/projects/yachtclub/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Яхт-клуб',
-        blurb:
-          'Архитектурная подсветка с акцентами на фактуры и береговую линию.',
-      },
-      en: {
-        title: 'Yacht Club',
-        blurb:
-          'Architectural lighting with material accents and shoreline highlights.',
-      },
-      pt: {
-        title: 'Clube de Iates',
-        blurb:
-          'Iluminação arquitetônica com acentos de materiais e destaque do litoral.',
-      },
+    title: {
+      ru: 'Яхт-клуб',
+      en: 'Yacht Club',
+      pt: 'Clube de Iates',
+    },
+    blurb: {
+      ru: 'Архитектурная подсветка с акцентами на фактуры и береговую линию.',
+      en: 'Architectural lighting with material accents and shoreline highlights.',
+      pt: 'Iluminação arquitetônica com acentos de materiais e destaque do litoral.',
     },
   },
 
@@ -165,50 +126,36 @@ export const PROJECTS: Project[] = [
       '/projects/apartment/2.jpg',
       '/projects/apartment/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Квартира',
-        blurb:
-          'Интерьерное освещение: сценарии, акценты, отсутствие бликов и слепящего света.',
-      },
-      en: {
-        title: 'Apartment',
-        blurb:
-          'Residential lighting: scenes, accents and glare-free comfort.',
-      },
-      pt: {
-        title: 'Apartamento',
-        blurb:
-          'Iluminação residencial: cenas, acentos e conforto sem ofuscamento.',
-      },
+    title: {
+      ru: 'Квартира',
+      en: 'Apartment',
+      pt: 'Apartamento',
+    },
+    blurb: {
+      ru: 'Интерьерное освещение: сценарии, акценты, отсутствие бликов и слепящего света.',
+      en: 'Residential lighting: scenes, accents and glare-free comfort.',
+      pt: 'Iluminação residencial: cenas, acentos e conforto sem ofuscamento.',
     },
   },
 
   // 7) QUICK SKETCHES
   {
-    slug: 'quick-sketches', // удобный slug для URL
+    slug: 'quick-sketches',
     cover: '/projects/quick-sketches/cover.jpg',
     images: [
       '/projects/quick-sketches/1.jpg',
       '/projects/quick-sketches/2.jpg',
       '/projects/quick-sketches/3.jpg',
     ],
-    meta: {
-      ru: {
-        title: 'Быстрые эскизы',
-        blurb:
-          'Серия быстрых концептов и мокапов — показываем идею до финального проекта.',
-      },
-      en: {
-        title: 'Quick sketches',
-        blurb:
-          'A series of quick concepts and mockups — conveying the idea before final design.',
-      },
-      pt: {
-        title: 'Esboços rápidos',
-        blurb:
-          'Série de conceitos rápidos e mockups — ideia antes do projeto final.',
-      },
+    title: {
+      ru: 'Быстрые эскизы',
+      en: 'Quick sketches',
+      pt: 'Esboços rápidos',
+    },
+    blurb: {
+      ru: 'Серия быстрых концептов и мокапов — показываем идею до финального проекта.',
+      en: 'A series of quick concepts and mockups — conveying the idea before final design.',
+      pt: 'Série de conceitos rápidos e mockups — ideia antes do projeto final.',
     },
   },
 ];
