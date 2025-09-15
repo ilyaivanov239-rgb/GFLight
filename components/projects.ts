@@ -1,13 +1,17 @@
 // components/projects.ts
-import type { Lang } from './i18n'; // ← используем один и тот же Lang
+import type { Lang } from './i18n';
+
+// Хелпер: генерирует массив путей /projects/<slug>/1.jpg ... /N.jpg
+const seq = (slug: string, n: number) =>
+  Array.from({ length: n }, (_, i) => `/projects/${slug}/${i + 1}.jpg`);
 
 export type Project = {
-  slug: string;                  // используется в URL
-  cover: string;                 // обложка (hero)
-  images: string[];              // галерея
-  title: Record<Lang, string>;   // заголовок
-  blurb: Record<Lang, string>;   // короткое описание (карточка)
-  desc?: Record<Lang, string>;   // развёрнутое описание (опционально)
+  slug: string;                 // используется в URL
+  cover: string;                // обложка (hero)
+  images: string[];             // галерея
+  title: Record<Lang, string>;  // заголовок
+  blurb: Record<Lang, string>;  // короткое описание (карточка)
+  desc?: Record<Lang, string>;  // развёрнутое описание (опционально)
 };
 
 // Порядок в массиве == порядок показа на главной
@@ -16,11 +20,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'restaurant',
     cover: '/projects/restaurant/cover.jpg',
-    images: [
-      '/projects/restaurant/1.jpg',
-      '/projects/restaurant/2.jpg',
-      '/projects/restaurant/3.jpg',
-    ],
+    images: seq('restaurant', 8), // берём 1..8.jpg из /public/projects/restaurant/
     title: {
       ru: 'Ресторан',
       en: 'Restaurant',
@@ -32,6 +32,9 @@ export const PROJECTS: Project[] = [
       pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
     },
   },
+
+  // ...дальше остальные проекты
+];
 
   // 2) COSMONAUTICS
   {
