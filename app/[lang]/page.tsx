@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { dict, type Lang } from '../../components/i18n'
+import { PROJECTS } from '../../components/projects'
 
 export default function Page() {
   const { lang } = useParams() as { lang: Lang }
@@ -154,22 +155,34 @@ const ctaContact =
 
       {/* PROJECTS — твой блок, без изменений */}
       <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">{t?.projects?.title ?? 'Projects'}</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {(t?.projects?.items ?? []).map((item: any, i: number) => (
-            <div key={i} className="bg-white rounded-2xl shadow overflow-hidden hover:shadow-lg transition">
-              <div className="h-40 bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-500">
-                  {typeof item === 'string' ? item : item.title}
-                </span>
-              </div>
-              {typeof item !== 'string' && item.desc && (
-                <div className="p-4 text-gray-600">{item.desc}</div>
-              )}
-            </div>
-          ))}
+  <h2 className="text-3xl font-bold mb-12">
+    {t?.projects?.title ?? 'Selected projects'}
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-8 text-left">
+    {PROJECTS.slice(0, 3).map((p) => (
+      <a
+        key={p.slug}
+        href={`/${lang}/projects/${p.slug}`}
+        className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden"
+      >
+        <div className="h-40 bg-gray-100">
+          <img
+            src={`/projects/${p.slug}/cover.jpg`}
+            alt={p.title[lang]}
+            className="w-full h-full object-cover"
+          />
         </div>
-      </section>
+        <div className="p-4">
+          <div className="font-medium">{p.title[lang]}</div>
+          {p.summary?.[lang] && (
+            <p className="text-gray-600 mt-2 text-sm">{p.summary[lang]}</p>
+          )}
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
 
       {/* BRANDS — новый блок */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
