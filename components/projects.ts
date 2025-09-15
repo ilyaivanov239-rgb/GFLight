@@ -3,44 +3,48 @@ export type Lang = 'ru' | 'en' | 'pt';
 
 type Localized = {
   title: string;
-  blurb: string;   // короткое описание (то, что было на карточке)
-  desc?: string;   // развёрнутое (опционально)
+  blurb: string;   // короткое описание (карточка)
+  desc?: string;   // развёрнутое на странице (опционально)
 };
 
 export type Project = {
-  slug: string;               // используется в URL
-  cover: string;              // обложка для hero
-  images: string[];           // галерея
+  slug: string;           // используется в URL
+  cover: string;          // обложка (hero)
+  images: string[];       // галерея
   meta: Record<Lang, Localized>;
 };
 
+// Порядок в массиве == порядок показа на главной
 export const PROJECTS: Project[] = [
+  // 1) RESTAURANT
   {
-    slug: 'ermitage',
-    cover: '/projects/ermitage/cover.jpg',
+    slug: 'restaurant',
+    cover: '/projects/restaurant/cover.jpg',
     images: [
-      '/projects/ermitage/1.jpg',
-      '/projects/ermitage/2.jpg',
-      '/projects/ermitage/3.jpg',
+      '/projects/restaurant/1.jpg',
+      '/projects/restaurant/2.jpg',
+      '/projects/restaurant/3.jpg',
     ],
     meta: {
       ru: {
-        title: 'Государственный Эрмитаж',
+        title: 'Ресторан',
         blurb:
-          'Равномерное вертикальное освещение и акценты в витринах для читаемых объёмов.',
+          'Атмосферная подсветка залов, акценты на текстурах и высокий визуальный комфорт.',
       },
       en: {
-        title: 'State Hermitage Museum',
+        title: 'Restaurant',
         blurb:
-          'Even vertical lighting with showcase accents for clearly readable volumes.',
+          'Atmospheric dining lighting with texture accents and high visual comfort.',
       },
       pt: {
-        title: 'Museu do Hermitage',
+        title: 'Restaurante',
         blurb:
-          'Iluminação vertical uniforme e acentos nas vitrines para volumes legíveis.',
+          'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
       },
     },
   },
+
+  // 2) COSMONAUTICS
   {
     slug: 'cosmonautics',
     cover: '/projects/cosmonautics/cover.jpg',
@@ -53,48 +57,161 @@ export const PROJECTS: Project[] = [
       ru: {
         title: 'Музей космонавтики',
         blurb:
-          'Экспозиции 15 м, оптика 6° — эффект «лунного света» с контрастными тенями.',
+          'Экспозиции высотой до 15 м, узкая оптика 6° — эффект «лунного света» и читаемые тени.',
       },
       en: {
         title: 'Museum of Cosmonautics',
         blurb:
-          '15 m exhibits, 6° optics — a “moonlight” effect with high-contrast shadows.',
+          'Up to 15 m exhibits, 6° optics — a “moonlight” effect with readable contrast.',
       },
       pt: {
         title: 'Museu da Cosmonáutica',
         blurb:
-          'Exposições de 15 m, óptica de 6° — efeito de “luz da lua” com sombras contrastantes.',
+          'Exposições até 15 m, óptica de 6° — efeito “luz da lua” com contraste legível.',
       },
     },
   },
+
+  // 3) GLOBALONE
   {
-    slug: 'railway-museum',
-    cover: '/projects/railway/cover.jpg',
+    slug: 'globalone',
+    cover: '/projects/globalone/cover.jpg',
     images: [
-      '/projects/railway/1.jpg',
-      '/projects/railway/2.jpg',
-      '/projects/railway/3.jpg',
+      '/projects/globalone/1.jpg',
+      '/projects/globalone/2.jpg',
+      '/projects/globalone/3.jpg',
     ],
     meta: {
       ru: {
-        title: 'Музей железных дорог России',
+        title: 'Офис GlobalOne',
         blurb:
-          'Трековые прожекторы, узкая оптика и высокий визуальный комфорт.',
+          'Функциональная офисная световая среда: равномерность, акценты и комфорт UGR.',
       },
       en: {
-        title: 'Russian Railway Museum',
+        title: 'GlobalOne Office',
         blurb:
-          'Track spots, narrow optics and high visual comfort.',
+          'Functional office lighting: uniformity, accents and comfortable UGR.',
       },
       pt: {
-        title: 'Museu Ferroviário Russo',
+        title: 'Escritório GlobalOne',
         blurb:
-          'Projetores de trilho, óptica estreita e alto conforto visual.',
+          'Iluminação funcional: uniformidade, acentos e conforto UGR.',
+      },
+    },
+  },
+
+  // 4) HOTEL
+  {
+    slug: 'hotel',
+    cover: '/projects/hotel/cover.jpg',
+    images: [
+      '/projects/hotel/1.jpg',
+      '/projects/hotel/2.jpg',
+      '/projects/hotel/3.jpg',
+    ],
+    meta: {
+      ru: {
+        title: 'Отель',
+        blurb:
+          'Интимная световая атмосфера для лобби и номеров — баланс теплоты и читаемости.',
+      },
+      en: {
+        title: 'Hotel',
+        blurb:
+          'Warm, intimate lighting for lobby and rooms with clear visual hierarchy.',
+      },
+      pt: {
+        title: 'Hotel',
+        blurb:
+          'Ambiente acolhedor no lobby e nos quartos com hierarquia visual clara.',
+      },
+    },
+  },
+
+  // 5) YACHT CLUB
+  {
+    slug: 'yachtclub',
+    cover: '/projects/yachtclub/cover.jpg',
+    images: [
+      '/projects/yachtclub/1.jpg',
+      '/projects/yachtclub/2.jpg',
+      '/projects/yachtclub/3.jpg',
+    ],
+    meta: {
+      ru: {
+        title: 'Яхт-клуб',
+        blurb:
+          'Архитектурная подсветка с акцентами на фактуры и береговую линию.',
+      },
+      en: {
+        title: 'Yacht Club',
+        blurb:
+          'Architectural lighting with material accents and shoreline highlights.',
+      },
+      pt: {
+        title: 'Clube de Iates',
+        blurb:
+          'Iluminação arquitetônica com acentos de materiais e destaque do litoral.',
+      },
+    },
+  },
+
+  // 6) APARTMENT
+  {
+    slug: 'apartment',
+    cover: '/projects/apartment/cover.jpg',
+    images: [
+      '/projects/apartment/1.jpg',
+      '/projects/apartment/2.jpg',
+      '/projects/apartment/3.jpg',
+    ],
+    meta: {
+      ru: {
+        title: 'Квартира',
+        blurb:
+          'Интерьерное освещение: сценарии, акценты, отсутствие бликов и слепящего света.',
+      },
+      en: {
+        title: 'Apartment',
+        blurb:
+          'Residential lighting: scenes, accents and glare-free comfort.',
+      },
+      pt: {
+        title: 'Apartamento',
+        blurb:
+          'Iluminação residencial: cenas, acentos e conforto sem ofuscamento.',
+      },
+    },
+  },
+
+  // 7) QUICK SKETCHES
+  {
+    slug: 'quick-sketches', // удобный slug для URL
+    cover: '/projects/quick-sketches/cover.jpg',
+    images: [
+      '/projects/quick-sketches/1.jpg',
+      '/projects/quick-sketches/2.jpg',
+      '/projects/quick-sketches/3.jpg',
+    ],
+    meta: {
+      ru: {
+        title: 'Быстрые эскизы',
+        blurb:
+          'Серия быстрых концептов и мокапов — показываем идею до финального проекта.',
+      },
+      en: {
+        title: 'Quick sketches',
+        blurb:
+          'A series of quick concepts and mockups — conveying the idea before final design.',
+      },
+      pt: {
+        title: 'Esboços rápidos',
+        blurb:
+          'Série de conceitos rápidos e mockups — ideia antes do projeto final.',
       },
     },
   },
 ];
 
-// удобный хелпер
 export const findProject = (slug: string) =>
   PROJECTS.find((p) => p.slug === slug);
