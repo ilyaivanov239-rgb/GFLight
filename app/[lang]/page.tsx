@@ -328,54 +328,75 @@ export default function Page() {
         WhatsApp
       </a>
 
-      {/* MODAL GALLERY */}
-      {modal && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeModal}
-        >
-          <div
-            className="relative max-w-5xl w-full max-h-[90vh] bg-black rounded-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-              aria-label="Close"
-            >
-              ✕
-            </button>
+      /* MODAL GALLERY */
+{modal && (() => {
+  const proj = PROJECTS[modal.projectIndex];
+  const title = proj.title[lang];
+  const desc  = proj.desc?.[lang];                 // длинный текст для шапки
+  const img   = proj.images[modal.imageIndex];
+  const total = proj.images.length;
+  const current = modal.imageIndex + 1;
 
-            <button
-              onClick={prevImage}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-              aria-label="Prev"
-            >
-              ‹
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-              aria-label="Next"
-            >
-              ›
-            </button>
-
-            <img
-              src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-              alt={PROJECTS[modal.projectIndex].title[lang]}
-              className="w-full h-[70vh] object-contain"
-            />
-
-            <div className="p-3 text-center text-white/80 text-sm">
-              {PROJECTS[modal.projectIndex].title[lang]} —{' '}
-              {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
-            </div>
-          </div>
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={closeModal}
+    >
+      <div
+        className="relative max-w-6xl w-full max-h-[92vh] bg-black rounded-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Шапка с заголовком и длинным описанием */}
+        <div className="absolute top-0 left-0 right-0 bg-black/70 border-b border-white/10 p-4 md:p-5">
+          <h3 className="text-white text-base md:text-lg font-semibold">
+            {title}
+          </h3>
+          {desc && (
+            <p className="mt-1 text-white/80 text-sm md:text-[15px] leading-relaxed">
+              {desc}
+            </p>
+          )}
         </div>
-      )}
-    </main>
+
+        {/* Кнопки управления */}
+        <button
+          onClick={closeModal}
+          className="absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <button
+          onClick={prevImage}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+          aria-label="Prev"
+        >
+          ‹
+        </button>
+        <button
+          onClick={nextImage}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+          aria-label="Next"
+        >
+          ›
+        </button>
+
+        {/* Зона изображения с фиксированным верхним отступом */}
+        <div className="pt-16 md:pt-20 px-3 pb-10">
+          <img
+            src={img}
+            alt={title}
+            className="w-full max-h-[70vh] md:max-h-[72vh] object-contain mx-auto"
+          />
+        </div>
+
+        {/* Подвал с счётчиком */}
+        <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-white/80 text-sm bg-black/40 border-t border-white/10">
+          {title} — {current}/{total}
+        </div>
+      </div>
+    </div>
   );
-}
+})()}
