@@ -1,7 +1,8 @@
 // app/[lang]/projects/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PROJECTS, findProject, type Lang } from '../../../../components/projects'
+import { PROJECTS, findProject } from '../../../../components/projects'
+import type { Lang } from '../../../../components/i18n'
 
 // Предгенерация всех комбинаций языков и слагов
 export function generateStaticParams() {
@@ -11,23 +12,31 @@ export function generateStaticParams() {
   )
 }
 
-// Мета-теги на основе локали проекта
+// Метаданные страницы проекта
 export function generateMetadata({
   params,
 }: {
   params: { lang: Lang; slug: string }
 }): Metadata {
-  const project = findProject(params.slug)
-  if (!project) return {}
+  const p = findProject(params.slug)
+  if (!p) return {}
 
-  const m = project.meta[params.lang] ?? project.meta.en
+  const metaAny: any = p as any
+  const loc = metaAny.meta?.[params.lang]
+  const title: string =
+    loc?.title ?? metaAny.title?.[params.lang] ?? 'Project'
+  const description: string | undefined =
+    loc?.blurb ?? metaAny.summary?.[params.lang] ?? undefined
+
+  const cover: string = metaAny.cover ?? `/projects/${p.slug}/cover.jpg`
+
   return {
-    title: m.title,
-    description: m.blurb,
+    title,
+    description,
     openGraph: {
-      title: m.title,
-      description: m.blurb,
-      images: [project.cover],
+      title,
+      description,
+      images: [cover],
       type: 'article',
     },
   }
@@ -38,52 +47,41 @@ export default function ProjectPage({
 }: {
   params: { lang: Lang; slug: string }
 }) {
-  const project = findProject(params.slug)
-  if (!project) notFound()
+  const p = findProject(params.slug)
+  if (!p) notFound()
 
-  const lang = params.lang
-  const m = project.meta[lang] ?? project.meta.en
+  const metaAny: any = p as any
+  const loc = metaAny.meta?.[params.lang]
+  const title: string =
+    loc?.title ?? metaAny.title?.[params.lang] ?? p.slug
+  const blurb: string =
+    loc?.blurb ?? metaAny.summary?.[params.lang] ?? ''
+
+  const cover: string = metaAny.cover ?? `/projects/${p.slug}/cover.jpg`
+  const images: string[] = Array.isArray(metaAny.images) ? metaAny.images : []
 
   return (
-    <main className="px-6 max-w-6xl mx-auto py-12">
-      {/* hero */}
-      <div className="rounded-2xl overflow-hidden border border-gray-200 mb-8">
-        <img
-          src={project.cover}
-          alt={m.title}
-          className="w-full h-[360px] md:h-[460px] object-cover"
-        />
+    <main className="px-6 max-w-5xl mx-auto py-10">
+      {/* Hero / cover */}
+      <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50 aspect-[16/9] mb-8">
+        <img src={cover} alt={title} className="w-full h-full object-cover" />
       </div>
 
-      <h1 className="text-3xl md:text-4xl font-bold mb-4">{m.title}</h1>
-      {m.blurb && (
-        <p className="text-gray-700 mb-10 leading-relaxed">{m.blurb}</p>
+      <h1 className="text-3xl font-bold mb-3">{title}</h1>
+      {blurb && <p className="text-gray-600 mb-8">{blurb}</p>}
+
+      {images.length > 0 && (
+        <div className="grid sm:grid-cols-2 gap-6">
+          {images.map((src: string, i: number) => (
+            <div
+              key={i}
+              className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50"
+            >
+              <img src={src} alt={`${title} ${i + 1}`} className="w-full h-full object-cover" />
+            </div>
+          ))}
+        </div>
       )}
-
-      {/* ГАЛЕРЕЯ */}
-      <div className="grid md:grid-cols-2 gap-6">
-        {project.images.map((src, i) => (
-          <div
-            key={src}
-            className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50"
-          >
-            <img
-              src={src}
-              alt={`${m.title} #${i + 1}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-10">
-        <a
-          href={`/${lang}#projects`}
-          className="inline-block text-sm text-gray-600 hover:text-black"
-        >
-          ← {lang === 'ru' ? 'Назад к проектам' : lang === 'pt' ? 'Voltar' : 'Back to projects'}
-        </a>
-      </div>
     </main>
   )
 }
