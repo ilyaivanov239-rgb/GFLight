@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
@@ -26,11 +26,10 @@ export default function Page() {
 
   const ctaServices =
     (t as any)?.hero?.button1 || (t as any)?.hero?.cta1 || CTA[lang].services;
-
   const ctaContact =
     (t as any)?.hero?.button2 || (t as any)?.hero?.cta2 || CTA[lang].contact;
 
-  // ----------------- Modal logic -----------------
+  // -------- Modal gallery state --------
   const [modal, setModal] = useState<ModalState>(null);
 
   const openProjectAt = (projectIndex: number, imageIndex = 0) =>
@@ -38,56 +37,54 @@ export default function Page() {
 
   const closeModal = useCallback(() => setModal(null), []);
 
-  const nextImage = useCallback(() => {
-    setModal((m) => {
-      if (!m) return m;
-      const proj = PROJECTS[m.projectIndex];
-      const idx = (m.imageIndex + 1) % proj.images.length;
-      return { projectIndex: m.projectIndex, imageIndex: idx };
-    });
-  }, []);
+  const nextImage = () => {
+    if (!modal) return;
+    const proj = PROJECTS[modal.projectIndex];
+    const n = (modal.imageIndex + 1) % proj.images.length;
+    setModal({ projectIndex: modal.projectIndex, imageIndex: n });
+  };
 
-  const prevImage = useCallback(() => {
-    setModal((m) => {
-      if (!m) return m;
-      const proj = PROJECTS[m.projectIndex];
-      const idx = (m.imageIndex - 1 + proj.images.length) % proj.images.length;
-      return { projectIndex: m.projectIndex, imageIndex: idx };
-    });
-  }, []);
+  const prevImage = () => {
+    if (!modal) return;
+    const proj = PROJECTS[modal.projectIndex];
+    const n = (modal.imageIndex - 1 + proj.images.length) % proj.images.length;
+    setModal({ projectIndex: modal.projectIndex, imageIndex: n });
+  };
 
-  // клавиатура
+  // keyboard
   useEffect(() => {
+    if (!modal) return;
     const onKey = (e: KeyboardEvent) => {
-      if (!modal) return;
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [modal, closeModal, nextImage, prevImage]);
+  }, [modal, closeModal]);
 
-  // свайп на мобилке
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
+  // touch (swipe)
+  const [touchX, setTouchX] = useState<number | null>(null);
+  const [touchY, setTouchY] = useState<number | null>(null);
 
   const onTouchStart = (e: React.TouchEvent) => {
-    const t0 = e.touches[0];
-    setTouchStart({ x: t0.clientX, y: t0.clientY });
+    const t = e.touches[0];
+    setTouchX(t.clientX);
+    setTouchY(t.clientY);
   };
-
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (!touchStart) return;
-    const t1 = e.changedTouches[0];
-    const dx = t1.clientX - touchStart.x;
-    const dy = t1.clientY - touchStart.y;
+    if (touchX == null || touchY == null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchX;
+    const dy = t.clientY - touchY;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
       dx < 0 ? nextImage() : prevImage();
     }
-    setTouchStart(null);
+    setTouchX(null);
+    setTouchY(null);
   };
 
-  // ----------------- Brands & FAQ -----------------
+  // Бренды (заглушки)
   const BRANDS: { name: string; src: string }[] = [
     { name: 'Brand 1', src: '/images/brands/brand1.png' },
     { name: 'Brand 2', src: '/images/brands/brand2.png' },
@@ -96,20 +93,6 @@ export default function Page() {
     { name: 'Brand 5', src: '/images/brands/brand5.png' },
     { name: 'Brand 6', src: '/images/brands/brand6.png' },
   ];
-
-  const FAQ_ITEMS: { q: string; a: string }[] = Array.isArray((t as any)?.faq?.items)
-    ? (t as any).faq.items
-    : [
-        {
-          q: 'В чём отличие ваших проектов?',
-          a: 'Грамотная оптика, контроль бликов — комфорт без ослепления.',
-        },
-        { q: 'Берёте на себя поставку?', a: 'Да. Подбор, поставка, сопровождение монтажа.' },
-        {
-          q: 'Работаете только в Португалии?',
-          a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.',
-        },
-      ];
 
   // ----------------- Render -----------------
   return (
@@ -203,9 +186,11 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS — карточки + модалка */}
       <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">{t?.projects?.title ?? 'Примеры проектов'}</h2>
+        <h2 className="text-3xl font-bold mb-12">
+          {t?.projects?.title ?? 'Примеры проектов'}
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-8 text-left">
           {PROJECTS.slice(0, 3).map((p, idx) => (
@@ -214,12 +199,21 @@ export default function Page() {
               onClick={() => openProjectAt(idx, 0)}
               className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden text-left"
             >
+              {/* Сначала картинка, потом текст */}
               <div className="h-40 bg-gray-100">
-                <img src={p.cover} alt={p.title[lang]} className="w-full h-full object-cover" />
+                <img
+                  src={p.cover}
+                  alt={p.title[lang]}
+                  className="w-full h-full object-cover"
+                />
               </div>
+
               <div className="p-4">
-                {/* Показываем ТОЛЬКО короткий текст */}
-                <p className="text-gray-800 font-medium">{p.blurb[lang]}</p>
+                <div className="font-semibold text-center">{p.title[lang]}</div>
+                {/* Только для ресторана — без тизера под фото */}
+                {p.slug !== 'restaurant' && (
+                  <p className="text-gray-600 mt-2 text-sm">{p.blurb[lang]}</p>
+                )}
               </div>
             </button>
           ))}
@@ -228,14 +222,20 @@ export default function Page() {
 
       {/* BRANDS */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">{(t as any)?.brands?.title ?? 'Бренды'}</h2>
+        <h2 className="text-3xl font-bold mb-8">
+          {(t as any)?.brands?.title ?? 'Бренды'}
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {BRANDS.map((b) => (
             <div
               key={b.name}
               className="aspect-[3/2] relative rounded-2xl bg-white border border-gray-200 flex items-center justify-center p-4"
             >
-              <img src={b.src} alt={b.name} className="max-h-full max-w-full object-contain" />
+              <img
+                src={b.src}
+                alt={b.name}
+                className="max-h-full max-w-full object-contain"
+              />
             </div>
           ))}
         </div>
@@ -248,12 +248,12 @@ export default function Page() {
       <section id="faq" className="py-20 px-6 max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-8">{(t as any)?.faq?.title ?? 'FAQ'}</h2>
         <div className="space-y-3">
-          {FAQ_ITEMS.map((it, i) => (
+          {(t as any)?.faq?.items?.map?.((it: any, i: number) => (
             <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
               <summary className="cursor-pointer font-medium">{it.q}</summary>
               <p className="text-gray-700 mt-2">{it.a}</p>
             </details>
-          ))}
+          )) || null}
         </div>
       </section>
 
@@ -266,7 +266,11 @@ export default function Page() {
               'Проектируем свет, который подчёркивает архитектуру и не слепит. Работаем с архитекторами и дизайнерами.'}
           </p>
           <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50">
-            <img src="/images/about/office.jpg" alt="About" className="w-full h-full object-cover" />
+            <img
+              src="/images/about/office.jpg"
+              alt="About"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </section>
@@ -288,7 +292,7 @@ export default function Page() {
       {/* WhatsApp FAB */}
       <a
         href={`https://wa.me/+351910000000?text=${encodeURIComponent(
-          'Olá! Quero falar sobre iluminação para um projeto.',
+          'Olá! Quero falar sobre iluminação para um projeto.'
         )}`}
         target="_blank"
         rel="noopener noreferrer"
@@ -299,67 +303,68 @@ export default function Page() {
 
       {/* MODAL GALLERY */}
       {modal && (
-  <div
-    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-    onClick={closeModal}
-  >
-    <div
-      className="relative max-w-5xl w-full max-h-[90vh] bg-black rounded-2xl overflow-hidden"
-      onClick={(e) => e.stopPropagation()}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
-      {/* Кнопка закрытия */}
-      <button
-        onClick={closeModal}
-        className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
-        aria-label="Close"
-      >
-        ✕
-      </button>
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="relative max-w-6xl w-full max-h-[92vh] bg-neutral-900 rounded-2xl overflow-hidden flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
+            {/* Close */}
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+              aria-label="Close"
+            >
+              ✕
+            </button>
 
-      {/* Шапка с заголовком и длинным текстом — НЕ перекрывает фото */}
-      <div className="bg-black text-white/90 px-4 py-3 md:px-5 md:py-4">
-        <div className="font-semibold text-base md:text-lg mb-2">
-          {PROJECTS[modal.projectIndex].title[lang]}
+            {/* Верхняя плашка с текстом — фото НЕ уходит под неё */}
+            <div className="bg-black/80 text-white px-3 py-2 md:px-4 md:py-3">
+              <div className="font-medium">
+                {PROJECTS[modal.projectIndex].title[lang]}
+              </div>
+              <p className="text-sm md:text-[15px] leading-relaxed whitespace-pre-line mt-1">
+                {PROJECTS[modal.projectIndex].desc?.[lang] ??
+                  PROJECTS[modal.projectIndex].blurb[lang]}
+              </p>
+            </div>
+
+            {/* Область фото */}
+            <div className="relative flex-1 flex items-center justify-center bg-black">
+              <button
+                onClick={prevImage}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+                aria-label="Prev"
+              >
+                ‹
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+                aria-label="Next"
+              >
+                ›
+              </button>
+
+              <img
+                src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
+                alt={PROJECTS[modal.projectIndex].title[lang]}
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+
+            {/* Пэйджер */}
+            <div className="p-2 text-center text-white/80 text-xs">
+              {PROJECTS[modal.projectIndex].title[lang]} —{' '}
+              {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
+            </div>
+          </div>
         </div>
-        <p className="text-sm md:text-[15px] leading-relaxed whitespace-pre-line">
-          {PROJECTS[modal.projectIndex].desc?.[lang] ??
-            PROJECTS[modal.projectIndex].blurb[lang]}
-        </p>
-      </div>
-
-      {/* Область изображения */}
-      <div className="relative flex items-center justify-center p-3 md:p-4">
-        {/* стрелки */}
-        <button
-          onClick={prevImage}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-          aria-label="Prev"
-        >
-          ‹
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-          aria-label="Next"
-        >
-          ›
-        </button>
-
-        {/* само фото — всегда целиком */}
-        <img
-          src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-          alt={PROJECTS[modal.projectIndex].title[lang]}
-          className="max-h-[60vh] w-full object-contain"
-        />
-      </div>
-
-      {/* подпись снизу */}
-      <div className="p-3 text-center text-white/70 text-sm">
-        {PROJECTS[modal.projectIndex].title[lang]} —{' '}
-        {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
-      </div>
-    </div>
-  </div>
-)}
+      )}
+    </main>
+  );
+}
