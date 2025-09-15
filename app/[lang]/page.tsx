@@ -153,36 +153,35 @@ const ctaContact =
 
 
 
-      {/* PROJECTS — твой блок, без изменений */}
-      <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
+     {/* PROJECTS */}
+<section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
   <h2 className="text-3xl font-bold mb-12">
     {t?.projects?.title ?? 'Selected projects'}
   </h2>
 
   <div className="grid md:grid-cols-3 gap-8 text-left">
     {PROJECTS.slice(0, 3).map((p) => (
-      <a
+      <Link
         key={p.slug}
         href={`/${lang}/projects/${p.slug}`}
         className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden"
       >
         <div className="h-40 bg-gray-100">
           <img
-            src={`/projects/${p.slug}/cover.jpg`}
+            src={p.cover}              // можно и `/projects/${p.slug}/cover.jpg`, но у нас уже есть p.cover
             alt={p.title[lang]}
             className="w-full h-full object-cover"
           />
         </div>
         <div className="p-4">
           <div className="font-medium">{p.title[lang]}</div>
-          {p.summary?.[lang] && (
-            <p className="text-gray-600 mt-2 text-sm">{p.summary[lang]}</p>
-          )}
+          <p className="text-gray-600 mt-2 text-sm">{p.blurb[lang]}</p>
         </div>
-      </a>
+      </Link>
     ))}
   </div>
 </section>
+
 
       {/* BRANDS — новый блок */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
