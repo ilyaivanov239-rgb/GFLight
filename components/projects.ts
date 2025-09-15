@@ -20,24 +20,29 @@ export const PROJECTS: Project[] = [
     slug: 'restaurant',
     cover: '/projects/restaurant/cover.jpg',
     images: seq('restaurant', 8), // есть 1..8.jpg
-    title: { ru: 'Ресторан', en: 'Restaurant', pt: 'Restaurante' },
-    blurb: {
-      ru: 'Проект освещения ресторана',
-      en: 'Atmospheric dining lighting with texture accents and high visual comfort.',
-      pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
-    },
-    desc: {
-    ru: 'Освещение в этом ресторане — это не просто свет, а часть истории. Мы создавали его с мыслью о том, чтобы каждый гость чувствовал себя особенным, а пространство — роскошным, но уютным.
+    title: {
+    ru: 'Проект освещения ресторана',
+    en: 'Restaurant lighting project',
+    pt: 'Projeto de iluminação do restaurante',
+  },
+  blurb: {
+    ru: 'Атмосферная подсветка залов, акценты на текстурах и высокий визуальный комфорт.',
+    en: 'Atmospheric lighting with texture accents and high visual comfort.',
+    pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
+  },
+  // <<< ВАЖНО: длинные тексты — ТОЛЬКО в бектиках >>>
+  desc: {
+    ru: `Освещение в этом ресторане — это не просто свет, а часть истории. Мы создавали его с мыслью о том, чтобы каждый гость чувствовал себя особенным, а пространство — роскошным, но уютным.
 
 Главная цель была в том, чтобы сделать так, чтобы всё выглядело дорого и элегантно. Для этого мы использовали закарнизную подсветку, которая подчеркивает лепной декор и показывает всю величественность потолков.
 
 Хрустальные люстры дают мягкий, тёплый свет, создавая интимную, чувственную атмосферу. Но ключевой элемент — акцентное освещение с фреймингом. Оно словно прожекторы на сцене, выделяет каждый стол, превращая посуду, серебро и цветы в настоящие арт-объекты.
 
-Такой свет не слепит, он делает фотографии «инстаграмными», а еду — невероятно аппетитной. Гости чувствуют себя комфортно, а архитектура зала смотрится выразительно, но не теряет своей изысканности.',
-    en: 'Atmospheric dining lighting with texture accents and high visual comfort. Uniform vertical lighting in showcases; precise accents on table setting and architecture—glare-free comfort.',
-    pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual. Luz vertical uniforme nas vitrines; acentos precisos na mesa e na arquitetura—sem ofuscamento.',
+Такой свет не слепит, он делает фотографии «инстаграмными», а еду — невероятно аппетитной. Гости чувствуют себя комфортно, а архитектура зала смотрится выразительно, но не теряет своей изысканности.`,
+    en: `Lighting in this restaurant is part of the story...`, // по желанию
+    pt: `A iluminação deste restaurante é parte da história...`,  // по желанию
   },
-  },
+},
   {
     slug: 'cosmonautics',
     cover: '/projects/cosmonautics/cover.jpg',
