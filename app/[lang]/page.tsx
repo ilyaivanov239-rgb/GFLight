@@ -302,69 +302,67 @@ export default function Page() {
       </a>
 
       {/* MODAL GALLERY */}
-      {modal && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeModal}
-        >
-          <div
-            className="relative max-w-6xl w-full max-h-[92vh] bg-neutral-900 rounded-2xl overflow-hidden flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            {/* Close */}
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-              aria-label="Close"
-            >
-              ✕
-            </button>
+{modal && (
+  <div
+    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+    onClick={closeModal}
+  >
+    <div
+      className="relative max-w-5xl w-full max-h-[90vh] bg-black rounded-2xl overflow-hidden flex flex-col"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Кнопка закрытия */}
+      <button
+        onClick={closeModal}
+        className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
+        aria-label="Close"
+      >
+        ✕
+      </button>
 
-            {/* Верхняя плашка с текстом — фото НЕ уходит под неё */}
-            <div className="bg-black/80 text-white px-3 py-2 md:px-4 md:py-3">
-              <div className="font-medium">
-                {PROJECTS[modal.projectIndex].title[lang]}
-              </div>
-              <p className="text-sm md:text-[15px] leading-relaxed whitespace-pre-line mt-1">
-                {PROJECTS[modal.projectIndex].desc?.[lang] ??
-                  PROJECTS[modal.projectIndex].blurb[lang]}
-              </p>
-            </div>
-
-            {/* Область фото */}
-            <div className="relative flex-1 flex items-center justify-center bg-black">
-              <button
-                onClick={prevImage}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-                aria-label="Prev"
-              >
-                ‹
-              </button>
-              <button
-                onClick={nextImage}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-                aria-label="Next"
-              >
-                ›
-              </button>
-
-              <img
-                src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-                alt={PROJECTS[modal.projectIndex].title[lang]}
-                className="max-h-full max-w-full object-contain"
-              />
-            </div>
-
-            {/* Пэйджер */}
-            <div className="p-2 text-center text-white/80 text-xs">
-              {PROJECTS[modal.projectIndex].title[lang]} —{' '}
-              {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
-            </div>
-          </div>
+      {/* Верхняя плашка с текстом (не перекрывает фото) */}
+      <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
+        <div className="font-semibold mb-2">
+          {PROJECTS[modal.projectIndex].title[lang]}
         </div>
-      )}
-    </main>
-  );
-}
+        <p className="leading-relaxed text-white/80 whitespace-pre-line">
+          {PROJECTS[modal.projectIndex].desc?.[lang] ?? ''}
+        </p>
+      </div>
+
+      {/* Область изображения — здесь и центрируем стрелки */}
+      <div
+        className="relative flex-1 flex items-center justify-center"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <img
+          src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
+          alt={PROJECTS[modal.projectIndex].title[lang]}
+          className="max-h-full max-w-full object-contain"
+        />
+
+        {/* Стрелки теперь центрируются относительно области фото */}
+        <button
+          onClick={prevImage}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+          aria-label="Prev"
+        >
+          ‹
+        </button>
+        <button
+          onClick={nextImage}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+          aria-label="Next"
+        >
+          ›
+        </button>
+      </div>
+
+      {/* Подпись снизу — только счётчик, без повторения заголовка */}
+      <div className="p-2 text-center text-white/70 text-xs">
+        {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
+      </div>
+    </div>
+  </div>
+)}
