@@ -1,13 +1,13 @@
 // components/projects.ts
-export type Lang = 'ru' | 'en' | 'pt';
+import type { Lang } from './i18n'; // ← используем один и тот же Lang
 
 export type Project = {
-  slug: string;                               // используется в URL
-  cover: string;                              // обложка (hero)
-  images: string[];                           // галерея
-  title: Record<Lang, string>;                // заголовок
-  blurb: Record<Lang, string>;                // короткое описание (карточка)
-  desc?: Record<Lang, string>;                // развёрнутое описание (опционально)
+  slug: string;                  // используется в URL
+  cover: string;                 // обложка (hero)
+  images: string[];              // галерея
+  title: Record<Lang, string>;   // заголовок
+  blurb: Record<Lang, string>;   // короткое описание (карточка)
+  desc?: Record<Lang, string>;   // развёрнутое описание (опционально)
 };
 
 // Порядок в массиве == порядок показа на главной
