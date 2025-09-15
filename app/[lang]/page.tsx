@@ -156,29 +156,36 @@ const ctaContact =
      {/* PROJECTS */}
 <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
   <h2 className="text-3xl font-bold mb-12">
-    {t?.projects?.title ?? 'Selected projects'}
+    {t?.projects?.title ?? (lang === 'ru' ? 'Избранные проекты' : 'Selected projects')}
   </h2>
 
   <div className="grid md:grid-cols-3 gap-8 text-left">
-    {PROJECTS.slice(0, 3).map((p) => (
-      <Link
-        key={p.slug}
-        href={`/${lang}/projects/${p.slug}`}
-        className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden"
-      >
-        <div className="h-40 bg-gray-100">
-          <img
-            src={p.cover}              // можно и `/projects/${p.slug}/cover.jpg`, но у нас уже есть p.cover
-            alt={p.title[lang]}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="p-4">
-          <div className="font-medium">{p.title[lang]}</div>
-          <p className="text-gray-600 mt-2 text-sm">{p.blurb[lang]}</p>
-        </div>
-      </Link>
-    ))}
+    {PROJECTS.slice(0, 3).map((p) => {
+      const m = p.meta[lang] ?? p.meta.en; // локализованный заголовок и тизер
+
+      return (
+        <Link
+          key={p.slug}
+          href={`/${lang}/projects/${p.slug}`}
+          className="group bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden"
+        >
+          <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
+            <img
+              src={p.cover}                 // или `/projects/${p.slug}/cover.jpg`
+              alt={m.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          </div>
+
+          <div className="p-4">
+            <div className="font-medium">{m.title}</div>
+            {m.blurb && (
+              <p className="text-gray-600 mt-2 text-sm">{m.blurb}</p>
+            )}
+          </div>
+        </Link>
+      );
+    })}
   </div>
 </section>
 
