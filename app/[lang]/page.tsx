@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
@@ -9,15 +9,15 @@ import { PROJECTS } from '../../components/projects';
 type ModalState =
   | null
   | {
-      projectIndex: number; // индекс проекта в PROJECTS
-      imageIndex: number;   // индекс картинки внутри проекта
+      projectIndex: number;
+      imageIndex: number;
     };
 
 export default function Page() {
   const { lang } = useParams() as { lang: Lang };
   const t = dict[lang] ?? dict.en;
 
-  // --- CTA тексты
+  // CTA
   const CTA = {
     ru: { services: 'Услуги', contact: 'Связаться' },
     en: { services: 'Our Services', contact: 'Contact Us' },
@@ -25,80 +25,69 @@ export default function Page() {
   } as const;
 
   const ctaServices =
-    (t as any)?.hero?.button1 ||
-    (t as any)?.hero?.cta1 ||
-    CTA[lang].services;
+    (t as any)?.hero?.button1 || (t as any)?.hero?.cta1 || CTA[lang].services;
 
   const ctaContact =
-    (t as any)?.hero?.button2 ||
-    (t as any)?.hero?.cta2 ||
-    CTA[lang].contact;
+    (t as any)?.hero?.button2 || (t as any)?.hero?.cta2 || CTA[lang].contact;
 
-  // --- Модалка-галерея
+  // ----------------- Modal logic -----------------
   const [modal, setModal] = useState<ModalState>(null);
-
-  const closeModal = useCallback(() => setModal(null), []);
-
-  // клавиатура: Esc — закрыть, ←/→ — перелистывание
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (!modal) return;
-      if (e.key === 'Escape') {
-        closeModal();
-      } else if (e.key === 'ArrowRight') {
-        nextImage();
-      } else if (e.key === 'ArrowLeft') {
-        prevImage();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [modal]);
 
   const openProjectAt = (projectIndex: number, imageIndex = 0) =>
     setModal({ projectIndex, imageIndex });
 
-  const nextImage = () => {
-    if (!modal) return;
-    const proj = PROJECTS[modal.projectIndex];
-    const n = (modal.imageIndex + 1) % proj.images.length;
-    setModal({ projectIndex: modal.projectIndex, imageIndex: n });
-  };
+  const closeModal = useCallback(() => setModal(null), []);
 
-  const prevImage = () => {
-    if (!modal) return;
-    const proj = PROJECTS[modal.projectIndex];
-    const n =
-      (modal.imageIndex - 1 + proj.images.length) % proj.images.length;
-    setModal({ projectIndex: modal.projectIndex, imageIndex: n });
-  };
+  const nextImage = useCallback(() => {
+    setModal((m) => {
+      if (!m) return m;
+      const proj = PROJECTS[m.projectIndex];
+      const idx = (m.imageIndex + 1) % proj.images.length;
+      return { projectIndex: m.projectIndex, imageIndex: idx };
+    });
+  }, []);
+
+  const prevImage = useCallback(() => {
+    setModal((m) => {
+      if (!m) return m;
+      const proj = PROJECTS[m.projectIndex];
+      const idx = (m.imageIndex - 1 + proj.images.length) % proj.images.length;
+      return { projectIndex: m.projectIndex, imageIndex: idx };
+    });
+  }, []);
+
+  // клавиатура
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!modal) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [modal, closeModal, nextImage, prevImage]);
 
   // свайп на мобилке
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
 
   const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    setTouchStartX(t.clientX);
-    setTouchStartY(t.clientY);
+    const t0 = e.touches[0];
+    setTouchStart({ x: t0.clientX, y: t0.clientY });
   };
 
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX == null || touchStartY == null) return;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - touchStartX;
-    const dy = t.clientY - touchStartY;
-
-    // простая эвристика: горизонтальный свайп
+    if (!touchStart) return;
+    const t1 = e.changedTouches[0];
+    const dx = t1.clientX - touchStart.x;
+    const dy = t1.clientY - touchStart.y;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 0) nextImage();
-      else prevImage();
+      dx < 0 ? nextImage() : prevImage();
     }
-    setTouchStartX(null);
-    setTouchStartY(null);
+    setTouchStart(null);
   };
 
-  // --- Бренды
+  // ----------------- Brands & FAQ -----------------
   const BRANDS: { name: string; src: string }[] = [
     { name: 'Brand 1', src: '/images/brands/brand1.png' },
     { name: 'Brand 2', src: '/images/brands/brand2.png' },
@@ -108,23 +97,21 @@ export default function Page() {
     { name: 'Brand 6', src: '/images/brands/brand6.png' },
   ];
 
-  // --- FAQ
-  const FAQ_ITEMS: { q: string; a: string }[] =
-    (t as any)?.faq?.items ?? [
-      {
-        q: 'В чём отличие ваших проектов?',
-        a: 'Грамотная оптика, контроль бликов — комфорт без ослепления.',
-      },
-      {
-        q: 'Берёте на себя поставку?',
-        a: 'Да. Подбор, поставка, сопровождение монтажа.',
-      },
-      {
-        q: 'Работаете только в Португалии?',
-        a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.',
-      },
-    ];
+  const FAQ_ITEMS: { q: string; a: string }[] = Array.isArray((t as any)?.faq?.items)
+    ? (t as any).faq.items
+    : [
+        {
+          q: 'В чём отличие ваших проектов?',
+          a: 'Грамотная оптика, контроль бликов — комфорт без ослепления.',
+        },
+        { q: 'Берёте на себя поставку?', a: 'Да. Подбор, поставка, сопровождение монтажа.' },
+        {
+          q: 'Работаете только в Португалии?',
+          a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.',
+        },
+      ];
 
+  // ----------------- Render -----------------
   return (
     <main>
       {/* HERO */}
@@ -216,11 +203,9 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROJECTS — карточки с модальным просмотром */}
+      {/* PROJECTS */}
       <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">
-          {t?.projects?.title ?? 'Примеры проектов'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-12">{t?.projects?.title ?? 'Примеры проектов'}</h2>
 
         <div className="grid md:grid-cols-3 gap-8 text-left">
           {PROJECTS.slice(0, 3).map((p, idx) => (
@@ -230,15 +215,11 @@ export default function Page() {
               className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden text-left"
             >
               <div className="h-40 bg-gray-100">
-                <img
-                  src={p.cover}
-                  alt={p.title[lang]}
-                  className="w-full h-full object-cover"
-                />
+                <img src={p.cover} alt={p.title[lang]} className="w-full h-full object-cover" />
               </div>
               <div className="p-4">
-                <div className="font-medium">{p.title[lang]}</div>
-                <p className="text-gray-600 mt-2 text-sm">{p.blurb[lang]}</p>
+                {/* Показываем ТОЛЬКО короткий текст */}
+                <p className="text-gray-800 font-medium">{p.blurb[lang]}</p>
               </div>
             </button>
           ))}
@@ -247,20 +228,14 @@ export default function Page() {
 
       {/* BRANDS */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">
-          {(t as any)?.brands?.title ?? 'Бренды'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-8">{(t as any)?.brands?.title ?? 'Бренды'}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {BRANDS.map((b) => (
             <div
               key={b.name}
               className="aspect-[3/2] relative rounded-2xl bg-white border border-gray-200 flex items-center justify-center p-4"
             >
-              <img
-                src={b.src}
-                alt={b.name}
-                className="max-h-full max-w-full object-contain"
-              />
+              <img src={b.src} alt={b.name} className="max-h-full max-w-full object-contain" />
             </div>
           ))}
         </div>
@@ -284,20 +259,14 @@ export default function Page() {
 
       {/* ABOUT */}
       <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">
-          {(t as any)?.about?.title ?? 'О нас'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-8">{(t as any)?.about?.title ?? 'О нас'}</h2>
         <div className="grid md:grid-cols-2 gap-10 items-start">
           <p className="text-gray-700 text-lg leading-relaxed">
             {(t as any)?.about?.text ??
               'Проектируем свет, который подчёркивает архитектуру и не слепит. Работаем с архитекторами и дизайнерами.'}
           </p>
           <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50">
-            <img
-              src="/images/about/office.jpg"
-              alt="About"
-              className="w-full h-full object-cover"
-            />
+            <img src="/images/about/office.jpg" alt="About" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -316,10 +285,10 @@ export default function Page() {
         </Link>
       </section>
 
-      {/* Плавающая кнопка WhatsApp */}
+      {/* WhatsApp FAB */}
       <a
         href={`https://wa.me/+351910000000?text=${encodeURIComponent(
-          'Olá! Quero falar sobre iluminação para um projeto.'
+          'Olá! Quero falar sobre iluminação para um projeto.',
         )}`}
         target="_blank"
         rel="noopener noreferrer"
@@ -328,75 +297,70 @@ export default function Page() {
         WhatsApp
       </a>
 
-      /* MODAL GALLERY */
-{modal && (() => {
-  const proj = PROJECTS[modal.projectIndex];
-  const title = proj.title[lang];
-  const desc  = proj.desc?.[lang];                 // длинный текст для шапки
-  const img   = proj.images[modal.imageIndex];
-  const total = proj.images.length;
-  const current = modal.imageIndex + 1;
+      {/* MODAL GALLERY */}
+      {modal && (() => {
+        const proj = PROJECTS[modal.projectIndex];
+        const title = proj.title[lang];
+        const desc = proj.desc?.[lang];
+        const img = proj.images[modal.imageIndex];
+        const total = proj.images.length;
+        const current = modal.imageIndex + 1;
 
-  return (
-    <div
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-      onClick={closeModal}
-    >
-      <div
-        className="relative max-w-6xl w-full max-h-[92vh] bg-black rounded-2xl overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        {/* Шапка с заголовком и длинным описанием */}
-        <div className="absolute top-0 left-0 right-0 bg-black/70 border-b border-white/10 p-4 md:p-5">
-          <h3 className="text-white text-base md:text-lg font-semibold">
-            {title}
-          </h3>
-          {desc && (
-            <p className="mt-1 text-white/80 text-sm md:text-[15px] leading-relaxed">
-              {desc}
-            </p>
-          )}
-        </div>
+        return (
+          <div
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={closeModal}
+          >
+            <div
+              className="relative max-w-6xl w-full max-h-[92vh] bg-black rounded-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+            >
+              {/* Header with long description */}
+              <div className="absolute top-0 left-0 right-0 bg-black/70 border-b border-white/10 p-4 md:p-5">
+                <h3 className="text-white text-base md:text-lg font-semibold">{title}</h3>
+                {desc && (
+                  <p className="mt-1 text-white/80 text-sm md:text-[15px] leading-relaxed">{desc}</p>
+                )}
+              </div>
 
-        {/* Кнопки управления */}
-        <button
-          onClick={closeModal}
-          className="absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-          aria-label="Close"
-        >
-          ✕
-        </button>
-        <button
-          onClick={prevImage}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-          aria-label="Prev"
-        >
-          ‹
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
-          aria-label="Next"
-        >
-          ›
-        </button>
+              {/* Controls */}
+              <button
+                onClick={closeModal}
+                className="absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+              <button
+                onClick={prevImage}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+                aria-label="Prev"
+              >
+                ‹
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2"
+                aria-label="Next"
+              >
+                ›
+              </button>
 
-        {/* Зона изображения с фиксированным верхним отступом */}
-        <div className="pt-16 md:pt-20 px-3 pb-10">
-          <img
-            src={img}
-            alt={title}
-            className="w-full max-h-[70vh] md:max-h-[72vh] object-contain mx-auto"
-          />
-        </div>
+              {/* Image with fixed top padding */}
+              <div className="pt-16 md:pt-20 px-3 pb-10">
+                <img src={img} alt={title} className="w-full max-h-[70vh] md:max-h-[72vh] object-contain mx-auto" />
+              </div>
 
-        {/* Подвал с счётчиком */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-white/80 text-sm bg-black/40 border-t border-white/10">
-          {title} — {current}/{total}
-        </div>
-      </div>
-    </div>
+              {/* Footer counter */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-white/80 text-sm bg-black/40 border-t border-white/10">
+                {title} — {current}/{total}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+    </main>
   );
-})()}
+}
