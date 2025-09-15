@@ -240,33 +240,32 @@ export default function Page() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8 text-left">
-          {PROJECTS.slice(0, 3).map((p) => {
-            const m = p.meta[lang] ?? p.meta.en
-            return (
-              <button
-                key={p.slug}
-                onClick={() => openLightbox(p.slug, 0)}
-                className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden text-left"
-              >
-                <div className="h-40 bg-gray-100">
-                  <img
-                    src={p.cover}
-                    alt={m.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <div className="font-medium">{m.title}</div>
-                  {m.blurb && (
-                    <p className="text-gray-600 mt-2 text-sm">{m.blurb}</p>
-                  )}
-                </div>
-              </button>
-            )
-          })}
-        </div>
-      </section>
+  {PROJECTS.slice(0, 3).map((p) => {
+    const title = p.title[lang] ?? p.title.en
+    const blurb = p.blurb?.[lang] ?? p.blurb?.[('en' as Lang)]
 
+    return (
+      <button
+        key={p.slug}
+        onClick={() => openLightbox(p.slug, 0)}
+        className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden text-left"
+      >
+        <div className="h-40 bg-gray-100">
+          <img
+            src={p.cover}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="p-4">
+          <div className="font-medium">{title}</div>
+          {blurb && <p className="text-gray-600 mt-2 text-sm">{blurb}</p>}
+        </div>
+      </button>
+    )
+  })}
+</div>
+</section>
       {/* BRANDS */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-8">
@@ -367,26 +366,28 @@ export default function Page() {
           <div className="absolute inset-0 flex flex-col">
             {/* top bar */}
             <div className="flex items-center justify-between p-3 md:p-4 text-white">
-              <div className="text-sm opacity-80">
-                {activeProject.meta[lang]?.title ?? activeProject.meta.en.title}
-              </div>
-              <button
-                onClick={closeLightbox}
-                aria-label="Close"
-                className="p-2 rounded hover:bg-white/10"
-              >
-                ✕
-              </button>
-            </div>
+  <div className="text-sm opacity-80">
+    {activeProject.title[lang] ?? activeProject.title.en}
+  </div>
+  <button
+    onClick={closeLightbox}
+    aria-label="Close"
+    className="p-2 rounded hover:bg-white/10"
+  >
+    ✕
+  </button>
+</div>
 
             {/* image area */}
             <div className="flex-1 relative select-none">
-              <img
-                src={activeProject.images[lbIndex]}
-                alt={`${activeProject.meta[lang]?.title ?? activeProject.meta.en.title} ${lbIndex + 1}`}
-                className="absolute inset-0 m-auto max-h-full max-w-full object-contain"
-                draggable={false}
-              />
+  <img
+    src={activeProject.images[lbIndex]}
+    alt={`${activeProject.title[lang] ?? activeProject.title.en} ${lbIndex + 1}`}
+    className="absolute inset-0 m-auto max-h-full max-w-full object-contain"
+    draggable={false}
+  />
+  ...
+</div>
 
               <button
                 onClick={(e) => { e.stopPropagation(); prev() }}
