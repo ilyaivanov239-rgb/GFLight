@@ -22,10 +22,15 @@ export const PROJECTS: Project[] = [
     images: seq('restaurant', 8), // есть 1..8.jpg
     title: { ru: 'Ресторан', en: 'Restaurant', pt: 'Restaurante' },
     blurb: {
-      ru: 'Атмосферная подсветка залов, акценты на текстурах и высокий визуальный комфорт.',
+      ru: 'Проект освещения ресторана',
       en: 'Atmospheric dining lighting with texture accents and high visual comfort.',
       pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual.',
     },
+    desc: {
+    ru: 'Атмосферная подсветка залов, акценты на текстурах и высокий визуальный комфорт. Равномерный вертикальный свет в витринах; точечные акценты на сервировке и архитектуре — комфорт без бликов.',
+    en: 'Atmospheric dining lighting with texture accents and high visual comfort. Uniform vertical lighting in showcases; precise accents on table setting and architecture—glare-free comfort.',
+    pt: 'Iluminação atmosférica com acentos nas texturas e alto conforto visual. Luz vertical uniforme nas vitrines; acentos precisos na mesa e na arquitetura—sem ofuscamento.',
+  },
   },
   {
     slug: 'cosmonautics',
