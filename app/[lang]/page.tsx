@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
 import { PROJECTS } from '../../components/projects';
+import Image from 'next/image';
+
 
 type ModalState =
   | null
@@ -227,13 +229,16 @@ export default function Page() {
         className="snap-start shrink-0 w-[85vw] bg-white rounded-2xl shadow hover:shadow-lg transition text-left overflow-hidden"
       >
         {/* Картинка — крупнее, без белой полосы сверху */}
-        <div className="h-56 bg-black/5 rounded-t-2xl overflow-hidden">
-          <img
-            src={p.cover}
-            alt={p.title[lang]}
-            className="block w-full h-full object-cover"
-          />
-        </div>
+        <div className="relative h-56 rounded-t-2xl overflow-hidden">
+  <Image
+    src={p.cover}
+    alt={p.title[lang]}
+    fill
+    className="object-cover"
+    sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 25vw"
+    priority={idx === 0}   // можно только для первой карточки
+  />
+</div>
 
         {/* Только название, по центру и пожирнее */}
         <div className="p-3">
@@ -254,13 +259,15 @@ export default function Page() {
         className="bg-white rounded-2xl shadow hover:shadow-lg transition text-left overflow-hidden"
       >
         {/* Картинка — крупнее, без белой полосы сверху */}
-        <div className="h-56 bg-black/5 rounded-t-2xl overflow-hidden">
-          <img
-            src={p.cover}
-            alt={p.title[lang]}
-            className="block w-full h-full object-cover"
-          />
-        </div>
+        <div className="relative h-56 rounded-t-2xl overflow-hidden">
+  <Image
+    src={p.cover}
+    alt={p.title[lang]}
+    fill
+    className="object-cover"
+    sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 25vw"
+  />
+</div>
 
         {/* Только название */}
         <div className="p-3">
@@ -385,12 +392,15 @@ export default function Page() {
             </div>
 
             {/* область фото — центрируем стрелки всегда по центру картинки */}
-            <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
-              <img
-                src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-                alt={PROJECTS[modal.projectIndex].title[lang]}
-                className="max-h-[70vh] w-auto object-contain"
-              />
+            <div className="relative w-full h-[70vh]">
+  <Image
+    src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
+    alt={PROJECTS[modal.projectIndex].title[lang]}
+    fill
+    sizes="100vw"
+    className="object-contain"
+  />
+</div>
 
               <button
                 onClick={prevImage}
