@@ -57,6 +57,33 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+  slug: 'onepoint',
+  cover: '/projects/onepoint/cover.jpg',
+  images: [
+    '/projects/onepoint/1.jpg',
+    '/projects/onepoint/2.jpg',
+    '/projects/onepoint/3.jpg',
+    // добавь остальные, если есть
+  ],
+  title: {
+    ru: 'Офис OnePoint',
+    en: 'OnePoint Office',
+    pt: 'Escritório OnePoint',
+  },
+  // краткий анонс можно оставить пустым, мы его на карточке больше не показываем
+  blurb: {
+    ru: '',
+    en: '',
+    pt: '',
+  },
+  // длинное описание (то, что показываем вверху модалки) — по желанию
+  desc: {
+    ru: '',
+    en: '',
+    pt: '',
+  },
+},
+  {
     slug: 'globalone',
     cover: '/projects/globalone/cover.jpg',
     images: seq('globalone', 3),
