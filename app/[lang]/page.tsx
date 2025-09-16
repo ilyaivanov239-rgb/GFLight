@@ -190,23 +190,20 @@ export default function Page() {
               onClick={() => openProjectAt(idx, 0)}
               className="snap-start shrink-0 w-[85vw] bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
             >
-              <div className="relative h-56 rounded-t-2xl overflow-hidden">
-                <Image
-                  src={p.cover}
-                  alt={p.title[lang]}
-                  fill
-                  sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 25vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="px-5 py-4">
-                <div className="font-semibold text-center leading-tight">
-                  {p.title[lang]}
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+  <img
+    src={p.cover}
+    alt={p.title[lang]}
+    className="absolute inset-0 block h-full w-full object-cover"
+  />
+</div>
+              <div className="p-4">
+  <div className="min-h-[48px] flex items-center justify-center">
+    <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
+      {p.title[lang]}
+    </h3>
+  </div>
+</div>
 
         {/* Планшет/десктоп: сетка 4×2 */}
         <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-8 text-left">
@@ -216,23 +213,20 @@ export default function Page() {
               onClick={() => openProjectAt(idx, 0)}
               className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
             >
-              <div className="relative h-56 rounded-t-2xl overflow-hidden">
-                <Image
-                  src={p.cover}
-                  alt={p.title[lang]}
-                  fill
-                  sizes="(max-width: 1024px) 30vw, 23vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="px-5 py-4">
-                <div className="font-semibold text-center leading-tight">
-                  {p.title[lang]}
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+  <img
+    src={p.cover}
+    alt={p.title[lang]}
+    className="absolute inset-0 block h-full w-full object-cover"
+  />
+</div>
+              <div className="p-4">
+  <div className="min-h-[48px] flex items-center justify-center">
+    <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
+      {p.title[lang]}
+    </h3>
+  </div>
+</div>
       </section>
 
       {/* BRANDS */}
