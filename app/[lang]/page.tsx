@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
@@ -81,6 +81,16 @@ export default function Page() {
     }
     setTouchX(null);
     setTouchY(null);
+  };
+
+  // ---- Projects: mobile scroller helpers ----
+  const mobListRef = useRef<HTMLDivElement>(null);
+  const scrollMob = (dir: 'left' | 'right') => {
+    const el = mobListRef.current;
+    if (!el) return;
+    const item =
+      (el.firstElementChild as HTMLElement | null)?.offsetWidth ?? 320;
+    el.scrollBy({ left: dir === 'left' ? -item : item, behavior: 'smooth' });
   };
 
   // Бренды (заглушки)
@@ -202,31 +212,81 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROJECTS — карточки + модалка */}
-      <section id="projects" className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">
+      {/* PROJECTS — сетка на md+ и свайповая лента на мобилке */}
+      <section id="projects" className="py-20 px-6 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-10 text-center">
           {t?.projects?.title ?? 'Примеры проектов'}
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8 text-left">
-          {PROJECTS.slice(0, 3).map((p, idx) => (
-            <button
-              key={p.slug}
-              onClick={() => openProjectAt(idx, 0)}
-              className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden text-left"
-            >
-              <div className="h-40 bg-gray-100">
+        {/* Мобилка: горизонтальный скролл со снапом + стрелки */}
+        <div className="md:hidden relative">
+          <div
+            ref={mobListRef}
+            className="
+              flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2
+              -mx-4 px-4
+              [-ms-overflow-style:none] [scrollbar-width:none]
+              [&::-webkit-scrollbar]:hidden
+            "
+          >
+            {PROJECTS.map((p, idx) => (
+              <button
+                key={p.slug}
+                onClick={() => openProjectAt(idx, 0)}
+                className="snap-start shrink-0 w-[85vw] bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
+              >
                 <img
                   src={p.cover}
                   alt={p.title[lang]}
-                  className="w-full h-full object-cover"
+                  className="block w-full aspect-[16/10] object-cover"
                 />
-              </div>
+                <div className="px-5 py-3">
+                  <div className="font-semibold text-center text-[18px] leading-tight">
+                    {p.title[lang]}
+                  </div>
+                  {p.slug !== 'restaurant' && (
+                    <p className="text-gray-600 mt-1 text-sm">{p.blurb[lang]}</p>
+                  )}
+                </div>
+              </button>
+            ))}
+          </div>
 
-              <div className="p-4">
-                <div className="font-semibold text-center">{p.title[lang]}</div>
+          <button
+            onClick={() => scrollMob('left')}
+            className="absolute left-1 top-1/2 -translate-y-1/2 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+            aria-label="Prev"
+          >
+            ‹
+          </button>
+          <button
+            onClick={() => scrollMob('right')}
+            className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+            aria-label="Next"
+          >
+            ›
+          </button>
+        </div>
+
+        {/* Планшет/десктоп: сетка 4×2 */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {PROJECTS.map((p, idx) => (
+            <button
+              key={p.slug}
+              onClick={() => openProjectAt(idx, 0)}
+              className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
+            >
+              <img
+                src={p.cover}
+                alt={p.title[lang]}
+                className="block w-full aspect-[4/3] object-cover"
+              />
+              <div className="px-5 py-3">
+                <div className="font-semibold text-center text-[18px] leading-tight">
+                  {p.title[lang]}
+                </div>
                 {p.slug !== 'restaurant' && (
-                  <p className="text-gray-600 mt-2 text-sm">{p.blurb[lang]}</p>
+                  <p className="text-gray-600 mt-1 text-sm">{p.blurb[lang]}</p>
                 )}
               </div>
             </button>
