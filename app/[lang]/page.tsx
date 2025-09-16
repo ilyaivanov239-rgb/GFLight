@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
 import { PROJECTS } from '../../components/projects';
@@ -30,7 +29,7 @@ export default function Page() {
   const ctaContact =
     (t as any)?.hero?.button2 || (t as any)?.hero?.cta2 || CTA[lang].contact;
 
-  // -------- Modal gallery state --------
+  // ---------- Modal ----------
   const [modal, setModal] = useState<ModalState>(null);
   const openProjectAt = (projectIndex: number, imageIndex = 0) =>
     setModal({ projectIndex, imageIndex });
@@ -62,16 +61,14 @@ export default function Page() {
     return () => window.removeEventListener('keydown', onKey);
   }, [modal, closeModal]);
 
-  // touch (swipe)
+  // touch swipe
   const [touchX, setTouchX] = useState<number | null>(null);
   const [touchY, setTouchY] = useState<number | null>(null);
-
   const onTouchStart = (e: React.TouchEvent) => {
     const t = e.touches[0];
     setTouchX(t.clientX);
     setTouchY(t.clientY);
   };
-
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchX == null || touchY == null) return;
     const t = e.changedTouches[0];
@@ -83,6 +80,23 @@ export default function Page() {
     setTouchX(null);
     setTouchY(null);
   };
+
+  // Бренды (заглушки)
+  const BRANDS: { name: string; src: string }[] = [
+    { name: 'Brand 1', src: '/images/brands/brand1.png' },
+    { name: 'Brand 2', src: '/images/brands/brand2.png' },
+    { name: 'Brand 3', src: '/images/brands/brand3.png' },
+    { name: 'Brand 4', src: '/images/brands/brand4.png' },
+    { name: 'Brand 5', src: '/images/brands/brand5.png' },
+    { name: 'Brand 6', src: '/images/brands/brand6.png' },
+  ];
+
+  const FAQ_ITEMS: { q: string; a: string }[] =
+    (t as any)?.faq?.items ?? [
+      { q: 'В чём отличие ваших проектов?', a: 'Грамотная оптика, контроль бликов — комфорт без ослепления.' },
+      { q: 'Берёте на себя поставку?', a: 'Да. Подбор, поставка, сопровождение монтажа.' },
+      { q: 'Работаете только в Португалии?', a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.' },
+    ];
 
   // ----------------- Render -----------------
   return (
@@ -176,13 +190,13 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROJECTS — сетка на md+ и свайповая лента на мобилке */}
+      {/* PROJECTS — мобилка: свайп; md+: сетка 4×2 */}
       <section id="projects" className="py-20 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-12 text-center">
           {t?.projects?.title ?? 'Примеры проектов'}
         </h2>
 
-        {/* Мобилка: горизонтальный свайп со snap */}
+        {/* mobile swipe */}
         <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4">
           {PROJECTS.map((p, idx) => (
             <button
@@ -191,21 +205,20 @@ export default function Page() {
               className="snap-start shrink-0 w-[85vw] bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
-  <img
-    src={p.cover}
-    alt={p.title[lang]}
-    className="absolute inset-0 block h-full w-full object-cover"
-  />
-</div>
+                <img src={p.cover} alt={p.title[lang]} className="absolute inset-0 block w-full h-full object-cover" />
+              </div>
               <div className="p-4">
-  <div className="min-h-[48px] flex items-center justify-center">
-    <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
-      {p.title[lang]}
-    </h3>
-  </div>
-</div>
+                <div className="min-h-[48px] flex items-center justify-center">
+                  <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
+                    {p.title[lang]}
+                  </h3>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
 
-        {/* Планшет/десктоп: сетка 4×2 */}
+        {/* desktop grid */}
         <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-8 text-left">
           {PROJECTS.map((p, idx) => (
             <button
@@ -214,19 +227,18 @@ export default function Page() {
               className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
-  <img
-    src={p.cover}
-    alt={p.title[lang]}
-    className="absolute inset-0 block h-full w-full object-cover"
-  />
-</div>
+                <img src={p.cover} alt={p.title[lang]} className="absolute inset-0 block w-full h-full object-cover" />
+              </div>
               <div className="p-4">
-  <div className="min-h-[48px] flex items-center justify-center">
-    <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
-      {p.title[lang]}
-    </h3>
-  </div>
-</div>
+                <div className="min-h-[48px] flex items-center justify-center">
+                  <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
+                    {p.title[lang]}
+                  </h3>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
       </section>
 
       {/* BRANDS */}
@@ -235,43 +247,27 @@ export default function Page() {
           {(t as any)?.brands?.title ?? 'Бренды'}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {[
-            { name: 'Brand 1', src: '/images/brands/brand1.png' },
-            { name: 'Brand 2', src: '/images/brands/brand2.png' },
-            { name: 'Brand 3', src: '/images/brands/brand3.png' },
-            { name: 'Brand 4', src: '/images/brands/brand4.png' },
-            { name: 'Brand 5', src: '/images/brands/brand5.png' },
-            { name: 'Brand 6', src: '/images/brands/brand6.png' },
-          ].map((b) => (
+          {BRANDS.map((b) => (
             <div
               key={b.name}
               className="aspect-[3/2] relative rounded-2xl bg-white border border-gray-200 flex items-center justify-center p-4"
             >
-              <img
-                src={b.src}
-                alt={b.name}
-                className="max-h-full max-w-full object-contain"
-              />
+              <img src={b.src} alt={b.name} className="max-h-full max-w-full object-contain" />
             </div>
           ))}
         </div>
-        {(t as any)?.brands?.note && (
-          <p className="text-sm text-gray-600 mt-4">{(t as any).brands.note}</p>
-        )}
       </section>
 
       {/* FAQ */}
       <section id="faq" className="py-20 px-6 max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">
-          {(t as any)?.faq?.title ?? 'FAQ'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-8">{(t as any)?.faq?.title ?? 'FAQ'}</h2>
         <div className="space-y-3">
-          {(t as any)?.faq?.items?.map?.((it: any, i: number) => (
+          {FAQ_ITEMS.map((it, i) => (
             <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
               <summary className="cursor-pointer font-medium">{it.q}</summary>
               <p className="text-gray-700 mt-2">{it.a}</p>
             </details>
-          )) || null}
+          ))}
         </div>
       </section>
 
@@ -286,11 +282,7 @@ export default function Page() {
               'Проектируем свет, который подчёркивает архитектуру и не слепит. Работаем с архитекторами и дизайнерами.'}
           </p>
           <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50">
-            <img
-              src="/images/about/office.jpg"
-              alt="About"
-              className="w-full h-full object-cover"
-            />
+            <img src="/images/about/office.jpg" alt="About" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -298,9 +290,7 @@ export default function Page() {
       {/* CONTACT */}
       <section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">{t?.contact?.title ?? 'Contact Us'}</h2>
-        <p className="mb-6 text-gray-600">
-          {t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}
-        </p>
+        <p className="mb-6 text-gray-600">{t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}</p>
         <Link
           href="mailto:hello@glarefreelight.com"
           className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition"
@@ -321,7 +311,7 @@ export default function Page() {
         WhatsApp
       </a>
 
-      {/* MODAL GALLERY */}
+      {/* MODAL */}
       {modal && (
         <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
@@ -333,7 +323,6 @@ export default function Page() {
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            {/* закрыть */}
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
@@ -342,7 +331,6 @@ export default function Page() {
               ✕
             </button>
 
-            {/* текст проекта — общий для всех слайдов этого проекта */}
             <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
               <p className="whitespace-pre-line leading-relaxed">
                 {PROJECTS[modal.projectIndex].desc?.[lang] ??
@@ -350,15 +338,13 @@ export default function Page() {
               </p>
             </div>
 
-            {/* область фото — центрируем стрелки всегда по центру картинки */}
-            <div className="relative w-full h-[70vh]">
-              <Image
+            <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
+              <img
                 src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
                 alt={PROJECTS[modal.projectIndex].title[lang]}
-                fill
-                sizes="100vw"
-                className="object-contain"
+                className="max-h-[70vh] w-auto object-contain"
               />
+
               <button
                 onClick={prevImage}
                 className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
