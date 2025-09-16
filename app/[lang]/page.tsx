@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
 import { PROJECTS } from '../../components/projects';
-import Image from 'next/image';
-
 
 type ModalState =
   | null
@@ -84,43 +83,6 @@ export default function Page() {
     setTouchX(null);
     setTouchY(null);
   };
-
-  // ---- Projects: mobile scroller helpers ----
-  const mobListRef = useRef<HTMLDivElement>(null);
-  const scrollMob = (dir: 'left' | 'right') => {
-    const el = mobListRef.current;
-    if (!el) return;
-    const item =
-      (el.firstElementChild as HTMLElement | null)?.offsetWidth ?? 320;
-    el.scrollBy({ left: dir === 'left' ? -item : item, behavior: 'smooth' });
-  };
-
-  // Бренды (заглушки)
-  const BRANDS: { name: string; src: string }[] = [
-    { name: 'Brand 1', src: '/images/brands/brand1.png' },
-    { name: 'Brand 2', src: '/images/brands/brand2.png' },
-    { name: 'Brand 3', src: '/images/brands/brand3.png' },
-    { name: 'Brand 4', src: '/images/brands/brand4.png' },
-    { name: 'Brand 5', src: '/images/brands/brand5.png' },
-    { name: 'Brand 6', src: '/images/brands/brand6.png' },
-  ];
-
-  // FAQ
-  const FAQ_ITEMS: { q: string; a: string }[] =
-    (t as any)?.faq?.items ?? [
-      {
-        q: 'В чём отличие ваших проектов?',
-        a: 'Грамотная оптика, контроль бликов — комфорт без ослепления.',
-      },
-      {
-        q: 'Берёте на себя поставку?',
-        a: 'Да. Подбор, поставка, сопровождение монтажа.',
-      },
-      {
-        q: 'Работаете только в Португалии?',
-        a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.',
-      },
-    ];
 
   // ----------------- Render -----------------
   return (
@@ -215,71 +177,63 @@ export default function Page() {
       </section>
 
       {/* PROJECTS — сетка на md+ и свайповая лента на мобилке */}
-<section id="projects" className="py-20 px-6 max-w-7xl mx-auto">
-  <h2 className="text-3xl font-bold mb-12 text-center">
-    {t?.projects?.title ?? 'Примеры проектов'}
-  </h2>
+      <section id="projects" className="py-20 px-6 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-12 text-center">
+          {t?.projects?.title ?? 'Примеры проектов'}
+        </h2>
 
-  {/* Мобилка: горизонтальный свайп со snap */}
-  <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4">
-    {PROJECTS.map((p, idx) => (
-      <button
-        key={p.slug}
-        onClick={() => openProjectAt(idx, 0)}
-        className="snap-start shrink-0 w-[85vw] bg-white rounded-2xl shadow hover:shadow-lg transition text-left overflow-hidden"
-      >
-        {/* Картинка — крупнее, без белой полосы сверху */}
-        <div className="relative h-56 rounded-t-2xl overflow-hidden">
-  <Image
-    src={p.cover}
-    alt={p.title[lang]}
-    fill
-    className="object-cover"
-    sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 25vw"
-    priority={idx === 0}   // можно только для первой карточки
-  />
-</div>
-
-        {/* Только название, по центру и пожирнее */}
-        <div className="p-3">
-          <div className="font-semibold text-center text-[17px] leading-tight">
-            {p.title[lang]}
-          </div>
+        {/* Мобилка: горизонтальный свайп со snap */}
+        <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4">
+          {PROJECTS.map((p, idx) => (
+            <button
+              key={p.slug}
+              onClick={() => openProjectAt(idx, 0)}
+              className="snap-start shrink-0 w-[85vw] bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
+            >
+              <div className="relative h-56 rounded-t-2xl overflow-hidden">
+                <Image
+                  src={p.cover}
+                  alt={p.title[lang]}
+                  fill
+                  sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="px-5 py-4">
+                <div className="font-semibold text-center leading-tight">
+                  {p.title[lang]}
+                </div>
+              </div>
+            </button>
+          ))}
         </div>
-      </button>
-    ))}
-  </div>
 
-  {/* Планшет/десктоп: сетка 4×2 */}
-  <div className="hidden md:grid md:grid-cols-4 gap-8 text-left">
-    {PROJECTS.map((p, idx) => (
-      <button
-        key={p.slug}
-        onClick={() => openProjectAt(idx, 0)}
-        className="bg-white rounded-2xl shadow hover:shadow-lg transition text-left overflow-hidden"
-      >
-        {/* Картинка — крупнее, без белой полосы сверху */}
-        <div className="relative h-56 rounded-t-2xl overflow-hidden">
-  <Image
-    src={p.cover}
-    alt={p.title[lang]}
-    fill
-    className="object-cover"
-    sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 25vw"
-  />
-</div>
-
-        {/* Только название */}
-        <div className="p-3">
-          <div className="font-semibold text-center text-[17px] leading-tight">
-            {p.title[lang]}
-          </div>
+        {/* Планшет/десктоп: сетка 4×2 */}
+        <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-8 text-left">
+          {PROJECTS.map((p, idx) => (
+            <button
+              key={p.slug}
+              onClick={() => openProjectAt(idx, 0)}
+              className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden text-left"
+            >
+              <div className="relative h-56 rounded-t-2xl overflow-hidden">
+                <Image
+                  src={p.cover}
+                  alt={p.title[lang]}
+                  fill
+                  sizes="(max-width: 1024px) 30vw, 23vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="px-5 py-4">
+                <div className="font-semibold text-center leading-tight">
+                  {p.title[lang]}
+                </div>
+              </div>
+            </button>
+          ))}
         </div>
-      </button>
-    ))}
-  </div>
-</section>
-
+      </section>
 
       {/* BRANDS */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
@@ -287,7 +241,14 @@ export default function Page() {
           {(t as any)?.brands?.title ?? 'Бренды'}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {BRANDS.map((b) => (
+          {[
+            { name: 'Brand 1', src: '/images/brands/brand1.png' },
+            { name: 'Brand 2', src: '/images/brands/brand2.png' },
+            { name: 'Brand 3', src: '/images/brands/brand3.png' },
+            { name: 'Brand 4', src: '/images/brands/brand4.png' },
+            { name: 'Brand 5', src: '/images/brands/brand5.png' },
+            { name: 'Brand 6', src: '/images/brands/brand6.png' },
+          ].map((b) => (
             <div
               key={b.name}
               className="aspect-[3/2] relative rounded-2xl bg-white border border-gray-200 flex items-center justify-center p-4"
@@ -307,7 +268,9 @@ export default function Page() {
 
       {/* FAQ */}
       <section id="faq" className="py-20 px-6 max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">{(t as any)?.faq?.title ?? 'FAQ'}</h2>
+        <h2 className="text-3xl font-bold mb-8">
+          {(t as any)?.faq?.title ?? 'FAQ'}
+        </h2>
         <div className="space-y-3">
           {(t as any)?.faq?.items?.map?.((it: any, i: number) => (
             <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
@@ -320,7 +283,9 @@ export default function Page() {
 
       {/* ABOUT */}
       <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">{(t as any)?.about?.title ?? 'О нас'}</h2>
+        <h2 className="text-3xl font-bold mb-8">
+          {(t as any)?.about?.title ?? 'О нас'}
+        </h2>
         <div className="grid md:grid-cols-2 gap-10 items-start">
           <p className="text-gray-700 text-lg leading-relaxed">
             {(t as any)?.about?.text ??
@@ -393,15 +358,13 @@ export default function Page() {
 
             {/* область фото — центрируем стрелки всегда по центру картинки */}
             <div className="relative w-full h-[70vh]">
-  <Image
-    src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-    alt={PROJECTS[modal.projectIndex].title[lang]}
-    fill
-    sizes="100vw"
-    className="object-contain"
-  />
-</div>
-
+              <Image
+                src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
+                alt={PROJECTS[modal.projectIndex].title[lang]}
+                fill
+                sizes="100vw"
+                className="object-contain"
+              />
               <button
                 onClick={prevImage}
                 className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
