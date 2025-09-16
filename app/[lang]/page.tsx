@@ -31,10 +31,8 @@ export default function Page() {
 
   // -------- Modal gallery state --------
   const [modal, setModal] = useState<ModalState>(null);
-
   const openProjectAt = (projectIndex: number, imageIndex = 0) =>
     setModal({ projectIndex, imageIndex });
-
   const closeModal = useCallback(() => setModal(null), []);
 
   const nextImage = () => {
@@ -72,6 +70,7 @@ export default function Page() {
     setTouchX(t.clientX);
     setTouchY(t.clientY);
   };
+
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchX == null || touchY == null) return;
     const t = e.changedTouches[0];
@@ -93,6 +92,23 @@ export default function Page() {
     { name: 'Brand 5', src: '/images/brands/brand5.png' },
     { name: 'Brand 6', src: '/images/brands/brand6.png' },
   ];
+
+  // FAQ
+  const FAQ_ITEMS: { q: string; a: string }[] =
+    (t as any)?.faq?.items ?? [
+      {
+        q: 'В чём отличие ваших проектов?',
+        a: 'Грамотная оптика, контроль бликов — комфорт без ослепления.',
+      },
+      {
+        q: 'Берёте на себя поставку?',
+        a: 'Да. Подбор, поставка, сопровождение монтажа.',
+      },
+      {
+        q: 'Работаете только в Португалии?',
+        a: 'База — Кашкайш; работаем по всей Португалии и удалённо — по запросу.',
+      },
+    ];
 
   // ----------------- Render -----------------
   return (
@@ -199,7 +215,6 @@ export default function Page() {
               onClick={() => openProjectAt(idx, 0)}
               className="bg-white rounded-2xl shadow hover:shadow-lg transition block overflow-hidden text-left"
             >
-              {/* Сначала картинка, потом текст */}
               <div className="h-40 bg-gray-100">
                 <img
                   src={p.cover}
@@ -210,7 +225,6 @@ export default function Page() {
 
               <div className="p-4">
                 <div className="font-semibold text-center">{p.title[lang]}</div>
-                {/* Только для ресторана — без тизера под фото */}
                 {p.slug !== 'restaurant' && (
                   <p className="text-gray-600 mt-2 text-sm">{p.blurb[lang]}</p>
                 )}
@@ -301,64 +315,65 @@ export default function Page() {
         WhatsApp
       </a>
 
-     {/* MODAL GALLERY */}
-{modal && (
-  <div
-    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-    onClick={closeModal}
-  >
-    <div
-      className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
-      onClick={(e) => e.stopPropagation()}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
-      {/* закрыть */}
-      <button
-        onClick={closeModal}
-        className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
-        aria-label="Close"
-      >
-        ✕
-      </button>
-
-      {/* ОДИН И ТОТ ЖЕ ТЕКСТ ДЛЯ ВСЕХ СЛАЙДОВ ТЕКУЩЕГО ПРОЕКТА */}
-      <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
-        <p className="whitespace-pre-line leading-relaxed">
-          {PROJECTS[modal.projectIndex].desc?.[lang] ??
-           PROJECTS[modal.projectIndex].blurb[lang]}
-        </p>
-      </div>
-
-      {/* Область изображения: фиксируем минимальную высоту, чтобы стрелки были по центру */}
-      <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
-        <img
-          src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-          alt={PROJECTS[modal.projectIndex].title[lang]}
-          className="max-h-[70vh] w-auto object-contain"
-        />
-
-        {/* стрелки */}
-        <button
-          onClick={prevImage}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
-          aria-label="Prev"
+      {/* MODAL GALLERY */}
+      {modal && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeModal}
         >
-          ‹
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
-          aria-label="Next"
-        >
-          ›
-        </button>
-      </div>
+          <div
+            className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
+            {/* закрыть */}
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
+              aria-label="Close"
+            >
+              ✕
+            </button>
 
-      {/* счётчик снизу */}
-      <div className="py-2 text-center text-white/70 text-xs">
-        {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
-      </div>
-    </div>
-  </div>
-)}
+            {/* текст проекта — общий для всех слайдов этого проекта */}
+            <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
+              <p className="whitespace-pre-line leading-relaxed">
+                {PROJECTS[modal.projectIndex].desc?.[lang] ??
+                  PROJECTS[modal.projectIndex].blurb[lang]}
+              </p>
+            </div>
+
+            {/* область фото — центрируем стрелки всегда по центру картинки */}
+            <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
+              <img
+                src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
+                alt={PROJECTS[modal.projectIndex].title[lang]}
+                className="max-h-[70vh] w-auto object-contain"
+              />
+
+              <button
+                onClick={prevImage}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+                aria-label="Prev"
+              >
+                ‹
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+                aria-label="Next"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="py-2 text-center text-white/70 text-xs">
+              {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}
