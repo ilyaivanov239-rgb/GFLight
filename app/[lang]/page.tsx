@@ -29,6 +29,13 @@ export default function Page() {
   const ctaContact =
     (t as any)?.hero?.button2 || (t as any)?.hero?.cta2 || CTA[lang].contact;
 
+  // Метки "Было / Стало"
+  const BEFORE_AFTER = {
+    ru: { before: 'Было', after: 'Стало' },
+    en: { before: 'Before', after: 'After' },
+    pt: { before: 'Antes', after: 'Depois' },
+  } as const;
+
   // ---------- Modal ----------
   const [modal, setModal] = useState<ModalState>(null);
   const openProjectAt = (projectIndex: number, imageIndex = 0) =>
@@ -81,6 +88,22 @@ export default function Page() {
     setTouchY(null);
   };
 
+  // Поддержка "Было/Стало" для нужного проекта
+  const activeProject = modal ? PROJECTS[modal.projectIndex] : null;
+  const showBeforeAfter =
+    !!activeProject &&
+    (
+      // флаг из данных проекта (если добавишь в projects.ts)
+      (activeProject as any).beforeAfter === true ||
+      // или конкретный слаг
+      activeProject.slug === 'quick-sketch'
+    );
+
+  const baDict = BEFORE_AFTER[lang] ?? BEFORE_AFTER.en;
+  const baLabel = modal
+    ? ((modal.imageIndex + 1) % 2 === 1 ? baDict.before : baDict.after) // 1,3,5... — "Было"
+    : '';
+
   // Бренды (заглушки)
   const BRANDS: { name: string; src: string }[] = [
     { name: 'Brand 1', src: '/images/brands/brand1.png' },
@@ -100,16 +123,16 @@ export default function Page() {
 
   // ----------------- Render -----------------
   return (
-  <main>
-    {/* HERO */}
-    <section
-      className="relative min-h-[480px] h-[70vh] md:h-[600px] flex items-center justify-center text-center"
-      style={{
-        backgroundImage: "url('/images/bg/Hero.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
+    <main>
+      {/* HERO */}
+      <section
+        className="relative min-h-[480px] h-[70vh] md:h-[600px] flex items-center justify-center text-center"
+        style={{
+          backgroundImage: "url('/images/bg/Hero.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <div className="absolute inset-0 md:bg-gradient-to-r md:from-black/35 md:via-black/10 md:to-transparent bg-black/15" />
         <div className="relative z-10 max-w-3xl px-6">
           <h1 className="text-white text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] mb-4">
@@ -166,12 +189,15 @@ export default function Page() {
                   {typeof item === 'string' ? item : item.title}
                 </h3>
 
-                {typeof item !== 'string' && (<p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
-              flex-none min-h-[176px] max-h-[176px] md:min-h-[200px] md:max-h-[200px]
-              overflow-hidden line-clamp-6 md:line-clamp-6" >
-     {item.desc ?? ''}
-   </p>
- )}
+                {typeof item !== 'string' && (
+                  <p
+                    className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
+                               flex-none min-h-[176px] max-h-[176px] md:min-h-[200px] md:max-h-[200px]
+                               overflow-hidden line-clamp-6 md:line-clamp-6"
+                  >
+                    {item.desc ?? ''}
+                  </p>
+                )}
 
                 {typeof item !== 'string' &&
                   Array.isArray(item.features) &&
@@ -361,6 +387,13 @@ export default function Page() {
                 ›
               </button>
             </div>
+
+            {/* Метка "Было/Стало" только для проекта quick-sketch или когда beforeAfter=true */}
+            {showBeforeAfter && (
+              <div className="py-3 text-center text-white/85 text-sm font-medium">
+                {baLabel}
+              </div>
+            )}
 
             <div className="py-2 text-center text-white/70 text-xs">
               {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
