@@ -166,9 +166,9 @@ export default function Page() {
                   {typeof item === 'string' ? item : item.title}
                 </h3>
 
-                {typeof item !== 'string' && (<p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em]
-                bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
-                flex-none min-h-[128px] max-h-[128px] overflow-hidden line-clamp-6"  >
+                {typeof item !== 'string' && (<p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
+               flex-none min-h-[200px] max-h-[200px] md:min-h-[224px] md:max-h-[224px]
+               overflow-hidden line-clamp-8 md:line-clamp-8"  >
      {item.desc ?? ''}
    </p>
  )}
