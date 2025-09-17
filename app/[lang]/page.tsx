@@ -167,8 +167,8 @@ export default function Page() {
                 </h3>
 
                 {typeof item !== 'string' && (<p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
-              flex-none min-h-[160px] max-h-[160px] md:min-h-[176px] md:max-h-[176px]
-              overflow-hidden line-clamp-5 md:line-clamp-5" >
+              flex-none min-h-[176px] max-h-[176px] md:min-h-[200px] md:max-h-[200px]
+              overflow-hidden line-clamp-6 md:line-clamp-6" >
      {item.desc ?? ''}
    </p>
  )}
