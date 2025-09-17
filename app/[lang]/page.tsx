@@ -88,21 +88,37 @@ export default function Page() {
     setTouchY(null);
   };
 
-  // Поддержка "Было/Стало" для нужного проекта
+  // Поддержка "Было/Стало" — флаг из данных или распознавание по slug/title
   const activeProject = modal ? PROJECTS[modal.projectIndex] : null;
-  const showBeforeAfter =
-    !!activeProject &&
-    (
-      // флаг из данных проекта (если добавишь в projects.ts)
-      (activeProject as any).beforeAfter === true ||
-      // или конкретный слаг
-      activeProject.slug === 'quick-sketch'
-    );
 
+  const isBeforeAfterProject = (p: any) => {
+    if (!p) return false;
+    if (p.beforeAfter === true) return true;
+    const slug = (p.slug || '').toLowerCase();
+    const titles = [
+      p.title?.ru ?? '',
+      p.title?.en ?? '',
+      p.title?.pt ?? '',
+    ].map((s: string) => s.toLowerCase());
+
+    // Лояльные эвристики: quick/sketch/эскиз/esboço и т.п.
+    const slugHit = ['quick', 'sketch', 'sketches', 'beforeafter', 'before-after'].some((k) =>
+      slug.includes(k)
+    );
+    const titleHit = titles.some((s) =>
+      /быстры|эскиз|quick|sketch|esbo|rápid/.test(s)
+    );
+    return slugHit || titleHit;
+  };
+
+  const showBeforeAfter = !!activeProject && isBeforeAfterProject(activeProject);
   const baDict = BEFORE_AFTER[lang] ?? BEFORE_AFTER.en;
-  const baLabel = modal
-    ? ((modal.imageIndex + 1) % 2 === 1 ? baDict.before : baDict.after) // 1,3,5... — "Было"
-    : '';
+  const baLabel =
+    modal && showBeforeAfter
+      ? modal.imageIndex % 2 === 0
+        ? baDict.before // 1-я, 3-я, 5-я...
+        : baDict.after  // 2-я, 4-я, 6-я...
+      : '';
 
   // Бренды (заглушки)
   const BRANDS: { name: string; src: string }[] = [
@@ -388,9 +404,9 @@ export default function Page() {
               </button>
             </div>
 
-            {/* Метка "Было/Стало" только для проекта quick-sketch или когда beforeAfter=true */}
+            {/* Метка "Было/Стало" */}
             {showBeforeAfter && (
-              <div className="py-3 text-center text-white/85 text-sm font-medium">
+              <div className="py-3 text-center text-white/90 text-sm font-medium select-none">
                 {baLabel}
               </div>
             )}
@@ -404,3 +420,4 @@ export default function Page() {
     </main>
   );
 }
+
