@@ -156,21 +156,22 @@ export default function Page() {
             {t?.services?.title ?? 'Services'}
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {(t?.services?.items ?? []).map((item: any, i: number) => (
               <div
                 key={i}
-                className="bg-white/80 backdrop-blur-sm ring-1 ring-slate-200/70 rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+                className="bg-white/80 backdrop-blur-sm ring-1 ring-slate-200/70 rounded-2xl p-6 shadow-sm hover:shadow-md transition h-full flex flex-col"
               >
-                <h3 className="text-center text-xl font-semibold mb-3">
+                <h3 className="text-center text-xl font-semibold leading-tight line-clamp-2 min-h-[3.5rem] mb-3">
                   {typeof item === 'string' ? item : item.title}
                 </h3>
 
-                {typeof item !== 'string' && item.desc && (
-                  <p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4">
-                    {item.desc}
-                  </p>
-                )}
+                {typeof item !== 'string' && (<p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em]
+                bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
+                flex-none min-h-[128px] max-h-[128px] overflow-hidden line-clamp-6"  >
+     {item.desc ?? ''}
+   </p>
+ )}
 
                 {typeof item !== 'string' &&
                   Array.isArray(item.features) &&
