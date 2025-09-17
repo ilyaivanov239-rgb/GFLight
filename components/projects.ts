@@ -129,8 +129,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'hotel',
     cover: '/projects/hotel/cover.jpg',
-    images: seq('hotel', 3),
-    title: { ru: 'Отель', en: 'Hotel', pt: 'Hotel' },
+    images: seq('hotel', 12),
+    title: { ru: 'Отель с комплексом СПА', en: 'Hotel', pt: 'Hotel' },
     blurb: {
       ru: 'Интимная световая атмосфера для лобби и номеров — баланс теплоты и читаемости.',
       en: 'Warm, intimate lighting for lobby and rooms with clear visual hierarchy.',
