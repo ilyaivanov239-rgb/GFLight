@@ -9,7 +9,31 @@
     "projects": "Portfólio",
     "contact": "Contacto"
   },
-  
+  "faq": {
+  "title": "FAQ",
+  "items": [
+    {
+      "q": "Que iluminação cria um ambiente acolhedor?",
+      "a": "Em espaços de habitação, a sensação de conforto surge com uma iluminação suave, sem uma fonte de luz visível, com uma temperatura de cor de 2700-3000 K e uma iluminância de 75-100 lx."
+    },
+    {
+      "q": "Há diferenças na abordagem entre habitação e espaços comerciais?",
+      "a": "A diferença fundamental está no que é mais significativo para cada ambiente. Para um escritório, é uma atmosfera de trabalho; para uma casa, é uma atmosfera de conforto e tranquilidade. Em cada caso individual, trabalhamos com um pedido personalizado."
+    },
+    {
+      "q": "Como esconder as imperfeições de um espaço com luz?",
+      "a": "O que não é iluminado pela luz, não é visível. Ao deixar lascas e defeitos de arquitetura na sombra ou a desfocá-los com luz geral e ao acentuar elementos significativos, podemos desviar o foco de atenção."
+    },
+    {
+      "q": "Económico mas com aspeto premium — qual é o segredo?",
+      "a": "O segredo está na iluminação de destaque de elementos de design de interiores significativos, mantendo um ambiente visualmente confortável. Quando até um único ramo de margaridas é iluminado de forma contrastante por um feixe do nada, isso cria uma atmosfera cara."
+    },
+    {
+      "q": "A aparência da luminária ou a sua performance — o que pesa mais?",
+      "a": "A revolução no design de produto deu-nos exemplos de belas luminárias, mas o seu principal problema é a falta de variabilidade na distribuição de luz necessária para um projeto. A iluminação arquitetónica oferece tudo o que é necessário em termos de ótica. A sua combinação dá o melhor resultado."
+    }
+  ]
+},
   "brands": { "title": "Nossos principais parceiros" },
   "hero": {
     "badge": "Iluminação técnica sem encandear",
