@@ -125,8 +125,8 @@ export default function Page() {
   const BRANDS: Brand[] = [
    { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/', scale: 1.4  },
   { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 1.0  },
-  { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.1  },
-    { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.2  },
+  { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.4  },
+    { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.5  },
     { name: 'Brand 5', src: '/images/brands/brand5.png' },
     { name: 'Brand 6', src: '/images/brands/brand6.png' },
   ];
