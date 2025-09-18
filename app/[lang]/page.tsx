@@ -132,7 +132,7 @@ export default function Page() {
   { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.05 },
   { name: 'iGuzzini', src: '/images/brands/iguzzini.svg', href: 'https://www.iguzzini.com/', scale: 1.3 },
   { name: 'Targetti',  src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.25  },
-  { name: 'Brand 10', src: '/images/brands/placeholder.svg' },
+  { name: 'Bel-lighting', src: '/images/brands/bellighting.png', href: 'https://bel-lighting.com/', scale: 1.3 },
   { name: 'Brand 11', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 12', src: '/images/brands/placeholder.svg' },
   ];
