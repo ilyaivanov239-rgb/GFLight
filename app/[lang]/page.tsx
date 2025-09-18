@@ -127,8 +127,14 @@ export default function Page() {
   { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 1.0  },
   { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.4  },
     { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.5  },
-    { name: 'Brand 5', src: '/images/brands/brand5.png' },
-    { name: 'Brand 6', src: '/images/brands/brand6.png' },
+    { name: 'Brand 5', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 6', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 7', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 8', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 9', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 10', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 11', src: '/images/brands/placeholder.svg' },
+  { name: 'Brand 12', src: '/images/brands/placeholder.svg' },
   ];
 
   const FAQ_ITEMS: { q: string; a: string }[] =
@@ -290,36 +296,33 @@ export default function Page() {
         <h2 className="text-3xl font-bold mb-8">
           {(t as any)?.brands?.title ?? 'Бренды'}
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5 sm:gap-6">
   {BRANDS.map((b) => (
     <div
-      key={b.name}
-      className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-6 group"
-      title={b.name}
+  key={b.name}
+  className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 md:p-5 group"
+  title={b.name}
+>
+  <img
+    src={b.src}
+    alt={b.name}
+    loading="lazy"
+    decoding="async"
+    className={`object-contain w-auto h-14 sm:h-16 md:h-20 lg:h-24 max-w-[88%] opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
+    style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
+  />
+  {b.href && (
+    <a
+      href={b.href}
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+      aria-label={`Открыть сайт ${b.name}`}
+      className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
+                 opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
     >
-      <img
-        src={b.src}
-        alt={b.name}
-        loading="lazy"
-        decoding="async"
-        className={`object-contain w-auto h-10 md:h-12 max-w-[70%] opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
-        style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
-      />
-
-      {b.href && (
-        <a
-          href={b.href}
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          aria-label={`Открыть сайт ${b.name}`}
-          className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
-                     opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
-        >
-          ↗
-        </a>
-      )}
-    </div>
-  ))}
+      ↗
+    </a>
+  )}
 </div>
       </section>
 
