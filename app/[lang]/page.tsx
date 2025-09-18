@@ -129,7 +129,7 @@ export default function Page() {
     { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.2  },
     { name: 'FLOS', src: '/images/brands/flos.svg', href: 'https://flos.com/en/it/', scale: 1.2 },
   { name: 'Artemide', src: '/images/brands/artemide.svg', href: 'https://www.artemide.com/en/', scale: 1.3 },
-  { name: 'Brand 7', src: '/images/brands/placeholder.svg' },
+  { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.25 },
   { name: 'Brand 8', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 9', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 10', src: '/images/brands/placeholder.svg' },
