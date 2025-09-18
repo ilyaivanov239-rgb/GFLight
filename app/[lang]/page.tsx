@@ -127,7 +127,7 @@ export default function Page() {
   { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 1.0  },
   { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.3  },
     { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.2  },
-    { name: 'FLOS', src: '/images/brands/flos.svg', href: 'https://flos.com/en/it/' },
+    { name: 'FLOS', src: '/images/brands/flos.svg', href: 'https://flos.com/en/it/', scale: 1.2 },
   { name: 'Brand 6', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 7', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 8', src: '/images/brands/placeholder.svg' },
