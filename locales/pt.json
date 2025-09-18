@@ -9,9 +9,8 @@
     "projects": "Portfólio",
     "contact": "Contacto"
   },
-  {
-  "brands": { "title": "Nossos principais parceiros" }
-},
+  
+  "brands": { "title": "Nossos principais parceiros" },
   "hero": {
     "badge": "Iluminação técnica sem encandear",
     "title": "A luz muda tudo.",
