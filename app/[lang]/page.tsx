@@ -432,11 +432,11 @@ const getBio   = (p: Person, lang: string) => pick(p.bio,  lang, p.bio.ru);
                 {getRole(p, lang)}
               </p>
 
-              {getBio(p, lang).map((paragraph, i) => (
-                <p key={i} className="mb-3 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+              {getBio(p, lang).map((paragraph: string, i: number) => (
+  <p key={i} className="mb-3 leading-relaxed">
+    {paragraph}
+  </p>
+))}
             </div>
           </article>
         ))}
