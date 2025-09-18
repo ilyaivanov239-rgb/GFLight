@@ -134,7 +134,7 @@ export default function Page() {
   { name: 'Targetti',  src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.25  },
   { name: 'Bel-lighting', src: '/images/brands/bellighting.png', href: 'https://bel-lighting.com/', scale: 1.3 },
   { name: 'Hunza', src: '/images/brands/Hunza.png', href: 'https://hunzalighting.com/', scale: 1.0 },
-  { name: 'Brand 12', src: '/images/brands/placeholder.svg' },
+  { name: 'Vibia', src: '/images/brands/vibia.svg', href: 'https://vibia.com/en/int', scale: 1.05 },
   ];
 
   const FAQ_ITEMS: { q: string; a: string }[] =
