@@ -327,16 +327,19 @@ export default function Page() {
 
       {/* FAQ */}
       <section id="faq" className="py-20 px-6 max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">{(t as any)?.faq?.title ?? 'FAQ'}</h2>
-        <div className="space-y-3">
-          {FAQ_ITEMS.map((it, i) => (
-            <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
-              <summary className="cursor-pointer font-medium">{it.q}</summary>
-              <p className="text-gray-700 mt-2">{it.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+  <h2 className="text-3xl font-bold mb-8 text-center">
+    {(t as any)?.faq?.title ?? 'FAQ'}
+  </h2>
+
+  <div className="space-y-3">
+    {FAQ_ITEMS.map((it, i) => (
+      <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
+        <summary className="cursor-pointer font-medium">{it.q}</summary>
+        <p className="text-gray-700 mt-2">{it.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
 
       {/* ABOUT */}
       <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
