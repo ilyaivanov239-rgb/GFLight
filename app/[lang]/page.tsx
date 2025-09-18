@@ -17,7 +17,19 @@ type Brand = { name: string; src: string; href?: string; invert?: boolean; scale
 export default function Page() {
   const { lang } = useParams() as { lang: Lang };
   const t = dict[lang] ?? dict.en;
+import type { CSSProperties } from 'react';
 
+type Person = {
+  id: string;
+  photo: string;
+  name: { ru: string; en: string; pt: string };
+  role: { ru: string; en: string; pt: string };
+  bio: { ru: string[]; en: string[]; pt: string[] };
+
+  // ➜ новые опциональные поля для индивидуального кадрирования фото
+  imgClass?: string;                // например 'object-top'
+  imgStyle?: CSSProperties;         // например { objectPosition: '48% 50%' }
+};
   // CTA
   const CTA = {
     ru: { services: 'Услуги', contact: 'Связаться' },
