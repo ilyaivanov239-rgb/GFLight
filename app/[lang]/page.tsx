@@ -123,9 +123,9 @@ export default function Page() {
 
   // Бренды (заглушки)
   const BRANDS: Brand[] = [
-   { name: 'ERCO', src: '/images/brands/erco.svg' },
-  { name: 'XAL',  src: '/images/brands/xal-white.webp', invert: true },
-    { name: 'BEGA', src: '/images/brands/bega.svg' },
+   { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/' },
+  { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true },
+  { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/' },
     { name: 'Brand 4', src: '/images/brands/brand4.png' },
     { name: 'Brand 5', src: '/images/brands/brand5.png' },
     { name: 'Brand 6', src: '/images/brands/brand6.png' },
@@ -294,7 +294,7 @@ export default function Page() {
   {BRANDS.map((b) => (
     <div
       key={b.name}
-      className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-6"
+      className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-6 group"
       title={b.name}
     >
       <img
@@ -302,9 +302,22 @@ export default function Page() {
         alt={b.name}
         loading="lazy"
         decoding="async"
-        className={`object-contain w-auto h-10 md:h-12 max-w-[70%] ${b.invert ? 'invert' : ''}`}
+        className={`object-contain w-auto h-10 md:h-12 max-w-[70%] opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
         style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
       />
+
+      {b.href && (
+        <a
+          href={b.href}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          aria-label={`Открыть сайт ${b.name}`}
+          className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
+                     opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+        >
+          ↗
+        </a>
+      )}
     </div>
   ))}
 </div>
