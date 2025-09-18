@@ -160,9 +160,9 @@ const PEOPLE: Person[] = [
     id: 'berezin',
     photo: '/images/team/Mikhail.jpg',        // << замени на свои пути (временно можно на любой существующий файл)
     name: {
-      ru: 'Михаил Березин',
-      en: 'Mikhail Berezin',
-      pt: 'Mikhail Berezin',
+      ru: 'Михаил Берзин',
+      en: 'Mikhail Berzin',
+      pt: 'Mikhail Berzin',
     },
     role: {
       ru: 'Основной генератор идей',
@@ -192,9 +192,9 @@ const PEOPLE: Person[] = [
     id: 'chochobekov',
     photo: '/images/team/Ilyas.jpg',
     name: {
-      ru: 'Ильяс Чочобеков',
-      en: 'Ilyas Chochobekov',
-      pt: 'Ilyas Chochobekov',
+      ru: 'Ильяс Чожобеков',
+      en: 'Ilyas Chozhobekov',
+      pt: 'Ilyas Chozhobekov',
     },
     role: {
       ru: 'Визуализатор-виртуоз',
@@ -476,7 +476,7 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
         <div
           key={p.id}
           /* карточка шире; фото и текст одинаковой ширины */
-          className="grid grid-cols-1 md:grid-cols-[420px_420px] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow overflow-hidden"
+          className="grid grid-cols-1 md:grid-cols-[400px_440px] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow overflow-hidden"
         >
           {/* Фото: чётко подрезается скруглением, без «срезанной головы» */}
           <div className="w-full aspect-[3/4] rounded-xl overflow-hidden">
