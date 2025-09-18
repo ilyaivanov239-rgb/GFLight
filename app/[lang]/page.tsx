@@ -130,7 +130,7 @@ export default function Page() {
     { name: 'FLOS', src: '/images/brands/flos.svg', href: 'https://flos.com/en/it/', scale: 1.2 },
   { name: 'Artemide', src: '/images/brands/artemide.svg', href: 'https://www.artemide.com/en/', scale: 1.3 },
   { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.15 },
-  { name: 'Brand 8', src: '/images/brands/placeholder.svg' },
+  { name: 'iGuzzini', src: '/images/brands/iguzzini.svg', href: 'https://www.iguzzini.com/', scale: 1.25 },
   { name: 'Brand 9', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 10', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 11', src: '/images/brands/placeholder.svg' },
