@@ -123,7 +123,7 @@ type Person = {
 const TEAM: Person[] = [
   {
     id: 'berezin',
-    photo: '/images/team/mikhail.jpg',
+    photo: '/images/team/Mikhail.jpg',
     name: { ru: 'Михаил Березин' },
     role: { ru: 'Основной генератор идей' },
     bio: {
@@ -136,7 +136,7 @@ const TEAM: Person[] = [
   },
   {
     id: 'ivanov',
-    photo: '/images/team/ilya.jpg',
+    photo: '/images/team/Ilya.jpg',
     name: { ru: 'Илья Иванов' },
     role: { ru: 'Менеджер проектов' },
     bio: {
@@ -149,7 +149,7 @@ const TEAM: Person[] = [
   },
   {
     id: 'chochobekov',
-    photo: '/images/team/ilyas.jpg',
+    photo: '/images/team/Ilyas.jpg',
     name: { ru: 'Ильяс Чочобеков' },
     role: { ru: 'Визуализатор-виртуоз' },
     bio: {
