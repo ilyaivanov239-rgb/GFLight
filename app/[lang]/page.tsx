@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, type CSSProperties } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { dict, type Lang } from '../../components/i18n';
 import { PROJECTS } from '../../components/projects';
+
+/* ---------------- Types ---------------- */
 
 type ModalState =
   | null
@@ -12,12 +14,14 @@ type ModalState =
       projectIndex: number;
       imageIndex: number;
     };
-type Brand = { name: string; src: string; href?: string; invert?: boolean; scale?: number };
 
-export default function Page() {
-  const { lang } = useParams() as { lang: Lang };
-  const t = dict[lang] ?? dict.en;
-import type { CSSProperties } from 'react';
+type Brand = {
+  name: string;
+  src: string;
+  href?: string;
+  invert?: boolean;
+  scale?: number;
+};
 
 type Person = {
   id: string;
@@ -25,11 +29,93 @@ type Person = {
   name: { ru: string; en: string; pt: string };
   role: { ru: string; en: string; pt: string };
   bio: { ru: string[]; en: string[]; pt: string[] };
-
-  // для кадрирования:
-  imgClass?: string;                 // например: 'object-top'
-  imgStyle?: CSSProperties;          // например: { objectPosition: '60% 50%' }
+  // индивидуальное кадрирование фото
+  imgClass?: string; // напр. 'object-top'
+  imgStyle?: CSSProperties; // напр. { objectPosition: '60% 50%' }
 };
+
+/* -------------- ABOUT data + helpers -------------- */
+
+const PEOPLE: Person[] = [
+  {
+    id: 'ivanov',
+    photo: '/images/team/Ilya.jpg',
+    imgClass: 'object-top',
+    name: { ru: 'Илья Иванов', en: 'Ilia Ivanov', pt: 'Ilia Ivanov' },
+    role: { ru: 'Менеджер проектов', en: 'Project Manager', pt: 'Gestor de projetos' },
+    bio: {
+      ru: [
+        'Более 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют глубоко вникать во все детали проекта.',
+        'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
+        'Ключевая компетенция — «переводить» между языком клиентов/дизайнеров и языком инженеров/строителей.',
+      ],
+      en: [
+        '15+ years in lighting design and sales. Civil engineering background and private housing construction experience help to dive deep into all project details.',
+        'From 2008 to 2021 he represented XAL. Regular participant of Light+Building (Frankfurt) and Euroluce (Milan).',
+        'Core skill — to “translate” between the language of clients/designers and the language of engineers/builders.',
+      ],
+      pt: [
+        'Mais de 15 anos em projeto de iluminação e vendas. Formação em engenharia civil e experiência em construção residencial permitem aprofundar todos os detalhes do projeto.',
+        'De 2008 a 2021 representou a XAL. Participante regular da Light+Building (Frankfurt) e Euroluce (Milão).',
+        'Competência central — “traduzir” entre a linguagem de clientes/designers e a dos engenheiros/empreiteiros.',
+      ],
+    },
+  },
+  {
+    id: 'berezin',
+    photo: '/images/team/Mikhail.jpg',
+    name: { ru: 'Михаил Берзин', en: 'Mikhail Berzin', pt: 'Mikhail Berzin' },
+    role: { ru: 'Основной генератор идей', en: 'Chief Idea Generator', pt: 'Gerador principal de ideias' },
+    bio: {
+      ru: [
+        'Более 20-ти лет в светодизайне и проектировании. Сочетание инженерно-электротехнического и психологического образований позволяет создавать технически выверенные и эмоционально наполненные проекты.',
+        'Последние 11 лет — представитель ERCO Lighting GmbH. Регулярно участвует в выставках Light+Building во Франкфурте.',
+        'С 2007 года читает курс лекций по светодизайну для архитекторов и дизайнеров в Москве и Санкт-Петербурге.',
+      ],
+      en: [
+        '20+ years in lighting design and engineering. With both engineering and psychology background, Mikhail creates technically precise yet emotionally rich projects.',
+        'For the last 11 years — representative of ERCO Lighting GmbH. Regularly participates in Light+Building (Frankfurt).',
+        'Since 2007 he has been giving lectures on lighting design for architects and interior designers in Moscow and St. Petersburg.',
+      ],
+      pt: [
+        'Mais de 20 anos em design de iluminação e engenharia. A combinação de formação técnica e psicológica permite criar projetos precisos e emocionalmente ricos.',
+        'Nos últimos 11 anos — representante da ERCO Lighting GmbH. Participante regular da Light+Building (Frankfurt).',
+        'Desde 2007 ministra cursos de light design para arquitetos e designers em Moscou e São Petersburgo.',
+      ],
+    },
+  },
+  {
+    id: 'chochobekov',
+    photo: '/images/team/Ilyas.jpg',
+    imgStyle: { objectPosition: '62% 50%' }, // чуть смещаем вправо
+    name: { ru: 'Ильяс Чожобеков', en: 'Ilyas Chozhobekov', pt: 'Ilyas Chozhobekov' },
+    role: { ru: 'Визуализатор-виртуоз', en: 'Visualization Lead', pt: 'Líder de visualização' },
+    bio: {
+      ru: [
+        'Опыт работы более 10-ти лет. В совершенстве владеет инструментарием для статичных и реалистичных 3D-визуализаций (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
+        'Благодаря Ильясу заказчики видят наши идеи в виде фотореалистичных рендеров ещё до монтажа.',
+      ],
+      en: [
+        '10+ years of experience. Mastery of static and realistic 3D visualizations (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
+        'Helps clients see our ideas as photorealistic renders long before installation.',
+      ],
+      pt: [
+        'Mais de 10 anos de experiência. Domínio de visualizações 3D estáticas e realistas (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
+        'Ajuda os clientes a verem as nossas ideias como renders fotorrealistas muito antes da montagem.',
+      ],
+    },
+  },
+];
+
+const getName = (p: Person, lang: Lang) => p.name[lang] ?? p.name.ru;
+const getRole = (p: Person, lang: Lang) => p.role[lang] ?? p.role.ru;
+const getBio = (p: Person, lang: Lang) => p.bio[lang] ?? p.bio.ru;
+
+/* ---------------- Page ---------------- */
+
+export default function Page() {
+  const { lang } = useParams() as { lang: Lang };
+  const t = dict[lang] ?? dict.en;
 
   // CTA
   const CTA = {
@@ -38,10 +124,8 @@ type Person = {
     pt: { services: 'Serviços', contact: 'Contactar' },
   } as const;
 
-  const ctaServices =
-    (t as any)?.hero?.button1 || (t as any)?.hero?.cta1 || CTA[lang].services;
-  const ctaContact =
-    (t as any)?.hero?.button2 || (t as any)?.hero?.cta2 || CTA[lang].contact;
+  const ctaServices = (t as any)?.hero?.button1 || (t as any)?.hero?.cta1 || CTA[lang].services;
+  const ctaContact = (t as any)?.hero?.button2 || (t as any)?.hero?.cta2 || CTA[lang].contact;
 
   // Метки "Было / Стало"
   const BEFORE_AFTER = {
@@ -52,8 +136,7 @@ type Person = {
 
   // ---------- Modal ----------
   const [modal, setModal] = useState<ModalState>(null);
-  const openProjectAt = (projectIndex: number, imageIndex = 0) =>
-    setModal({ projectIndex, imageIndex });
+  const openProjectAt = (projectIndex: number, imageIndex = 0) => setModal({ projectIndex, imageIndex });
   const closeModal = useCallback(() => setModal(null), []);
 
   const nextImage = () => {
@@ -86,15 +169,15 @@ type Person = {
   const [touchX, setTouchX] = useState<number | null>(null);
   const [touchY, setTouchY] = useState<number | null>(null);
   const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    setTouchX(t.clientX);
-    setTouchY(t.clientY);
+    const t0 = e.touches[0];
+    setTouchX(t0.clientX);
+    setTouchY(t0.clientY);
   };
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchX == null || touchY == null) return;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - touchX;
-    const dy = t.clientY - touchY;
+    const t1 = e.changedTouches[0];
+    const dx = t1.clientX - touchX;
+    const dy = t1.clientY - touchY;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
       dx < 0 ? nextImage() : prevImage();
     }
@@ -102,170 +185,45 @@ type Person = {
     setTouchY(null);
   };
 
-  // Поддержка "Было/Стало" — флаг из данных или распознавание по slug/title
+  // Поддержка "Было/Стало"
   const activeProject = modal ? PROJECTS[modal.projectIndex] : null;
 
   const isBeforeAfterProject = (p: any) => {
     if (!p) return false;
     if (p.beforeAfter === true) return true;
     const slug = (p.slug || '').toLowerCase();
-    const titles = [
-      p.title?.ru ?? '',
-      p.title?.en ?? '',
-      p.title?.pt ?? '',
-    ].map((s: string) => s.toLowerCase());
-
-    // Лояльные эвристики: quick/sketch/эскиз/esboço и т.п.
-    const slugHit = ['quick', 'sketch', 'sketches', 'beforeafter', 'before-after'].some((k) =>
-      slug.includes(k)
-    );
-    const titleHit = titles.some((s) =>
-      /быстры|эскиз|quick|sketch|esbo|rápid/.test(s)
-    );
+    const titles = [p.title?.ru ?? '', p.title?.en ?? '', p.title?.pt ?? ''].map((s: string) => s.toLowerCase());
+    const slugHit = ['quick', 'sketch', 'sketches', 'beforeafter', 'before-after'].some((k) => slug.includes(k));
+    const titleHit = titles.some((s) => /быстры|эскиз|quick|sketch|esbo|rápid/.test(s));
     return slugHit || titleHit;
   };
-// ----- Team (ABOUT) data & helpers -----
 
-type LocalizedStr = Record<'ru' | 'en' | 'pt', string>;
-type LocalizedRich = Record<'ru' | 'en' | 'pt', string[]>;
-
-interface Person {
-  id: string;
-  photo: string;           // путь к изображению в /public
-  name: LocalizedStr;
-  role: LocalizedStr;
-  bio: LocalizedRich;      // несколько абзацев
-}
-
-const PEOPLE: Person[] = [
-  {
-    id: 'ivanov',
-    photo: '/images/team/Ilya.jpg',
-    imgClass: 'object-top',
-    name: {
-      ru: 'Илья Иванов',
-      en: 'Ilia Ivanov',
-      pt: 'Ilia Ivanov',
-    },
-    role: {
-      ru: 'Менеджер проектов',
-      en: 'Project Manager',
-      pt: 'Gestor de projetos',
-    },
-    bio: {
-      ru: [
-        'Более 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют глубоко вникать во все детали проекта.',
-        'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
-        'Ключевая компетенция — «переводить» между языком клиентов/дизайнеров и языком инженеров/строителей.'
-      ],
-      en: [
-        '15+ years in lighting design and sales. Civil engineering background and private housing construction experience help to dive deep into all project details.',
-        'From 2008 to 2021 he represented XAL. Regular participant of Light+Building (Frankfurt) and Euroluce (Milan).',
-        'Core skill — to “translate” between the language of clients/designers and the language of engineers/builders.'
-      ],
-      pt: [
-        'Mais de 15 anos em projeto de iluminação e vendas. Formação em engenharia civil e experiência em construção residencial permitem aprofundar todos os detalhes do projeto.',
-        'De 2008 a 2021 representou a XAL. Participante regular da Light+Building (Frankfurt) e Euroluce (Milão).',
-        'Competência central — “traduzir” entre a linguagem de clientes/designers e a dos engenheiros/empreiteiros.'
-      ],
-    },
-  },
-  {
-    id: 'berezin',
-    photo: '/images/team/Mikhail.jpg',        // << замени на свои пути (временно можно на любой существующий файл)
-    name: {
-      ru: 'Михаил Берзин',
-      en: 'Mikhail Berzin',
-      pt: 'Mikhail Berzin',
-    },
-    role: {
-      ru: 'Основной генератор идей',
-      en: 'Chief Idea Generator',
-      pt: 'Gerador principal de ideias',
-    },
-    bio: {
-      ru: [
-        'Более 20-ти лет в светодизайне и проектировании. Сочетание инженерно-электротехнического и психологического образований позволяет создавать технически выверенные и эмоционально наполненные проекты.',
-        'Последние 11 лет — представитель ERCO Lighting GmbH. Регулярно участвует в выставках Light+Building во Франкфурте.',
-        'С 2007 года читает курс лекций по светодизайну для архитекторов и дизайнеров в Москве и Санкт-Петербурге.'
-      ],
-      en: [
-        '20+ years in lighting design and engineering. With both engineering and psychology background, Mikhail creates technically precise yet emotionally rich projects.',
-        'For the last 11 years — representative of ERCO Lighting GmbH. Regularly participates in Light+Building (Frankfurt).',
-        'Since 2007 he has been giving lectures on lighting design for architects and interior designers in Moscow and St. Petersburg.'
-      ],
-      pt: [
-        'Mais de 20 anos em design de iluminação e engenharia. A combinação de formação técnica e psicológica permite criar projetos precisos e emocionalmente ricos.',
-        'Nos últimos 11 anos — representante da ERCO Lighting GmbH. Participante regular da Light+Building (Frankfurt).',
-        'Desde 2007 ministra cursos de light design para arquitetos e designers em Moscou e São Petersburgo.'
-      ],
-    },
-  },
-  
-  {
-    id: 'chochobekov',
-    photo: '/images/team/Ilyas.jpg',
-    imgStyle: { objectPosition: '48% 50%' },
-    name: {
-      ru: 'Ильяс Чожобеков',
-      en: 'Ilyas Chozhobekov',
-      pt: 'Ilyas Chozhobekov',
-    },
-    role: {
-      ru: 'Визуализатор-виртуоз',
-      en: 'Visualization Lead',
-      pt: 'Líder de visualização',
-    },
-    bio: {
-      ru: [
-        'Опыт работы более 10-ти лет. В совершенстве владеет инструментарием для статичных и реалистичных 3D-визуализаций (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
-        'Благодаря Ильясу заказчики видят наши идеи в виде фотореалистичных рендеров ещё до монтажа.'
-      ],
-      en: [
-        '10+ years of experience. Mastery of static and realistic 3D visualizations (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
-        'Helps clients see our ideas as photorealistic renders long before installation.'
-      ],
-      pt: [
-        'Mais de 10 anos de experiência. Domínio de visualizações 3D estáticas e realistas (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
-        'Ajuda os clientes a verem as nossas ideias como renders fotorrealistas muito antes da montagem.'
-      ],
-    },
-  },
-];
-
-// helpers
-const getName = (p: Person, lang: Lang) => p.name[lang] || p.name.en;
-const getRole = (p: Person, lang: Lang) => p.role[lang] || p.role.en;
-const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
   const showBeforeAfter = !!activeProject && isBeforeAfterProject(activeProject);
   const baDict = BEFORE_AFTER[lang] ?? BEFORE_AFTER.en;
   const baLabel =
-    modal && showBeforeAfter
-      ? modal.imageIndex % 2 === 0
-        ? baDict.before // 1-я, 3-я, 5-я...
-        : baDict.after  // 2-я, 4-я, 6-я...
-      : '';
+    modal && showBeforeAfter ? (modal.imageIndex % 2 === 0 ? baDict.before : baDict.after) : '';
 
-  // Бренды (заглушки)
+  // Бренды
   const BRANDS: Brand[] = [
-   { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/', scale: 1.3  },
-  { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 0.9  },
-  { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.3  },
-    { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.2  },
+    { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/', scale: 1.3 },
+    { name: 'XAL', src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 0.9 },
+    { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.3 },
+    { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.2 },
     { name: 'FLOS', src: '/images/brands/flos.svg', href: 'https://flos.com/en/it/', scale: 1.2 },
-  { name: 'Artemide', src: '/images/brands/artemide.svg', href: 'https://www.artemide.com/en/', scale: 1.3 },
-  { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.05 },
-  { name: 'iGuzzini', src: '/images/brands/iguzzini.svg', href: 'https://www.iguzzini.com/', scale: 1.3 },
-  { name: 'Targetti',  src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.25  },
-  { name: 'Bel-lighting', src: '/images/brands/bellighting.png', href: 'https://bel-lighting.com/', scale: 1.3 },
-  { name: 'Hunza', src: '/images/brands/Hunza.png', href: 'https://hunzalighting.com/', scale: 1.25 },
-  { name: 'Vibia', src: '/images/brands/vibia.svg', href: 'https://vibia.com/en/int', scale: 1.15 },
+    { name: 'Artemide', src: '/images/brands/artemide.svg', href: 'https://www.artemide.com/en/', scale: 1.3 },
+    { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.05 },
+    { name: 'iGuzzini', src: '/images/brands/iguzzini.svg', href: 'https://www.iguzzini.com/', scale: 1.3 },
+    { name: 'Targetti', src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.25 },
+    { name: 'Bel-lighting', src: '/images/brands/bellighting.png', href: 'https://bel-lighting.com/', scale: 1.3 },
+    { name: 'Hunza', src: '/images/brands/Hunza.png', href: 'https://hunzalighting.com/', scale: 1.25 },
+    { name: 'Vibia', src: '/images/brands/vibia.svg', href: 'https://vibia.com/en/int', scale: 1.15 },
   ];
 
-  const FAQ_ITEMS: { q: string; a: string }[] =
-  Array.isArray((t as any)?.faq?.items) ? (t as any).faq.items.slice(0, 5) : [];
+  const FAQ_ITEMS: { q: string; a: string }[] = Array.isArray((t as any)?.faq?.items)
+    ? (t as any).faq.items.slice(0, 5)
+    : [];
 
-  // ----------------- Render -----------------
+  /* ---------------- Render ---------------- */
   return (
     <main>
       {/* HERO */}
@@ -319,9 +277,7 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
         </div>
 
         <div className="relative z-10 px-6 max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center">
-            {t?.services?.title ?? 'Services'}
-          </h2>
+          <h2 className="text-3xl font-bold mb-12 text-center">{t?.services?.title ?? 'Services'}</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {(t?.services?.items ?? []).map((item: any, i: number) => (
@@ -343,29 +299,25 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
                   </p>
                 )}
 
-                {typeof item !== 'string' &&
-                  Array.isArray(item.features) &&
-                  item.features.length > 0 && (
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      {item.features.map((f: string, idx: number) => (
-                        <li key={idx} className="pl-4 relative">
-                          <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-gray-400" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                {typeof item !== 'string' && Array.isArray(item.features) && item.features.length > 0 && (
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    {item.features.map((f: string, idx: number) => (
+                      <li key={idx} className="pl-4 relative">
+                        <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-gray-400" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PROJECTS — мобилка: свайп; md+: сетка 4×2 */}
+      {/* PROJECTS */}
       <section id="projects" className="py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center">
-          {t?.projects?.title ?? 'Примеры проектов'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-12 text-center">{t?.projects?.title ?? 'Примеры проектов'}</h2>
 
         {/* mobile swipe */}
         <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4">
@@ -380,9 +332,7 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
               </div>
               <div className="p-4">
                 <div className="min-h-[48px] flex items-center justify-center">
-                  <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
-                    {p.title[lang]}
-                  </h3>
+                  <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">{p.title[lang]}</h3>
                 </div>
               </div>
             </button>
@@ -402,9 +352,7 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
               </div>
               <div className="p-4">
                 <div className="min-h-[48px] flex items-center justify-center">
-                  <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">
-                    {p.title[lang]}
-                  </h3>
+                  <h3 className="font-semibold text-center text-[17px] leading-snug line-clamp-2">{p.title[lang]}</h3>
                 </div>
               </div>
             </button>
@@ -415,133 +363,119 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
       {/* BRANDS */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-12 text-center">
-  {(t as any)?.brands?.title ?? (lang === 'pt' ? 'Marcas' : lang === 'ru' ? 'Бренды' : 'Brands')}
-</h2>
+          {(t as any)?.brands?.title ?? (lang === 'pt' ? 'Marcas' : lang === 'ru' ? 'Бренды' : 'Brands')}
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5 sm:gap-6">
-  {BRANDS.map((b) => (
-    <div
-      key={b.name}
-      className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 md:p-5 group"
-      title={b.name}
-    >
-      <img
-        src={b.src}
-        alt={b.name}
-        loading="lazy"
-        decoding="async"
-        className={`object-contain w-auto h-14 sm:h-16 md:h-20 lg:h-24 max-w-[88%] opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
-        style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
-      />
+          {BRANDS.map((b) => (
+            <div
+              key={b.name}
+              className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 md:p-5 group"
+              title={b.name}
+            >
+              <img
+                src={b.src}
+                alt={b.name}
+                loading="lazy"
+                decoding="async"
+                className={`object-contain w-auto h-14 sm:h-16 md:h-20 lg:h-24 max-w-[88%] opacity-80 group-hover:opacity-100 transition ${
+                  b.invert ? 'invert' : ''
+                }`}
+                style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
+              />
 
-      {b.href && (
-        <a
-          href={b.href}
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          aria-label={`Открыть сайт ${b.name}`}
-          className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
+              {b.href && (
+                <a
+                  href={b.href}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  aria-label={`Открыть сайт ${b.name}`}
+                  className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
                      opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
-        >
-          ↗
-        </a>
-      )}
-    </div>
-  ))}
-</div>
+                >
+                  ↗
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* FAQ */}
       <section id="faq" className="py-20 px-6 max-w-3xl mx-auto">
-  <h2 className="text-3xl font-bold mb-8 text-center">
-    {(t as any)?.faq?.title ?? 'FAQ'}
-  </h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">{(t as any)?.faq?.title ?? 'FAQ'}</h2>
 
-  <div className="space-y-3">
-    {FAQ_ITEMS.map((it, i) => (
-      <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
-        <summary className="cursor-pointer font-medium">{it.q}</summary>
-        <p className="text-gray-700 mt-2">{it.a}</p>
-      </details>
-    ))}
-  </div>
-</section>
+        <div className="space-y-3">
+          {FAQ_ITEMS.map((it, i) => (
+            <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
+              <summary className="cursor-pointer font-medium">{it.q}</summary>
+              <p className="text-gray-700 mt-2">{it.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
       {/* ABOUT */}
-<section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-  {/* сетка: узкая левая колонка + правая часть на всю ширину */}
-  <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-10 items-start">
-    {/* ЛЕВО: заголовок и короткий текст */}
-    <div className="text-left">
-      <h2 className="text-3xl font-bold mb-4">
-        {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
-      </h2>
-      <p className="text-gray-700 text-lg leading-relaxed">
-        {lang === 'en' &&
-          'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'}
-        {lang === 'pt' &&
-          'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'}
-        {lang === 'ru' &&
-          'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
-      </p>
-    </div>
+      <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-10 items-start">
+          {/* ЛЕВО */}
+          <div className="text-left">
+            <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}</h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {lang === 'en' &&
+                'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'}
+              {lang === 'pt' &&
+                'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'}
+              {lang === 'ru' &&
+                'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+            </p>
+          </div>
 
-    {/* ПРАВО: карточки */}
-    <div className="space-y-8">
-      {PEOPLE.map((p) => (
-        <article
-          key={p.id}
-          className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
-        >
-          {/* Фото: строгая обрезка внутри скругления */}
-          <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
-            <img
-              src={p.photo}
-              alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
-              className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
-              style={p.imgStyle}
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+          {/* ПРАВО */}
+          <div className="space-y-8">
+            {PEOPLE.map((p) => (
+              <article
+                key={p.id}
+                className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+              >
+                <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
+                  <img
+                    src={p.photo}
+                    alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
+                    className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
+                    style={p.imgStyle}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
 
-          {/* Текстовая часть */}
-          <div className="h-full">
-            <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
-            <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
+                <div className="h-full">
+                  <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
+                  <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
 
-            {getBio(p, lang).map((paragraph: string, i: number) => (
-              <p key={i} className="mb-3 leading-relaxed">
-                {paragraph}
-              </p>
+                  {getBio(p, lang).map((paragraph, i) => (
+                    <p key={i} className="mb-3 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-
-
-
-
+        </div>
+      </section>
 
       {/* CONTACT */}
       <section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">{t?.contact?.title ?? 'Contact Us'}</h2>
         <p className="mb-6 text-gray-600">{t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}</p>
-        <Link
-          href="mailto:hello@glarefreelight.com"
-          className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition"
-        >
+        <Link href="mailto:hello@glarefreelight.com" className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition">
           Email
         </Link>
       </section>
 
       {/* WhatsApp FAB */}
       <a
-        href={`https://wa.me/+351910000000?text=${encodeURIComponent(
-          'Olá! Quero falar sobre iluminação para um projeto.'
-        )}`}
+        href={`https://wa.me/+351910000000?text=${encodeURIComponent('Olá! Quero falar sobre iluminação para um projeto.')}`}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 md:bottom-8 md:right-8 inline-flex items-center gap-2 px-4 py-2 rounded-2xl shadow-lg bg-emerald-500 hover:bg-emerald-600 text-white"
@@ -551,28 +485,20 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
 
       {/* MODAL */}
       {modal && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeModal}
-        >
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeModal}>
           <div
             className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
-              aria-label="Close"
-            >
+            <button onClick={closeModal} className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2" aria-label="Close">
               ✕
             </button>
 
             <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
               <p className="whitespace-pre-line leading-relaxed">
-                {PROJECTS[modal.projectIndex].desc?.[lang] ??
-                  PROJECTS[modal.projectIndex].blurb[lang]}
+                {PROJECTS[modal.projectIndex].desc?.[lang] ?? PROJECTS[modal.projectIndex].blurb[lang]}
               </p>
             </div>
 
@@ -599,12 +525,7 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
               </button>
             </div>
 
-            {/* Метка "Было/Стало" */}
-            {showBeforeAfter && (
-              <div className="py-3 text-center text-white/90 text-sm font-medium select-none">
-                {baLabel}
-              </div>
-            )}
+            {showBeforeAfter && <div className="py-3 text-center text-white/90 text-sm font-medium select-none">{baLabel}</div>}
 
             <div className="py-2 text-center text-white/70 text-xs">
               {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
@@ -615,4 +536,3 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
     </main>
   );
 }
-
