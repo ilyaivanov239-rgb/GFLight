@@ -111,62 +111,116 @@ export default function Page() {
     );
     return slugHit || titleHit;
   };
-// --- Team / About content (fallback RU; EN/PT можно добавить позже)
-type Person = {
-  id: string;
-  photo: string;               // путь к фото в /public
-  name: Record<string, string>;
-  role: Record<string, string>;
-  bio: Record<string, string[]>; // массив абзацев
-};
+// ----- Team (ABOUT) data & helpers -----
 
-const TEAM: Person[] = [
+type LocalizedStr = Record<'ru' | 'en' | 'pt', string>;
+type LocalizedRich = Record<'ru' | 'en' | 'pt', string[]>;
+
+interface Person {
+  id: string;
+  photo: string;           // путь к изображению в /public
+  name: LocalizedStr;
+  role: LocalizedStr;
+  bio: LocalizedRich;      // несколько абзацев
+}
+
+const PEOPLE: Person[] = [
   {
     id: 'berezin',
-    photo: '/images/team/Mikhail.jpg',
-    name: { ru: 'Михаил Березин' },
-    role: { ru: 'Основной генератор идей' },
+    photo: '/images/team/berezin.jpg',        // << замени на свои пути (временно можно на любой существующий файл)
+    name: {
+      ru: 'Михаил Березин',
+      en: 'Mikhail Berezin',
+      pt: 'Mikhail Berezin',
+    },
+    role: {
+      ru: 'Основной генератор идей',
+      en: 'Chief Idea Generator',
+      pt: 'Gerador principal de ideias',
+    },
     bio: {
       ru: [
-        'Более 20-ти лет в светодизайне и проектировании. Сочетание инженерно-электротехнического и психологического образований позволяют создавать технически выверенные и эмоционально наполненные проекты.',
-        'Последние 11 лет представитель компании ERCO Lighting GmbH. Регулярно участвует в выставках Light+Building во Франкфурте.',
+        'Более 20-ти лет в светодизайне и проектировании. Сочетание инженерно-электротехнического и психологического образований позволяет создавать технически выверенные и эмоционально наполненные проекты.',
+        'Последние 11 лет — представитель ERCO Lighting GmbH. Регулярно участвует в выставках Light+Building во Франкфурте.',
         'С 2007 года читает курс лекций по светодизайну для архитекторов и дизайнеров в Москве и Санкт-Петербурге.'
+      ],
+      en: [
+        '20+ years in lighting design and engineering. With both engineering and psychology background, Mikhail creates technically precise yet emotionally rich projects.',
+        'For the last 11 years — representative of ERCO Lighting GmbH. Regularly participates in Light+Building (Frankfurt).',
+        'Since 2007 he has been giving lectures on lighting design for architects and interior designers in Moscow and St. Petersburg.'
+      ],
+      pt: [
+        'Mais de 20 anos em design de iluminação e engenharia. A combinação de formação técnica e psicológica permite criar projetos precisos e emocionalmente ricos.',
+        'Nos últimos 11 anos — representante da ERCO Lighting GmbH. Participante regular da Light+Building (Frankfurt).',
+        'Desde 2007 ministra cursos de light design para arquitetos e designers em Moscou e São Petersburgo.'
       ],
     },
   },
   {
     id: 'ivanov',
-    photo: '/images/team/Ilya.jpg',
-    name: { ru: 'Илья Иванов' },
-    role: { ru: 'Менеджер проектов' },
+    photo: '/images/team/ivanov.jpg',
+    name: {
+      ru: 'Илья Иванов',
+      en: 'Ilya Ivanov',
+      pt: 'Ilya Ivanov',
+    },
+    role: {
+      ru: 'Менеджер проектов',
+      en: 'Project Manager',
+      pt: 'Gestor de projetos',
+    },
     bio: {
       ru: [
-        'Более – 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют подробно вникать во все детали проекта.',
+        'Более 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют глубоко вникать во все детали проекта.',
         'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
-        'Основная компетенция — умение «переводить» с языка клиентов/дизайнеров на язык инженеров/строителей и обратно.'
+        'Ключевая компетенция — «переводить» между языком клиентов/дизайнеров и языком инженеров/строителей.'
+      ],
+      en: [
+        '15+ years in lighting design and sales. Civil engineering background and private housing construction experience help to dive deep into all project details.',
+        'From 2008 to 2021 he represented XAL. Regular participant of Light+Building (Frankfurt) and Euroluce (Milan).',
+        'Core skill — to “translate” between the language of clients/designers and the language of engineers/builders.'
+      ],
+      pt: [
+        'Mais de 15 anos em projeto de iluminação e vendas. Formação em engenharia civil e experiência em construção residencial permitem aprofundar todos os detalhes do projeto.',
+        'De 2008 a 2021 representou a XAL. Participante regular da Light+Building (Frankfurt) e Euroluce (Milão).',
+        'Competência central — “traduzir” entre a linguagem de clientes/designers e a dos engenheiros/empreiteiros.'
       ],
     },
   },
   {
     id: 'chochobekov',
-    photo: '/images/team/Ilyas.jpg',
-    name: { ru: 'Ильяс Чочобеков' },
-    role: { ru: 'Визуализатор-виртуоз' },
+    photo: '/images/team/chochobekov.jpg',
+    name: {
+      ru: 'Ильяс Чочобеков',
+      en: 'Ilyas Chochobekov',
+      pt: 'Ilyas Chochobekov',
+    },
+    role: {
+      ru: 'Визуализатор-виртуоз',
+      en: 'Visualization Lead',
+      pt: 'Líder de visualização',
+    },
     bio: {
       ru: [
-        'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ — архитектурное проектирование.',
-        'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных рендеров.',
-        'В совершенстве владеет инструментарием для этого (3ds Max, Photoshop, Revit, AutoCAD, After Effects). Делает как статичные рендеры, так и реалистичные 3D-видеоролики с облетом объекта и различными сценариями освещения.'
+        'Опыт работы более 10-ти лет. В совершенстве владеет инструментарием для статичных и реалистичных 3D-визуализаций (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
+        'Благодаря Ильясу заказчики видят наши идеи в виде фотореалистичных рендеров ещё до монтажа.'
+      ],
+      en: [
+        '10+ years of experience. Mastery of static and realistic 3D visualizations (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
+        'Helps clients see our ideas as photorealistic renders long before installation.'
+      ],
+      pt: [
+        'Mais de 10 anos de experiência. Domínio de visualizações 3D estáticas e realistas (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
+        'Ajuda os clientes a verem as nossas ideias como renders fotorrealistas muito antes da montagem.'
       ],
     },
   },
 ];
-// Локализаторы-помощники (падают на RU, если нет перевода):
-const pick = (obj: Record<string, any>, key: string, fallback: any) =>
-  (obj && obj[key]) ?? fallback;
-const getName  = (p: Person, lang: string) => pick(p.name, lang, p.name.ru);
-const getRole  = (p: Person, lang: string) => pick(p.role, lang, p.role.ru);
-const getBio   = (p: Person, lang: string) => pick(p.bio,  lang, p.bio.ru);
+
+// helpers
+const getName = (p: Person, lang: Lang) => p.name[lang] || p.name.en;
+const getRole = (p: Person, lang: Lang) => p.role[lang] || p.role.en;
+const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
   const showBeforeAfter = !!activeProject && isBeforeAfterProject(activeProject);
   const baDict = BEFORE_AFTER[lang] ?? BEFORE_AFTER.en;
   const baLabel =
