@@ -111,7 +111,62 @@ export default function Page() {
     );
     return slugHit || titleHit;
   };
+// --- Team / About content (fallback RU; EN/PT можно добавить позже)
+type Person = {
+  id: string;
+  photo: string;               // путь к фото в /public
+  name: Record<string, string>;
+  role: Record<string, string>;
+  bio: Record<string, string[]>; // массив абзацев
+};
 
+const TEAM: Person[] = [
+  {
+    id: 'berezin',
+    photo: '/images/team/mikhail.jpg',
+    name: { ru: 'Михаил Березин' },
+    role: { ru: 'Основной генератор идей' },
+    bio: {
+      ru: [
+        'Более 20-ти лет в светодизайне и проектировании. Сочетание инженерно-электротехнического и психологического образований позволяют создавать технически выверенные и эмоционально наполненные проекты.',
+        'Последние 11 лет представитель компании ERCO Lighting GmbH. Регулярно участвует в выставках Light+Building во Франкфурте.',
+        'С 2007 года читает курс лекций по светодизайну для архитекторов и дизайнеров в Москве и Санкт-Петербурге.'
+      ],
+    },
+  },
+  {
+    id: 'ivanov',
+    photo: '/images/team/ilya.jpg',
+    name: { ru: 'Илья Иванов' },
+    role: { ru: 'Менеджер проектов' },
+    bio: {
+      ru: [
+        'Более – 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют подробно вникать во все детали проекта.',
+        'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
+        'Основная компетенция — умение «переводить» с языка клиентов/дизайнеров на язык инженеров/строителей и обратно.'
+      ],
+    },
+  },
+  {
+    id: 'chochobekov',
+    photo: '/images/team/ilyas.jpg',
+    name: { ru: 'Ильяс Чочобеков' },
+    role: { ru: 'Визуализатор-виртуоз' },
+    bio: {
+      ru: [
+        'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ — архитектурное проектирование.',
+        'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных рендеров.',
+        'В совершенстве владеет инструментарием для этого (3ds Max, Photoshop, Revit, AutoCAD, After Effects). Делает как статичные рендеры, так и реалистичные 3D-видеоролики с облетом объекта и различными сценариями освещения.'
+      ],
+    },
+  },
+];
+// Локализаторы-помощники (падают на RU, если нет перевода):
+const pick = (obj: Record<string, any>, key: string, fallback: any) =>
+  (obj && obj[key]) ?? fallback;
+const getName  = (p: Person, lang: string) => pick(p.name, lang, p.name.ru);
+const getRole  = (p: Person, lang: string) => pick(p.role, lang, p.role.ru);
+const getBio   = (p: Person, lang: string) => pick(p.bio,  lang, p.bio.ru);
   const showBeforeAfter = !!activeProject && isBeforeAfterProject(activeProject);
   const baDict = BEFORE_AFTER[lang] ?? BEFORE_AFTER.en;
   const baLabel =
@@ -341,21 +396,54 @@ export default function Page() {
   </div>
 </section>
 
-      {/* ABOUT */}
-      <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">
-          {(t as any)?.about?.title ?? 'О нас'}
+      {/* ABOUT — новый блок в стиле презентации */}
+<section id="about-section" className="scroll-mt-24 py-14">
+  <div className="bg-stone-900 rounded-3xl py-14">
+    <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-[1fr,2fr] gap-10 items-start">
+      {/* Левая колонка: заголовок и лид-абзац */}
+      <div>
+        <h2 className="text-white text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+          {(t as any)?.about?.title ?? 'Мы'}
         </h2>
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-          <p className="text-gray-700 text-lg leading-relaxed">
-            {(t as any)?.about?.text ??
-              'Проектируем свет, который подчёркивает архитектуру и не слепит. Работаем с архитекторами и дизайнерами.'}
-          </p>
-          <div className="rounded-2xl overflow-hidden border border-gray-200 bg-gray-50">
-            <img src="/images/about/office.jpg" alt="About" className="w-full h-full object-cover" />
-          </div>
-        </div>
-      </section>
+        <p className="text-stone-200 text-lg leading-relaxed">
+          {(t as any)?.about?.lead ??
+            'Более 10 лет проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+        </p>
+      </div>
+
+      {/* Правая колонка: карточки команды */}
+      <div className="space-y-6">
+        {TEAM.map((p) => (
+          <article
+            key={p.id}
+            className="bg-stone-100 text-stone-900 rounded-2xl overflow-hidden border border-stone-200 shadow-sm grid md:grid-cols-[220px,1fr]"
+          >
+            <div className="h-[220px] md:h-auto">
+              <img
+                src={p.photo}
+                alt={getName(p, lang)}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="p-6 md:p-8">
+              <h3 className="text-2xl font-semibold">{getName(p, lang)}</h3>
+              <p className="text-stone-600 font-medium mb-3">
+                {getRole(p, lang)}
+              </p>
+
+              {getBio(p, lang).map((paragraph, i) => (
+                <p key={i} className="mb-3 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* CONTACT */}
       <section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
