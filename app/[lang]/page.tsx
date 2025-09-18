@@ -453,14 +453,15 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
 
       {/* ABOUT */}
 <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-  <div className="grid md:grid-cols-2 gap-8 items-start">
-    {/* Левый столбец: заголовок и текст */}
+  {/* Левый столбец теперь уже, правый — вся остальная ширина */}
+  <div className="grid md:grid-cols-[280px_1fr] gap-10 items-start">
+    {/* ЛЕВО: заголовок и короткий текст */}
     <div className="space-y-5">
       <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
         {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
       </h2>
 
-      <p className="text-gray-700 text-lg leading-relaxed max-w-[36ch]">
+      <p className="text-gray-700 text-[18px] leading-relaxed">
         {lang === 'en'
           ? 'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'
           : lang === 'pt'
@@ -469,24 +470,25 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
       </p>
     </div>
 
-    {/* Правая колонка: карточки людей */}
-    <div className="space-y-6">
+    {/* ПРАВО: карточки людей */}
+    <div className="space-y-8">
       {PEOPLE.map((p) => (
         <div
           key={p.id}
-          className="grid grid-cols-[380px,1fr] md:grid-cols-[440px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+          /* карточка шире; фото и текст одинаковой ширины */
+          className="grid grid-cols-1 md:grid-cols-[420px_420px] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow overflow-hidden"
         >
-          {/* Фото — шире, без «срезанной» головы */}
-          <div className="aspect-[3/4] w-full">
+          {/* Фото: чётко подрезается скруглением, без «срезанной головы» */}
+          <div className="w-full aspect-[3/4] rounded-xl overflow-hidden">
             <img
               src={p.photo}
               alt={getName(p, lang)}
-              className="w-full h-full object-contain rounded-xl bg-zinc-100"
+              className="w-full h-full object-cover"
             />
           </div>
 
-          {/* Текст */}
-          <div>
+          {/* Текст — ширина как у фото */}
+          <div className="w-full">
             <h3 className="text-xl font-semibold">{getName(p, lang)}</h3>
             <div className="text-sm text-zinc-500 mb-3">{getRole(p, lang)}</div>
 
@@ -501,6 +503,7 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
     </div>
   </div>
 </section>
+
 
 
 
