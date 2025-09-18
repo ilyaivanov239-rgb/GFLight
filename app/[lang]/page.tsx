@@ -122,7 +122,7 @@ export default function Page() {
 
   // Бренды (заглушки)
   const BRANDS: { name: string; src: string }[] = [
-    { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/' },
+    { name: 'ERCO', src: '/images/brands/erco.svg'},
     { name: 'Brand 2', src: '/images/brands/brand2.png' },
     { name: 'Brand 3', src: '/images/brands/brand3.png' },
     { name: 'Brand 4', src: '/images/brands/brand4.png' },
