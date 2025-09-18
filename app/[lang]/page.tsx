@@ -123,7 +123,7 @@ export default function Page() {
 
   // Бренды (заглушки)
   const BRANDS: Brand[] = [
-    { name: 'ERCO', src: '/images/brands/erco.svg' },
+   { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/' },
   { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true },
     { name: 'Brand 3', src: '/images/brands/brand3.png' },
     { name: 'Brand 4', src: '/images/brands/brand4.png' },
@@ -291,18 +291,26 @@ export default function Page() {
           {(t as any)?.brands?.title ?? 'Бренды'}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-  {BRANDS.map(b => (
-    <div key={b.name}
-         className="aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 group"
-         title={b.name}>
-      <img
-        src={b.src}
-        alt={b.name}
-        loading="lazy" decoding="async"
-        className={`max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
-      />
-    </div>
-  ))}
+  {BRANDS.map((b) => {
+    const Wrap: any = 'div'; // сама плашка не кликается
+    return (
+      <Wrap key={b.name}
+        className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 group"
+        title={b.name}>
+        <img
+          src={b.src}
+          alt={b.name}
+          loading="lazy" decoding="async"
+          className={`max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
+        />
+        {b.href && (
+          <a href={b.href} target="_blank" rel="noopener noreferrer nofollow"
+             className="absolute bottom-2 right-2 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm opacity-0 group-hover:opacity-100 transition"
+             aria-label={`Открыть сайт ${b.name}`}>↗</a>
+        )}
+      </Wrap>
+    );
+  })}
 </div>
       </section>
 
