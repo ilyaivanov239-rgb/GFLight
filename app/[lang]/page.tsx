@@ -452,55 +452,56 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
 </section>
 
       {/* ABOUT */}
-<section id="about-section" className="scroll-mt-24 py-20 px-6">
-  <div className="max-w-6xl mx-auto rounded-3xl bg-zinc-900 text-white px-6 md:px-10 py-12">
-    <div className="grid md:grid-cols-2 gap-10 items-start">
-      {/* Левый столбец */}
-<div className="space-y-5">
-  <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-    {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
-  </h2>
+<section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
+  <div className="grid md:grid-cols-2 gap-8 items-start">
+    {/* Левый столбец: заголовок и текст */}
+    <div className="space-y-5">
+      <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
+      </h2>
 
-  <p className="text-zinc-300 text-lg md:text-xl max-w-[36ch]">
-    {lang === 'en'
-      ? 'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'
-      : lang === 'pt'
-        ? 'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'
-        : 'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
-  </p>
-</div>
-
-      {/* Правая колонка: карточки людей */}
-<div className="space-y-6">
-  {PEOPLE.map((p) => (
-    <div
-      key={p.id}
-      className="grid grid-cols-[380px,1fr] md:grid-cols-[440px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
-    >
-      {/* Фото: больше ширина, без обрезки головы */}
-      <div className="aspect-[3/4] w-full">
-        <img
-          src={p.photo}
-          alt={getName(p, lang)}
-          className="w-full h-full object-contain rounded-xl bg-zinc-100"
-        />
-      </div>
-
-      {/* Текст */}
-      <div>
-        <h3 className="text-xl font-semibold">{getName(p, lang)}</h3>
-        <div className="text-sm text-zinc-500 mb-3">{getRole(p, lang)}</div>
-
-        {getBio(p, lang).map((paragraph: string, i: number) => (
-          <p key={i} className="mb-3 leading-relaxed">
-            {paragraph}
-          </p>
-        ))}
-      </div>
+      <p className="text-gray-700 text-lg leading-relaxed max-w-[36ch]">
+        {lang === 'en'
+          ? 'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'
+          : lang === 'pt'
+            ? 'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'
+            : 'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+      </p>
     </div>
-  ))}
-</div>
+
+    {/* Правая колонка: карточки людей */}
+    <div className="space-y-6">
+      {PEOPLE.map((p) => (
+        <div
+          key={p.id}
+          className="grid grid-cols-[380px,1fr] md:grid-cols-[440px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+        >
+          {/* Фото — шире, без «срезанной» головы */}
+          <div className="aspect-[3/4] w-full">
+            <img
+              src={p.photo}
+              alt={getName(p, lang)}
+              className="w-full h-full object-contain rounded-xl bg-zinc-100"
+            />
+          </div>
+
+          {/* Текст */}
+          <div>
+            <h3 className="text-xl font-semibold">{getName(p, lang)}</h3>
+            <div className="text-sm text-zinc-500 mb-3">{getRole(p, lang)}</div>
+
+            {getBio(p, lang).map((paragraph: string, i: number) => (
+              <p key={i} className="mb-3 leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 </section>
+
 
 
       {/* CONTACT */}
