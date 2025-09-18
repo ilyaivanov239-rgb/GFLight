@@ -9,6 +9,9 @@
     "projects": "Portfolio",
     "contact": "Contact"
   },
+  {
+  "brands": { "title": "Our core partners" }
+},
   "hero": {
     "badge": "Technical lighting without glare",
     "title": "Light changes everything.",
