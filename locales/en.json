@@ -9,7 +9,31 @@
     "projects": "Portfolio",
     "contact": "Contact"
   },
-  
+  "faq": {
+  "title": "FAQ",
+  "items": [
+    {
+      "q": "What kind of lighting creates a cozy atmosphere?",
+      "a": "In living spaces, a feeling of comfort comes from soft lighting, without a visible light source, with a color temperature of 2700-3000 K and an illuminance of 75-100 lx."
+    },
+    {
+      "q": "Is there a different approach to lighting homes vs. commercial spaces?",
+      "a": "The fundamental difference is what is most significant for each environment. For an office, it's a working atmosphere; for a home, it's an atmosphere of comfort and tranquility. In each individual case, we work with a personalized request."
+    },
+    {
+      "q": "How can light hide a room’s shortcomings?",
+      "a": "What is not lit by light is not visible. By leaving chips and architectural defects in shadow or blurring them with general light, and by accentuating significant elements, we can shift the focus of attention."
+    },
+    {
+      "q": "Affordable yet looks expensive — what’s the secret?",
+      "a": "The secret is in the accent lighting of significant interior elements while maintaining a visually comfortable environment. When even a single bouquet of daisies is contrastingly lit by a beam from nowhere, it creates an expensive atmosphere."
+    },
+    {
+      "q": "Fixture appearance or optical performance — which is more important?",
+      "a": "The revolution in product design has given us examples of beautiful light fixtures, but their main problem is the lack of variability in light distribution required for a project. Architectural lighting provides everything needed in terms of optics. Their combination gives the best result."
+    }
+  ]
+},
   "brands": { "title": "Our core partners" },
   "hero": {
     "badge": "Technical lighting without glare",
