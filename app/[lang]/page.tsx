@@ -396,54 +396,50 @@ const getBio   = (p: Person, lang: string) => pick(p.bio,  lang, p.bio.ru);
   </div>
 </section>
 
-      {/* ABOUT — новый блок в стиле презентации */}
-<section id="about-section" className="scroll-mt-24 py-14">
-  <div className="bg-stone-900 rounded-3xl py-14">
-    <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-[1fr,2fr] gap-10 items-start">
-      {/* Левая колонка: заголовок и лид-абзац */}
+      {/* ABOUT */}
+<section id="about-section" className="scroll-mt-24 py-20 px-6">
+  <div className="max-w-6xl mx-auto rounded-3xl bg-zinc-900 text-white px-6 md:px-10 py-12">
+    <div className="grid md:grid-cols-2 gap-10 items-start">
+      {/* Левая колонка: заголовок + описание */}
       <div>
-        <h2 className="text-white text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-          {(t as any)?.about?.title ?? 'Мы'}
+        <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+          {(t as any)?.about?.title ?? 'Специалисты по свету без нежелательного блеска'}
         </h2>
-        <p className="text-stone-200 text-lg leading-relaxed">
-          {(t as any)?.about?.lead ??
-            'Более 10 лет проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+        <p className="text-lg md:text-xl text-zinc-200">
+          {(t as any)?.about?.text ??
+            'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
         </p>
       </div>
 
-      {/* Правая колонка: карточки команды */}
+      {/* Правая колонка: карточки людей */}
       <div className="space-y-6">
-        {TEAM.map((p) => (
-          <article
+        {PEOPLE.map((p) => (
+          <div
             key={p.id}
-            className="bg-stone-100 text-stone-900 rounded-2xl overflow-hidden border border-stone-200 shadow-sm grid md:grid-cols-[220px,1fr]"
+            className="grid grid-cols-[300px,1fr] md:grid-cols-[360px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
           >
-            <div className="h-[220px] md:h-auto">
-              <img
-                src={p.photo}
-                alt={getName(p, lang)}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="p-6 md:p-8">
-              <h3 className="text-2xl font-semibold">{getName(p, lang)}</h3>
-              <p className="text-stone-600 font-medium mb-3">
-                {getRole(p, lang)}
-              </p>
+            <img
+              src={p.photo}
+              alt={getName(p, lang)}
+              className="w-full h-[360px] md:h-[420px] object-cover rounded-xl"
+            />
+            <div>
+              <h3 className="text-xl font-semibold">{getName(p, lang)}</h3>
+              <p className="text-zinc-500 text-sm mb-4">{getRole(p, lang)}</p>
 
               {getBio(p, lang).map((paragraph: string, i: number) => (
-  <p key={i} className="mb-3 leading-relaxed">
-    {paragraph}
-  </p>
-))}
+                <p key={i} className="mb-3 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
             </div>
-          </article>
+          </div>
         ))}
       </div>
     </div>
   </div>
 </section>
+
 
       {/* CONTACT */}
       <section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
