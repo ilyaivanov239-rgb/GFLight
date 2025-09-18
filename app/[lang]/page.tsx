@@ -26,10 +26,11 @@ type Person = {
   role: { ru: string; en: string; pt: string };
   bio: { ru: string[]; en: string[]; pt: string[] };
 
-  // ➜ новые опциональные поля для индивидуального кадрирования фото
-  imgClass?: string;                // например 'object-top'
-  imgStyle?: CSSProperties;         // например { objectPosition: '48% 50%' }
+  // для кадрирования:
+  imgClass?: string;                 // например: 'object-top'
+  imgStyle?: CSSProperties;          // например: { objectPosition: '60% 50%' }
 };
+
   // CTA
   const CTA = {
     ru: { services: 'Услуги', contact: 'Связаться' },
@@ -467,47 +468,46 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
 
       {/* ABOUT */}
 <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-  {/* Левый столбец теперь уже, правый — вся остальная ширина */}
-  <div className="grid md:grid-cols-[280px_1fr] gap-10 items-start">
+  {/* сетка: узкая левая колонка + правая часть на всю ширину */}
+  <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-10 items-start">
     {/* ЛЕВО: заголовок и короткий текст */}
-    <div className="space-y-5">
-      <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+    <div className="text-left">
+      <h2 className="text-3xl font-bold mb-4">
         {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
       </h2>
-
-      <p className="text-gray-700 text-[18px] leading-relaxed">
-        {lang === 'en'
-          ? 'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'
-          : lang === 'pt'
-            ? 'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'
-            : 'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+      <p className="text-gray-700 text-lg leading-relaxed">
+        {lang === 'en' &&
+          'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'}
+        {lang === 'pt' &&
+          'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'}
+        {lang === 'ru' &&
+          'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
       </p>
     </div>
 
-    {/* ПРАВО: карточки людей */}
+    {/* ПРАВО: карточки */}
     <div className="space-y-8">
       {PEOPLE.map((p) => (
-        <div
+        <article
           key={p.id}
-          /* карточка шире; фото и текст одинаковой ширины */
-          className="grid grid-cols-1 md:grid-cols-[400px_440px] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow overflow-hidden"
+          className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
         >
-          {/* Фото: чётко подрезается скруглением, без «срезанной головы» */}
-          <div className="relative w-full aspect-[4/3] md:aspect-[5/4] overflow-hidden rounded-xl">
-  <img
-    src={p.photo}
-    alt={getName(p, lang)}
-    className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
-    style={p.imgStyle}
-    loading="lazy"
-    decoding="async"
-  />
-</div>
+          {/* Фото: строгая обрезка внутри скругления */}
+          <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
+            <img
+              src={p.photo}
+              alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
+              className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
+              style={p.imgStyle}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
 
-          {/* Текст — ширина как у фото */}
-          <div className="w-full">
-            <h3 className="text-xl font-semibold">{getName(p, lang)}</h3>
-            <div className="text-sm text-zinc-500 mb-3">{getRole(p, lang)}</div>
+          {/* Текстовая часть */}
+          <div className="h-full">
+            <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
+            <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
 
             {getBio(p, lang).map((paragraph: string, i: number) => (
               <p key={i} className="mb-3 leading-relaxed">
@@ -515,11 +515,12 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
               </p>
             ))}
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
+
 
 
 
