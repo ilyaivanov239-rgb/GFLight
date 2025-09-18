@@ -12,7 +12,7 @@ type ModalState =
       projectIndex: number;
       imageIndex: number;
     };
-type Brand = { name: string; src: string; href?: string; invert?: boolean };
+type Brand = { name: string; src: string; href?: string; invert?: boolean; scale?: number };
 
 export default function Page() {
   const { lang } = useParams() as { lang: Lang };
@@ -123,8 +123,8 @@ export default function Page() {
 
   // Бренды (заглушки)
   const BRANDS: Brand[] = [
-   { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/' },
-  { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true },
+   { name: 'ERCO', src: '/images/brands/erco.svg' },
+  { name: 'XAL',  src: '/images/brands/xal-white.webp', invert: true },
     { name: 'Brand 3', src: '/images/brands/brand3.png' },
     { name: 'Brand 4', src: '/images/brands/brand4.png' },
     { name: 'Brand 5', src: '/images/brands/brand5.png' },
@@ -291,26 +291,22 @@ export default function Page() {
           {(t as any)?.brands?.title ?? 'Бренды'}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-  {BRANDS.map((b) => {
-    const Wrap: any = 'div'; // сама плашка не кликается
-    return (
-      <Wrap key={b.name}
-        className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 group"
-        title={b.name}>
-        <img
-          src={b.src}
-          alt={b.name}
-          loading="lazy" decoding="async"
-          className={`max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
-        />
-        {b.href && (
-          <a href={b.href} target="_blank" rel="noopener noreferrer nofollow"
-             className="absolute bottom-2 right-2 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm opacity-0 group-hover:opacity-100 transition"
-             aria-label={`Открыть сайт ${b.name}`}>↗</a>
-        )}
-      </Wrap>
-    );
-  })}
+  {BRANDS.map((b) => (
+    <div
+      key={b.name}
+      className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-6"
+      title={b.name}
+    >
+      <img
+        src={b.src}
+        alt={b.name}
+        loading="lazy"
+        decoding="async"
+        className={`object-contain w-auto h-10 md:h-12 max-w-[70%] ${b.invert ? 'invert' : ''}`}
+        style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
+      />
+    </div>
+  ))}
 </div>
       </section>
 
