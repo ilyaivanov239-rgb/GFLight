@@ -121,8 +121,8 @@ export default function Page() {
       : '';
 
   // Бренды (заглушки)
-  const BRANDS: { name: string; src: string }[] = [
-    { name: 'ERCO', src: '/images/brands/erco.svg'},
+  const BRANDS: { name: string; src: string; href?: string }[] = [
+    { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/' },
     { name: 'Brand 2', src: '/images/brands/brand2.png' },
     { name: 'Brand 3', src: '/images/brands/brand3.png' },
     { name: 'Brand 4', src: '/images/brands/brand4.png' },
@@ -290,15 +290,24 @@ export default function Page() {
           {(t as any)?.brands?.title ?? 'Бренды'}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {BRANDS.map((b) => (
-            <div
-              key={b.name}
-              className="aspect-[3/2] relative rounded-2xl bg-white border border-gray-200 flex items-center justify-center p-4"
-            >
-              <img src={b.src} alt={b.name} className="max-h-full max-w-full object-contain" />
-            </div>
-          ))}
-        </div>
+  {BRANDS.map(b => (
+    <div key={b.name}
+         className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 group"
+         title={b.name}>
+      <img src={b.src} alt={b.name}
+           className="max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition"
+           loading="lazy" decoding="async" />
+      {b.href && (
+        <a href={b.href} target="_blank" rel="noopener noreferrer nofollow"
+           aria-label={`Открыть сайт ${b.name}`}
+           className="absolute bottom-2 right-2 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700
+                      shadow-sm opacity-0 group-hover:opacity-100 transition">
+          ↗
+        </a>
+      )}
+    </div>
+  ))}
+</div>
       </section>
 
       {/* FAQ */}
