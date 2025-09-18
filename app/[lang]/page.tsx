@@ -125,7 +125,7 @@ export default function Page() {
   const BRANDS: Brand[] = [
    { name: 'ERCO', src: '/images/brands/erco.svg' },
   { name: 'XAL',  src: '/images/brands/xal-white.webp', invert: true },
-    { name: 'Brand 3', src: '/images/brands/brand3.png' },
+    { name: 'BEGA', src: '/images/brands/bega.svg' },
     { name: 'Brand 4', src: '/images/brands/brand4.png' },
     { name: 'Brand 5', src: '/images/brands/brand5.png' },
     { name: 'Brand 6', src: '/images/brands/brand6.png' },
