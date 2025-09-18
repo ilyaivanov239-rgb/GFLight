@@ -124,14 +124,14 @@ export default function Page() {
   // Бренды (заглушки)
   const BRANDS: Brand[] = [
    { name: 'ERCO', src: '/images/brands/erco.svg', href: 'https://www.erco.com/en/', scale: 1.3  },
-  { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 1.0  },
+  { name: 'XAL',  src: '/images/brands/xal-white.webp', href: 'https://www.xal.com/en', invert: true, scale: 0.9  },
   { name: 'BEGA', src: '/images/brands/bega.svg', href: 'https://www.bega.com/en/', scale: 1.3  },
     { name: 'Luce&Light', src: '/images/brands/Luceandlight.svg', href: 'https://www.lucelight.it/en/', scale: 1.2  },
     { name: 'FLOS', src: '/images/brands/flos.svg', href: 'https://flos.com/en/it/', scale: 1.2 },
   { name: 'Artemide', src: '/images/brands/artemide.svg', href: 'https://www.artemide.com/en/', scale: 1.3 },
-  { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.15 },
+  { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.05 },
   { name: 'iGuzzini', src: '/images/brands/iguzzini.svg', href: 'https://www.iguzzini.com/', scale: 1.3 },
-  { name: 'Targetti',  src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.2  },
+  { name: 'Targetti',  src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.25  },
   { name: 'Brand 10', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 11', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 12', src: '/images/brands/placeholder.svg' },
