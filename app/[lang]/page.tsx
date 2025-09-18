@@ -126,8 +126,39 @@ interface Person {
 
 const PEOPLE: Person[] = [
   {
+    id: 'ivanov',
+    photo: '/images/team/Ilya.jpg',
+    name: {
+      ru: 'Илья Иванов',
+      en: 'Ilia Ivanov',
+      pt: 'Ilia Ivanov',
+    },
+    role: {
+      ru: 'Менеджер проектов',
+      en: 'Project Manager',
+      pt: 'Gestor de projetos',
+    },
+    bio: {
+      ru: [
+        'Более 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют глубоко вникать во все детали проекта.',
+        'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
+        'Ключевая компетенция — «переводить» между языком клиентов/дизайнеров и языком инженеров/строителей.'
+      ],
+      en: [
+        '15+ years in lighting design and sales. Civil engineering background and private housing construction experience help to dive deep into all project details.',
+        'From 2008 to 2021 he represented XAL. Regular participant of Light+Building (Frankfurt) and Euroluce (Milan).',
+        'Core skill — to “translate” between the language of clients/designers and the language of engineers/builders.'
+      ],
+      pt: [
+        'Mais de 15 anos em projeto de iluminação e vendas. Formação em engenharia civil e experiência em construção residencial permitem aprofundar todos os detalhes do projeto.',
+        'De 2008 a 2021 representou a XAL. Participante regular da Light+Building (Frankfurt) e Euroluce (Milão).',
+        'Competência central — “traduzir” entre a linguagem de clientes/designers e a dos engenheiros/empreiteiros.'
+      ],
+    },
+  },
+  {
     id: 'berezin',
-    photo: '/images/team/berezin.jpg',        // << замени на свои пути (временно можно на любой существующий файл)
+    photo: '/images/team/Mikhail.jpg',        // << замени на свои пути (временно можно на любой существующий файл)
     name: {
       ru: 'Михаил Березин',
       en: 'Mikhail Berezin',
@@ -156,40 +187,10 @@ const PEOPLE: Person[] = [
       ],
     },
   },
-  {
-    id: 'ivanov',
-    photo: '/images/team/ivanov.jpg',
-    name: {
-      ru: 'Илья Иванов',
-      en: 'Ilya Ivanov',
-      pt: 'Ilya Ivanov',
-    },
-    role: {
-      ru: 'Менеджер проектов',
-      en: 'Project Manager',
-      pt: 'Gestor de projetos',
-    },
-    bio: {
-      ru: [
-        'Более 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют глубоко вникать во все детали проекта.',
-        'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
-        'Ключевая компетенция — «переводить» между языком клиентов/дизайнеров и языком инженеров/строителей.'
-      ],
-      en: [
-        '15+ years in lighting design and sales. Civil engineering background and private housing construction experience help to dive deep into all project details.',
-        'From 2008 to 2021 he represented XAL. Regular participant of Light+Building (Frankfurt) and Euroluce (Milan).',
-        'Core skill — to “translate” between the language of clients/designers and the language of engineers/builders.'
-      ],
-      pt: [
-        'Mais de 15 anos em projeto de iluminação e vendas. Formação em engenharia civil e experiência em construção residencial permitem aprofundar todos os detalhes do projeto.',
-        'De 2008 a 2021 representou a XAL. Participante regular da Light+Building (Frankfurt) e Euroluce (Milão).',
-        'Competência central — “traduzir” entre a linguagem de clientes/designers e a dos engenheiros/empreiteiros.'
-      ],
-    },
-  },
+  
   {
     id: 'chochobekov',
-    photo: '/images/team/chochobekov.jpg',
+    photo: '/images/team/Ilyas.jpg',
     name: {
       ru: 'Ильяс Чочобеков',
       en: 'Ilyas Chochobekov',
