@@ -128,6 +128,7 @@ const PEOPLE: Person[] = [
   {
     id: 'ivanov',
     photo: '/images/team/Ilya.jpg',
+    imgClass: 'object-top',
     name: {
       ru: 'Илья Иванов',
       en: 'Ilia Ivanov',
@@ -191,6 +192,7 @@ const PEOPLE: Person[] = [
   {
     id: 'chochobekov',
     photo: '/images/team/Ilyas.jpg',
+    imgStyle: { objectPosition: '48% 50%' },
     name: {
       ru: 'Ильяс Чожобеков',
       en: 'Ilyas Chozhobekov',
@@ -479,13 +481,16 @@ const getBio  = (p: Person, lang: Lang) => p.bio[lang]  || p.bio.en;
           className="grid grid-cols-1 md:grid-cols-[400px_440px] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow overflow-hidden"
         >
           {/* Фото: чётко подрезается скруглением, без «срезанной головы» */}
-          <div className="w-full aspect-[3/4] rounded-xl overflow-hidden">
-            <img
-              src={p.photo}
-              alt={getName(p, lang)}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <div className="relative w-full aspect-[4/3] md:aspect-[5/4] overflow-hidden rounded-xl">
+  <img
+    src={p.photo}
+    alt={getName(p, lang)}
+    className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
+    style={p.imgStyle}
+    loading="lazy"
+    decoding="async"
+  />
+</div>
 
           {/* Текст — ширина как у фото */}
           <div className="w-full">
