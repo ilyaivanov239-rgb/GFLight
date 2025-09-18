@@ -299,30 +299,33 @@ export default function Page() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5 sm:gap-6">
   {BRANDS.map((b) => (
     <div
-  key={b.name}
-  className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 md:p-5 group"
-  title={b.name}
->
-  <img
-    src={b.src}
-    alt={b.name}
-    loading="lazy"
-    decoding="async"
-    className={`object-contain w-auto h-14 sm:h-16 md:h-20 lg:h-24 max-w-[88%] opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
-    style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
-  />
-  {b.href && (
-    <a
-      href={b.href}
-      target="_blank"
-      rel="noopener noreferrer nofollow"
-      aria-label={`Открыть сайт ${b.name}`}
-      className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
-                 opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+      key={b.name}
+      className="relative aspect-[3/2] rounded-2xl bg-white border border-gray-200 grid place-items-center p-4 md:p-5 group"
+      title={b.name}
     >
-      ↗
-    </a>
-  )}
+      <img
+        src={b.src}
+        alt={b.name}
+        loading="lazy"
+        decoding="async"
+        className={`object-contain w-auto h-14 sm:h-16 md:h-20 lg:h-24 max-w-[88%] opacity-80 group-hover:opacity-100 transition ${b.invert ? 'invert' : ''}`}
+        style={b.scale ? { transform: `scale(${b.scale})` } : undefined}
+      />
+
+      {b.href && (
+        <a
+          href={b.href}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          aria-label={`Открыть сайт ${b.name}`}
+          className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
+                     opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+        >
+          ↗
+        </a>
+      )}
+    </div>
+  ))}
 </div>
       </section>
 
