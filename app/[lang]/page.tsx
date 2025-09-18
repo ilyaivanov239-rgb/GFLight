@@ -293,9 +293,9 @@ export default function Page() {
 
       {/* BRANDS */}
       <section id="brands" className="py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">
-          {(t as any)?.brands?.title ?? 'Бренды'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-12 text-center">
+  {(t as any)?.brands?.title ?? (lang === 'pt' ? 'Marcas' : lang === 'ru' ? 'Бренды' : 'Brands')}
+</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5 sm:gap-6">
   {BRANDS.map((b) => (
     <div
