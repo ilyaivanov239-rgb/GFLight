@@ -131,7 +131,7 @@ export default function Page() {
   { name: 'Artemide', src: '/images/brands/artemide.svg', href: 'https://www.artemide.com/en/', scale: 1.3 },
   { name: 'DGA', src: '/images/brands/dga.svg', href: 'https://www.dga.it/en', scale: 1.15 },
   { name: 'iGuzzini', src: '/images/brands/iguzzini.svg', href: 'https://www.iguzzini.com/', scale: 1.25 },
-  { name: 'Brand 9', src: '/images/brands/placeholder.svg' },
+  { name: 'Targetti',  src: '/images/brands/targetti.svg', href: 'https://www.targetti.com/en', invert: true, scale: 1.0  },
   { name: 'Brand 10', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 11', src: '/images/brands/placeholder.svg' },
   { name: 'Brand 12', src: '/images/brands/placeholder.svg' },
