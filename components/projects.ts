@@ -72,15 +72,27 @@ pt: [
   ru: [
     'Чтобы выделить каждый экспонат и придать всей экспозиции "космический" вид, мы использовали узконаправленные прожекторы, размещённые на большой высоте — от 12 до 15 метров. Холодный свет с цветовой температурой 4000K позволил создать глубокие, отчётливые тени, напоминающие солнечный свет в открытом космосе.',
     '',
-    'Спутники, подвешенные на разной высоте, должны были одинаково хорошо смотреться со всех четырёх уровней пандуса: с пола, с 4, 7 и 11 метров. Чтобы решить эту задачу, мы использовали множество точек подсветки с разных уровней, а пересекающиеся лучи позволяли выделить каждый объект, не слепя посетителей. Точная оптика и адресное димирование позволили создать единый световой облик, несмотря на масштабную высоту и сложность экспозиции.',
+    'Спутники, подвешенные на разной высоте, должны были одинаково хорошо смотреться со всех четырёх уровней пандуса: с пола, с 4, 7 и 11 метров. Чтобы решить эту задачу, мы использовали множество точек подсветки с разных уровней, а пересекающиеся лучи позволяли выделить каждый объект, не слепя посетителей. Точная оптика и адресное диммирование позволили создать единый световой облик, несмотря на масштабную высоту и сложность экспозиции.',
     '',
     'В результате, благодаря смешению естественного и искусственного освещения, каждый экспонат был подсвечен отдельно, но при этом гармонично вписался в общую композицию. Это позволило создать запоминающийся и живой образ, который подчёркивает значимость и технологичность целой эпохи.',
   ].join('\n'),
-  en: '',
-  pt: '',
-},
+  en: [
+  'To highlight each exhibit and give the entire display a “cosmic” look, we used narrow-beam spotlights installed high above—12 to 15 meters. The cool 4000K light created deep, crisp shadows reminiscent of sunlight in open space.',
+  '',
+  'Satellites suspended at different heights had to read equally well from all four ramp levels: from the floor and from 4, 7 and 11 meters. To achieve this we used many lighting points from different levels; crossing beams picked out each object without dazzling visitors. Precise optics and addressable dimming produced a unified lighting identity despite the great height and complexity of the display.',
+  '',
+  'As a result, by mixing natural and artificial light, every exhibit was lit individually yet blended harmoniously into the overall composition. This created a memorable, vivid image that underscores the significance and technological character of an entire era.',
+].join('\n'),
 
-  },
+pt: [
+  'Para destacar cada peça e dar à exposição um aspeto “cósmico”, utilizámos projetores de feixe estreito instalados a grande altura — entre 12 e 15 metros. A luz fria de 4000 K criou sombras profundas e nítidas, semelhantes à luz solar no espaço aberto.',
+  '',
+  'Os satélites suspensos a diferentes alturas tinham de ser percecionados igualmente bem a partir dos quatro níveis da rampa: do piso e dos 4, 7 e 11 metros. Para isso, utilizámos muitos pontos de luz em diferentes níveis; os feixes cruzados destacavam cada objeto sem ofuscar os visitantes. Ótica precisa e dimerização endereçável permitiram criar uma linguagem luminosa unificada, apesar da grande altura e da complexidade da exposição.',
+  '',
+  'Como resultado, graças à mistura de luz natural e artificial, cada peça foi iluminada individualmente, mas integrou-se de forma harmoniosa na composição geral. Isto criou uma imagem marcante e viva que sublinha a importância e o caráter tecnológico de toda uma época.',
+].join('\n'),
+
+}},
   {
   slug: 'onepoint',
   cover: '/projects/onepoint/cover.jpg',
