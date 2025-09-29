@@ -435,7 +435,7 @@ export default function Page() {
             {PEOPLE.map((p) => (
               <article
                 key={p.id}
-                className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+                className="grid md:grid-cols-[460px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
               >
                 <figure className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl">
   <img
