@@ -57,7 +57,7 @@ pt: [
   'Esta luz não encandeia; torna as fotos dignas de Instagram e a comida irresistivelmente apetitosa. Os convidados sentem-se confortáveis e a arquitetura da sala fica expressiva sem perder a sua sofisticação.',
 ].join('\n'),
 
-},
+ }},
   {
     slug: 'cosmonautics',
     cover: '/projects/cosmonautics/cover.jpg',
