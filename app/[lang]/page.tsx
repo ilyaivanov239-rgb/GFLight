@@ -486,19 +486,31 @@ const SOCIAL = [
       {/* ABOUT */}
 <section id="about-section" className="scroll-mt-24 py-20 px-6">
   {/* Вступление сверху по центру */}
-  <div className="max-w-3xl mx-auto text-center mb-12">
-    <h2 className="text-3xl md:text-4xl font-bold mb-4">
-      {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
-    </h2>
-    <p className="text-gray-700 text-lg leading-relaxed">
-      {lang === 'en' &&
-        'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'}
-      {lang === 'pt' &&
-        'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'}
-      {lang === 'ru' &&
-        'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
-    </p>
-  </div>
+<div className="max-w-3xl mx-auto text-center mb-12">
+  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
+  </h2>
+
+  {/* Абзац 1 */}
+  <p className="text-gray-700 text-lg leading-relaxed">
+    {lang === 'ru' &&
+      'Более 15 лет мы проектируем и реализуем премиальные световые проекты для интерьеров и фасадов — от частных резиденций до ансамблей дворцового масштаба. Наш главный приоритет — визуальный комфорт и атмосфера. Мы создаём свет, который не утомляет взгляд, не слепит и не искажает фактуры, а бережно раскрывает архитектуру, материалы и цвет.'}
+    {lang === 'en' &&
+      'For over 15 years we have been designing and delivering premium lighting projects for interiors and façades — from private residences to palace-scale ensembles. Our main priority is visual comfort and ambience. We create light that does not tire the eyes, does not dazzle or distort textures, but gently reveals architecture, materials and colour.'}
+    {lang === 'pt' &&
+      'Há mais de 15 anos projetamos e realizamos projetos de iluminação premium para interiores e fachadas — desde residências privadas até conjuntos de escala palaciana. A nossa prioridade é o conforto visual e a atmosfera. Criamos uma luz que não cansa a visão, não encandeia nem distorce as texturas, mas revela com cuidado a arquitetura, os materiais e a cor.'}
+  </p>
+
+  {/* Абзац 2 */}
+  <p className="text-gray-700 text-lg leading-relaxed mt-4">
+    {lang === 'ru' &&
+      'Мы тщательно подбираем оптику и распределение светового потока, строим сценарии и систему управления, чтобы вы могли легко менять настроение пространства — от спокойного повседневного до праздничного. В результате свет становится не просто функцией, а частью архитектуры и вашего образа жизни.'}
+    {lang === 'en' &&
+      'We carefully select optics and light distribution, build scenes and the control system so you can effortlessly change the mood of the space — from calm everyday to festive. As a result, light becomes not just a function, but a part of the architecture and your lifestyle.'}
+    {lang === 'pt' &&
+      'Selecionamos cuidadosamente a ótica e a distribuição do fluxo luminoso, construímos cenários e o sistema de controlo para que possa mudar facilmente o ambiente do espaço — do quotidiano tranquilo ao festivo. Assim, a luz torna-se não apenas uma função, mas parte da arquitetura e do seu estilo de vida.'}
+  </p>
+</div>
 
   {/* Карточки команды */}
   <div className="space-y-8 max-w-6xl mx-auto">
