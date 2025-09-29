@@ -247,6 +247,45 @@ const submitContact = (e: React.FormEvent) => {
   window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 };
 
+// --- Contact constants ---
+const CONTACT_EMAIL = 'studio@gflight.pt';
+const CONTACT_PHONE_E164 = '351910075868'; // без '+' для wa.me
+const CONTACT_PHONE_DISPLAY = '+351 910 075 868';
+const WA_TEXT = encodeURIComponent('Olá! Quero falar sobre iluminação para um projeto.');
+
+const SOCIAL = [
+  {
+    name: 'WhatsApp',
+    href: `https://wa.me/${CONTACT_PHONE_E164}?text=${WA_TEXT}`,
+    bg: 'bg-emerald-500 hover:bg-emerald-600',
+    // иконка WhatsApp (SVG)
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+        <path d="M20.52 3.48A11.77 11.77 0 0 0 12.01 0C5.39 0 .03 5.36.03 11.98c0 2.01.52 3.98 1.5 5.73L0 24l6.47-1.48A11.9 11.9 0 0 0 12 23.96c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.2-3.46-8.5zM12 21.3c-1.75 0-3.47-.46-4.99-1.33l-.36-.21-3.84.88.82-3.74-.24-.38A9.3 9.3 0 0 1 2.7 12 9.3 9.3 0 0 1 12 2.7 9.3 9.3 0 0 1 21.3 12 9.3 9.3 0 0 1 12 21.3zm5.1-6.79c-.28-.14-1.65-.81-1.9-.9-.25-.09-.44-.14-.63.14-.19.28-.73.9-.9 1.08-.17.19-.33.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.82-.73-1.38-1.62-1.55-1.9-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.48-.63-.49h-.54c-.19 0-.49.07-.75.35-.26.28-1 1.02-1 2.48 0 1.46 1.03 2.87 1.17 3.06.14.19 2.03 3.1 4.92 4.35.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.33-.07-.12-.26-.19-.54-.33z"/>
+      </svg>
+    ),
+  },
+  {
+    name: 'Telegram',
+    href: 'https://t.me/GFLightPortugal',
+    bg: 'bg-sky-500 hover:bg-sky-600',
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+        <path d="M23.95 3.5a1.38 1.38 0 0 0-1.58-.27L1.6 13.12c-.67.32-.67 1.3.01 1.6l5.65 2.44 2.2 4.66c.31.66 1.26.77 1.74.21l3.1-3.58 5.68 2.45c.66.29 1.42-.13 1.54-.84l2.34-14.6c.08-.5-.18-1-.61-1.26zM8.36 16.1l-.05 2.87 1.27-1.45 7.8-9.03-9.02 7.61z"/>
+      </svg>
+    ),
+  },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/glarefreelight/',
+    bg: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:brightness-110',
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6zM18.4 6.6a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/>
+      </svg>
+    ),
+  },
+];
 
   const FAQ_ITEMS: { q: string; a: string }[] = Array.isArray((t as any)?.faq?.items)
     ? (t as any).faq.items.slice(0, 5)
@@ -499,34 +538,43 @@ const submitContact = (e: React.FormEvent) => {
       </section>
 
       {/* CONTACT */}
-<section id="contact" className="py-20 px-6 max-w-3xl mx-auto">
-  <h2 className="text-3xl font-bold mb-8 text-center">
-    {t?.contact?.title ?? (lang === 'pt' ? 'Contactos' : lang === 'en' ? 'Contact' : 'Напишите нам')}
+<section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
+  <h2 className="text-3xl font-bold mb-6">
+    {t?.contact?.title ?? 'Напишите нам'}
   </h2>
+  <p className="mb-10 text-gray-600">
+    {t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}
+  </p>
 
-  {/* карточка с явными контактами */}
-  <div className="mb-8 grid gap-4 sm:grid-cols-2">
+  {/* Почта и телефон */}
+  <div className="grid md:grid-cols-2 gap-4 mb-8 text-left">
     <div className="rounded-2xl border border-gray-200 bg-white p-5">
-      <div className="text-sm text-gray-500 mb-1">{lang === 'ru' ? 'Эл. почта' : lang === 'pt' ? 'Email' : 'Email'}</div>
-      <a
-        href="mailto:studio@gflight.pt"
-        className="text-lg font-medium break-all hover:underline"
-      >
-        studio@gflight.pt
-      </a>
+      <div className="text-sm text-gray-500 mb-1">Эл. почта</div>
+      <div className="flex items-center justify-between gap-3">
+        <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-lg hover:underline">
+          {CONTACT_EMAIL}
+        </a>
+        <button
+          onClick={() => navigator.clipboard?.writeText(CONTACT_EMAIL)}
+          className="text-xs px-2 py-1 rounded-md bg-gray-100 hover:bg-gray-200"
+          aria-label="Скопировать email"
+        >
+          Copy
+        </button>
+      </div>
     </div>
 
     <div className="rounded-2xl border border-gray-200 bg-white p-5">
-      <div className="text-sm text-gray-500 mb-1">{lang === 'ru' ? 'Телефон / WhatsApp' : lang === 'pt' ? 'Telefone / WhatsApp' : 'Phone / WhatsApp'}</div>
-      <div className="flex items-center gap-3">
-        <a href="tel:+351910075868" className="text-lg font-medium hover:underline">
-          +351 910 075 868
+      <div className="text-sm text-gray-500 mb-1">Телефон / WhatsApp</div>
+      <div className="flex items-center justify-between gap-3">
+        <a href={`tel:+${CONTACT_PHONE_E164}`} className="font-medium text-lg hover:underline">
+          {CONTACT_PHONE_DISPLAY}
         </a>
         <a
-          href="https://wa.me/351910075868"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm px-2 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
+          href={`https://wa.me/${CONTACT_PHONE_E164}?text=${WA_TEXT}`}
+          target="_blank" rel="noopener noreferrer"
+          className="text-xs px-2 py-1 rounded-md bg-emerald-500 text-white hover:bg-emerald-600"
+          aria-label="Написать в WhatsApp"
         >
           WhatsApp
         </a>
@@ -534,68 +582,23 @@ const submitContact = (e: React.FormEvent) => {
     </div>
   </div>
 
-  {/* форма обратной связи */}
-  <form onSubmit={submitContact} className="rounded-2xl border border-gray-200 bg-white p-6">
-    <div className="grid gap-4 sm:grid-cols-2">
-      <div className="sm:col-span-1">
-        <label className="block text-sm text-gray-600 mb-1">
-          {lang === 'ru' ? 'Ваше имя' : lang === 'pt' ? 'O seu nome' : 'Your Name'}
-        </label>
-        <input
-          type="text"
-          required
-          value={formName}
-          onChange={(e) => setFormName(e.target.value)}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
-          placeholder={lang === 'ru' ? 'Иван Иванов' : lang === 'pt' ? 'João Silva' : 'John Doe'}
-        />
-      </div>
-
-      <div className="sm:col-span-1">
-        <label className="block text-sm text-gray-600 mb-1">
-          Email
-        </label>
-        <input
-          type="email"
-          required
-          value={formEmail}
-          onChange={(e) => setFormEmail(e.target.value)}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
-          placeholder="you@email.com"
-        />
-      </div>
-
-      <div className="sm:col-span-2">
-        <label className="block text-sm text-gray-600 mb-1">
-          {lang === 'ru' ? 'Сообщение' : lang === 'pt' ? 'Mensagem' : 'Message'}
-        </label>
-        <textarea
-          required
-          rows={5}
-          value={formMsg}
-          onChange={(e) => setFormMsg(e.target.value)}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
-          placeholder={
-            lang === 'ru'
-              ? 'Коротко о задаче и сроках…'
-              : lang === 'pt'
-              ? 'Conte-nos brevemente sobre o projeto…'
-              : 'Tell us a bit about your project…'
-          }
-        />
-      </div>
-    </div>
-
-    <div className="mt-6 flex justify-center">
-      <button
-        type="submit"
-        className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition"
+  {/* Соц-кнопки */}
+  <div className="flex items-center justify-center gap-3">
+    {SOCIAL.map(s => (
+      <a
+        key={s.name}
+        href={s.href}
+        target="_blank" rel="noopener noreferrer nofollow"
+        className={`inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-white shadow ${s.bg} transition hover:scale-[1.02]`}
+        aria-label={s.name}
       >
-        {lang === 'ru' ? 'Отправить' : lang === 'pt' ? 'Enviar' : 'Send'}
-      </button>
-    </div>
-  </form>
+        {s.icon}
+        <span className="font-medium">{s.name}</span>
+      </a>
+    ))}
+  </div>
 </section>
+
 
 
 
