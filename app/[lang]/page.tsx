@@ -29,7 +29,6 @@ type Person = {
   name: { ru: string; en: string; pt: string };
   role: { ru: string; en: string; pt: string };
   bio: { ru: string[]; en: string[]; pt: string[] };
-  // индивидуальное кадрирование фото
   imgClass?: string; // напр. 'object-top'
   imgStyle?: CSSProperties; // напр. { objectPosition: '60% 50%' }
 };
@@ -47,7 +46,7 @@ const PEOPLE: Person[] = [
       ru: [
         'Более 15-ти лет в световом проектировании и продажах. Высшее строительное образование и опыт строительства частных домов позволяют глубоко вникать во все детали проекта.',
         'С 2008 по 2021 год представлял компанию XAL. Регулярно принимал участие в выставках Light+Building во Франкфурте и Euroluce в Милане.',
-        'Ключевая компетенция — «переводить» между языком клиентов/дизайнеров и языком инженеров/строителей.',
+        'Ключевая компетенция — умение «переводить» с языка клиентов/дизайнеров на язык инженеров/строителей и обратно. ',
       ],
       en: [
         '15+ years in lighting design and sales. Civil engineering background and private housing construction experience help to dive deep into all project details.',
@@ -85,29 +84,29 @@ const PEOPLE: Person[] = [
     },
   },
   {
-  id: 'chochobekov',
-  photo: '/images/team/Ilyas.jpg',
-  imgStyle: { objectPosition: '62% 50%' }, // слегка смещаем фокус вправо
-  name: { ru: 'Ильяс Чожобеков', en: 'Ilyas Chozhobekov', pt: 'Ilyas Chozhobekov' },
-  role: { ru: 'Визуализатор-виртуоз', en: 'Visualization Lead', pt: 'Líder de visualização' },
-  bio: {
-    ru: [
-      'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ — архитектурное проектирование.',
-      'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных рендеров.',
-      'В совершенстве владеет всем инструментарием для этого (3ds Max, Photoshop, Revit, AutoCAD, After Effects). Может делать как статичные рендеры, так и реалистичные 3D-видеоролики с облётом объекта и различными сценариями освещения.',
-    ],
-    en: [
-      'With over 10 years of experience, he holds a degree in architectural design from SPbGASU.',
-      'Thanks to Ilyas, our clients can visualize our ideas and plans through photorealistic renders.',
-      'He excels in all the necessary tools for this (3ds Max, Photoshop, Revit, AutoCAD, After Effects). He is skilled in creating both static renders and realistic 3D videos, including flyovers of the objects and various lighting scenarios.',
-    ],
-    pt: [
-      'Com mais de 10 anos de experiência, possui uma licenciatura em design arquitetónico pela SPbGASU.',
-      'Graças ao Ilyas, os nossos clientes podem visualizar as nossas ideias e planos através de renders fotorrealistas.',
-      'Ele destaca-se no uso de ferramentas necessárias para isso (3ds Max, Photoshop, Revit, AutoCAD, After Effects). É competente na criação tanto de renders estáticos como de vídeos 3D realistas, incluindo sobrevoos dos objetos e diversos cenários de iluminação.',
-    ],
+    id: 'chochobekov',
+    photo: '/images/team/Ilyas.jpg',
+    imgStyle: { objectPosition: '62% 50%' },
+    name: { ru: 'Ильяс Чожобеков', en: 'Ilyas Chozhobekov', pt: 'Ilyas Chozhobekov' },
+    role: { ru: 'Визуализатор-виртуоз', en: 'Visualization Lead', pt: 'Líder de visualização' },
+    bio: {
+      ru: [
+        'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ — архитектурное проектирование.',
+        'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных рендеров.',
+        'В совершенстве владеет всем инструментарием для этого (3ds Max, Photoshop, Revit, AutoCAD, After Effects). Может делать как статичные рендеры, так и реалистичные 3D-видеоролики с облётом объекта и различными сценариями освещения.',
+      ],
+      en: [
+        'With over 10 years of experience, he holds a degree in architectural design from SPbGASU.',
+        'Thanks to Ilyas, our clients can visualize our ideas and plans through photorealistic renders.',
+        'He excels in all the necessary tools for this (3ds Max, Photoshop, Revit, AutoCAD, After Effects). He is skilled in creating both static renders and realistic 3D videos, including flyovers of the objects and various lighting scenarios.',
+      ],
+      pt: [
+        'Com mais de 10 anos de experiência, possui uma licenciatura em design arquitetónico pela SPbGASU.',
+        'Graças ao Ilyas, os nossos clientes podem visualizar as nossas ideias e planos através de renders fotorrealistas.',
+        'Ele destaca-se no uso de ferramentas necessárias para isso (3ds Max, Photoshop, Revit, AutoCAD, After Effects). É competente na criação tanto de renders estáticos como de vídeos 3D realistas, incluindo sobrevoos dos objetos e diversos cenários de iluminação.',
+      ],
+    },
   },
-},
 ];
 
 const getName = (p: Person, lang: Lang) => p.name[lang] ?? p.name.ru;
@@ -203,8 +202,7 @@ export default function Page() {
 
   const showBeforeAfter = !!activeProject && isBeforeAfterProject(activeProject);
   const baDict = BEFORE_AFTER[lang] ?? BEFORE_AFTER.en;
-  const baLabel =
-    modal && showBeforeAfter ? (modal.imageIndex % 2 === 0 ? baDict.before : baDict.after) : '';
+  const baLabel = modal && showBeforeAfter ? (modal.imageIndex % 2 === 0 ? baDict.before : baDict.after) : '';
 
   // Бренды
   const BRANDS: Brand[] = [
@@ -221,76 +219,50 @@ export default function Page() {
     { name: 'Hunza', src: '/images/brands/Hunza.png', href: 'https://hunzalighting.com/', scale: 1.25 },
     { name: 'Vibia', src: '/images/brands/vibia.svg', href: 'https://vibia.com/en/int', scale: 1.15 },
   ];
-  // ---------- Contact form state ----------
-const [formName, setFormName] = useState('');
-const [formEmail, setFormEmail] = useState('');
-const [formMsg, setFormMsg] = useState('');
 
-const submitContact = (e: React.FormEvent) => {
-  e.preventDefault();
+  // --- Contact constants ---
+  const CONTACT_EMAIL = 'studio@gflight.pt';
+  const CONTACT_PHONE_E164 = '351910075868'; // без '+' для wa.me
+  const CONTACT_PHONE_DISPLAY = '+351 910 075 868';
+  const WA_TEXT = encodeURIComponent('Olá! Quero falar sobre iluminação para um projeto.');
+  const CONTACT_UI = {
+    ru: { title: 'Как с нами связаться', email: 'Эл. почта', phone: 'Телефон' },
+    en: { title: 'How to reach us', email: 'Email', phone: 'Phone' },
+    pt: { title: 'Como contactar-nos', email: 'E-mail', phone: 'Telefone' },
+  } as const;
 
-  // подготавливаем письмо
-  const subject = encodeURIComponent('GFLight — Enquiry');
-  const bodyLines = [
-    `Name: ${formName}`,
-    `Email: ${formEmail}`,
-    '',
-    'Message:',
-    formMsg,
+  const SOCIAL = [
+    {
+      name: 'WhatsApp',
+      href: `https://wa.me/${CONTACT_PHONE_E164}?text=${WA_TEXT}`,
+      bg: 'bg-emerald-500 hover:bg-emerald-600',
+      icon: (
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+          <path d="M20.52 3.48A11.77 11.77 0 0 0 12.01 0C5.39 0 .03 5.36.03 11.98c0 2.01.52 3.98 1.5 5.73L0 24l6.47-1.48A11.9 11.9 0 0 0 12 23.96c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.2-3.46-8.5zM12 21.3c-1.75 0-3.47-.46-4.99-1.33l-.36-.21-3.84.88.82-3.74-.24-.38A9.3 9.3 0 0 1 2.7 12 9.3 9.3 0 0 1 12 2.7 9.3 9.3 0 0 1 21.3 12 9.3 9.3 0 0 1 12 21.3zm5.1-6.79c-.28-.14-1.65-.81-1.9-.9-.25-.09-.44-.14-.63.14-.19.28-.73.9-.9 1.08-.17.19-.33.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.82-.73-1.38-1.62-1.55-1.9-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.48-.63-.49h-.54c-.19 0-.49.07-.75.35-.26.28-1 1.02-1 2.48 0 1.46 1.03 2.87 1.17 3.06.14.19 2.03 3.1 4.92 4.35.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.33-.07-.12-.26-.19-.54-.33z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Telegram',
+      href: 'https://t.me/GFLightPortugal',
+      bg: 'bg-sky-500 hover:bg-sky-600',
+      icon: (
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+          <path d="M23.95 3.5a1.38 1.38 0 0 0-1.58-.27L1.6 13.12c-.67.32-.67 1.3.01 1.6l5.65 2.44 2.2 4.66c.31.66 1.26.77 1.74.21l3.1-3.58 5.68 2.45c.66.29 1.42-.13 1.54-.84l2.34-14.6c.08-.5-.18-1-.61-1.26zM8.36 16.1l-.05 2.87 1.27-1.45 7.8-9.03-9.02 7.61z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/glarefreelight/',
+      bg: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:brightness-110',
+      icon: (
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+          <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6zM18.4 6.6a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z" />
+        </svg>
+      ),
+    },
   ];
-  const body = encodeURIComponent(bodyLines.join('\n'));
-
-  // открываем почтовый клиент / веб-почту
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-};
-
-// --- Contact constants ---
-const CONTACT_EMAIL = 'studio@gflight.pt';
-const CONTACT_PHONE_E164 = '351910075868'; // без '+' для wa.me
-const CONTACT_PHONE_DISPLAY = '+351 910 075 868';
-const WA_TEXT = encodeURIComponent('Olá! Quero falar sobre iluminação para um projeto.');
-const CONTACT_UI = {
-  ru: { title: 'Как с нами связаться', email: 'Эл. почта', phone: 'Телефон' },
-  en: { title: 'How to reach us',      email: 'Email',     phone: 'Phone'   },
-  pt: { title: 'Como contactar-nos',   email: 'E-mail',    phone: 'Telefone'}
-} as const;
-const SOCIAL = [
-  {
-    name: 'WhatsApp',
-    href: `https://wa.me/${CONTACT_PHONE_E164}?text=${WA_TEXT}`,
-    bg: 'bg-emerald-500 hover:bg-emerald-600',
-    // иконка WhatsApp (SVG)
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-        <path d="M20.52 3.48A11.77 11.77 0 0 0 12.01 0C5.39 0 .03 5.36.03 11.98c0 2.01.52 3.98 1.5 5.73L0 24l6.47-1.48A11.9 11.9 0 0 0 12 23.96c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.2-3.46-8.5zM12 21.3c-1.75 0-3.47-.46-4.99-1.33l-.36-.21-3.84.88.82-3.74-.24-.38A9.3 9.3 0 0 1 2.7 12 9.3 9.3 0 0 1 12 2.7 9.3 9.3 0 0 1 21.3 12 9.3 9.3 0 0 1 12 21.3zm5.1-6.79c-.28-.14-1.65-.81-1.9-.9-.25-.09-.44-.14-.63.14-.19.28-.73.9-.9 1.08-.17.19-.33.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.82-.73-1.38-1.62-1.55-1.9-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.48-.63-.49h-.54c-.19 0-.49.07-.75.35-.26.28-1 1.02-1 2.48 0 1.46 1.03 2.87 1.17 3.06.14.19 2.03 3.1 4.92 4.35.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.33-.07-.12-.26-.19-.54-.33z"/>
-      </svg>
-    ),
-  },
-  {
-    name: 'Telegram',
-    href: 'https://t.me/GFLightPortugal',
-    bg: 'bg-sky-500 hover:bg-sky-600',
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-        <path d="M23.95 3.5a1.38 1.38 0 0 0-1.58-.27L1.6 13.12c-.67.32-.67 1.3.01 1.6l5.65 2.44 2.2 4.66c.31.66 1.26.77 1.74.21l3.1-3.58 5.68 2.45c.66.29 1.42-.13 1.54-.84l2.34-14.6c.08-.5-.18-1-.61-1.26zM8.36 16.1l-.05 2.87 1.27-1.45 7.8-9.03-9.02 7.61z"/>
-      </svg>
-    ),
-  },
-  {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/glarefreelight/',
-    bg: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:brightness-110',
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6zM18.4 6.6a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/>
-      </svg>
-    ),
-  },
-];
-
-  const FAQ_ITEMS: { q: string; a: string }[] = Array.isArray((t as any)?.faq?.items)
-    ? (t as any).faq.items.slice(0, 5)
-    : [];
 
   /* ---------------- Render ---------------- */
   return (
@@ -359,11 +331,7 @@ const SOCIAL = [
                 </h3>
 
                 {typeof item !== 'string' && (
-                  <p
-                    className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4
-                               flex-none min-h-[176px] max-h-[176px] md:min-h-[200px] md:max-h-[200px]
-                               overflow-hidden line-clamp-6 md:line-clamp-6"
-                  >
+                  <p className="text-slate-700 text-[15px] md:text-base leading-6 md:leading-7 tracking-[-0.005em] bg-slate-50 border border-slate-200/60 rounded-xl p-4 mb-4 flex-none min-h-[176px] max-h-[176px] md:min-h-[200px] md:max-h-[200px] overflow-hidden line-clamp-6 md:line-clamp-6">
                     {item.desc ?? ''}
                   </p>
                 )}
@@ -458,8 +426,7 @@ const SOCIAL = [
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   aria-label={`Открыть сайт ${b.name}`}
-                  className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm
-                     opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+                  className="absolute bottom-2 right-2 z-10 text-xs px-2 py-1 rounded-md bg-white/90 text-gray-700 shadow-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
                 >
                   ↗
                 </a>
@@ -474,144 +441,144 @@ const SOCIAL = [
         <h2 className="text-3xl font-bold mb-8 text-center">{(t as any)?.faq?.title ?? 'FAQ'}</h2>
 
         <div className="space-y-3">
-          {FAQ_ITEMS.map((it, i) => (
-            <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
-              <summary className="cursor-pointer font-medium">{it.q}</summary>
-              <p className="text-gray-700 mt-2">{it.a}</p>
-            </details>
-          ))}
+          {Array.isArray((t as any)?.faq?.items)
+            ? (t as any).faq.items.slice(0, 5).map((it: any, i: number) => (
+                <details key={i} className="rounded-xl border border-gray-200 bg-white p-4">
+                  <summary className="cursor-pointer font-medium">{it.q}</summary>
+                  <p className="text-gray-700 mt-2">{it.a}</p>
+                </details>
+              ))
+            : null}
         </div>
       </section>
 
       {/* ABOUT */}
-<section id="about-section" className="scroll-mt-24 py-20 px-6">
-  {/* Вступление сверху по центру */}
-<div className="max-w-3xl mx-auto text-center mb-12">
-  <h2 className="text-3xl md:text-4xl font-bold mb-4">
-    {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
-  </h2>
+      <section id="about" className="scroll-mt-24 py-20 px-6">
+        {/* Вступление сверху по центру */}
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
+          </h2>
 
-  {/* Абзац 1 */}
-  <p className="text-gray-700 text-lg leading-relaxed">
-    {lang === 'ru' &&
-      'Более 15 лет мы проектируем и реализуем премиальные световые проекты для интерьеров и фасадов — от частных резиденций до ансамблей дворцового масштаба. Наш главный приоритет — визуальный комфорт и атмосфера. Мы создаём свет, который не утомляет взгляд, не слепит и не искажает фактуры, а бережно раскрывает архитектуру, материалы и цвет.'}
-    {lang === 'en' &&
-      'For over 15 years we have been designing and delivering premium lighting projects for interiors and façades — from private residences to palace-scale ensembles. Our main priority is visual comfort and ambience. We create light that does not tire the eyes, does not dazzle or distort textures, but gently reveals architecture, materials and colour.'}
-    {lang === 'pt' &&
-      'Há mais de 15 anos projetamos e realizamos projetos de iluminação premium para interiores e fachadas — desde residências privadas até conjuntos de escala palaciana. A nossa prioridade é o conforto visual e a atmosfera. Criamos uma luz que não cansa a visão, não encandeia nem distorce as texturas, mas revela com cuidado a arquitetura, os materiais e a cor.'}
-  </p>
+          {/* Абзац 1 */}
+          <p className="text-gray-700 text-lg leading-relaxed">
+            {lang === 'ru' &&
+              'Более 15 лет мы проектируем и реализуем премиальные световые проекты для интерьеров и фасадов — от частных резиденций до ансамблей дворцового масштаба. Наш главный приоритет — визуальный комфорт и атмосфера. Мы создаём свет, который не утомляет взгляд, не слепит и не искажает фактуры, а бережно раскрывает архитектуру, материалы и цвет.'}
+            {lang === 'en' &&
+              'For over 15 years we have been designing and delivering premium lighting projects for interiors and façades — from private residences to palace-scale ensembles. Our main priority is visual comfort and ambience. We create light that does not tire the eyes, does not dazzle or distort textures, but gently reveals architecture, materials and colour.'}
+            {lang === 'pt' &&
+              'Há mais de 15 anos projetamos e realizamos projetos de iluminação premium para interiores e fachadas — desde residências privadas até conjuntos de escala palaciana. A nossa prioridade é o conforto visual e a atmosfera. Criamos uma luz que não cansa a visão, não encandeia nem distorce as texturas, mas revela com cuidado a arquitetura, os materiais e a cor.'}
+          </p>
 
-  {/* Абзац 2 */}
-  <p className="text-gray-700 text-lg leading-relaxed mt-4">
-    {lang === 'ru' &&
-      'Мы тщательно подбираем оптику и распределение светового потока, строим сценарии и систему управления, чтобы вы могли легко менять настроение пространства — от спокойного повседневного до праздничного. В результате свет становится не просто функцией, а частью архитектуры и вашего образа жизни.'}
-    {lang === 'en' &&
-      'We carefully select optics and light distribution, build scenes and the control system so you can effortlessly change the mood of the space — from calm everyday to festive. As a result, light becomes not just a function, but a part of the architecture and your lifestyle.'}
-    {lang === 'pt' &&
-      'Selecionamos cuidadosamente a ótica e a distribuição do fluxo luminoso, construímos cenários e o sistema de controlo para que possa mudar facilmente o ambiente do espaço — do quotidiano tranquilo ao festivo. Assim, a luz torna-se não apenas uma função, mas parte da arquitetura e do seu estilo de vida.'}
-  </p>
-</div>
+          {/* Абзац 2 */}
+          <p className="text-gray-700 text-lg leading-relaxed mt-4">
+            {lang === 'ru' &&
+              'Мы тщательно подбираем оптику и распределение светового потока, строим сценарии и систему управления, чтобы вы могли легко менять настроение пространства — от спокойного повседневного до праздничного. В результате свет становится не просто функцией, а частью архитектуры и вашего образа жизни.'}
+            {lang === 'en' &&
+              'We carefully select optics and light distribution, build scenes and the control system so you can effortlessly change the mood of the space — from calm everyday to festive. As a result, light becomes not just a function, but a part of the architecture and your lifestyle.'}
+            {lang === 'pt' &&
+              'Selecionamos cuidadosamente a ótica e a distribuição do fluxo luminoso, construímos cenários e o sistema de controlo para que possa mudar facilmente o ambiente do espaço — do quotidiano tranquilo ao festivo. Assim, a luz torna-se não apenas uma função, mas parte da arquitetura e do seu estilo de vida.'}
+          </p>
+        </div>
 
-  {/* Карточки команды */}
-  <div className="space-y-8 max-w-6xl mx-auto">
-    {PEOPLE.map((p) => (
-      <article
-        key={p.id}
-        className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
-      >
-        {/* Фото со строгим кропом внутри скруглений */}
-        <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
-          <img
-            src={p.photo}
-            alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
-            className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
-            style={p.imgStyle}
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
+        {/* Карточки команды */}
+        <div className="space-y-8 max-w-6xl mx-auto">
+          {PEOPLE.map((p) => (
+            <article
+              key={p.id}
+              className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+            >
+              {/* Фото со строгим кропом внутри скруглений */}
+              <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
+                <img
+                  src={p.photo}
+                  alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
+                  className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
+                  style={p.imgStyle}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
 
-        {/* Текстовая часть */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
-          <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
+              {/* Текстовая часть */}
+              <div>
+                <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
+                <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
 
-          {getBio(p, lang).map((paragraph, i) => (
-            <p key={i} className="mb-3 leading-relaxed">
-              {paragraph}
-            </p>
+                {getBio(p, lang).map((paragraph, i) => (
+                  <p key={i} className="mb-3 leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
-      </article>
-    ))}
-  </div>
-</section>
-
+      </section>
 
       {/* ---------- CONTACT ---------- */}
-<section id="contact" className="py-20 px-6 max-w-6xl mx-auto text-center">
-  {/* Заголовок (локализованный) */}
-  <h2 className="text-3xl md:text-4xl font-bold mb-10">
-    {CONTACT_UI[lang]?.title ?? CONTACT_UI.en.title}
-  </h2>
+      <section id="contact" className="py-20 px-6 max-w-6xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-10">
+          {CONTACT_UI[lang]?.title ?? CONTACT_UI.en.title}
+        </h2>
 
-  {/* Две карточки: Email + Phone */}
-  <div className="grid md:grid-cols-2 gap-6 mb-10">
-    {/* Email */}
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
-      <div className="text-gray-500 mb-2">
-        {CONTACT_UI[lang]?.email ?? CONTACT_UI.en.email}
-      </div>
-      <div className="flex items-center justify-between gap-4">
-        <div className="text-2xl md:text-3xl font-semibold tracking-tight break-all">
-          {CONTACT_EMAIL}
+        {/* Две карточки: Email + Phone */}
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
+          {/* Email */}
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
+            <div className="text-gray-500 mb-2">
+              {CONTACT_UI[lang]?.email ?? CONTACT_UI.en.email}
+            </div>
+            <div className="text-2xl md:text-3xl font-semibold tracking-tight break-all">
+              {CONTACT_EMAIL}
+            </div>
+          </div>
+
+          {/* Phone */}
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
+            <div className="text-gray-500 mb-2">
+              {CONTACT_UI[lang]?.phone ?? CONTACT_UI.en.phone}
+            </div>
+            <div className="text-2xl md:text-3xl font-semibold tracking-tight">
+              {CONTACT_PHONE_DISPLAY}
+            </div>
+          </div>
         </div>
-              </div>
-    </div>
 
-    {/* Phone */}
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
-      <div className="text-gray-500 mb-2">
-        {CONTACT_UI[lang]?.phone ?? CONTACT_UI.en.phone}
-      </div>
-      <div className="text-2xl md:text-3xl font-semibold tracking-tight">
-        {CONTACT_PHONE_DISPLAY}
-      </div>
-    </div>
-  </div>
+        {/* Социальные кнопки */}
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          {SOCIAL.map((s) => (
+            <a
+              key={s.name}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-white ${s.bg} shadow`}
+            >
+              {s.icon}
+              <span className="text-lg font-medium">{s.name}</span>
+            </a>
+          ))}
+        </div>
+      </section>
 
-  {/* Социальные кнопки */}
-  <div className="flex flex-wrap items-center justify-center gap-4">
-    {SOCIAL.map((s) => (
-      <a
-        key={s.name}
-        href={s.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-white ${s.bg} shadow`}
-      >
-        {s.icon}
-        <span className="text-lg font-medium">{s.name}</span>
-      </a>
-    ))}
-  </div>
-</section>
-
-
-
-
-
-     
       {/* MODAL */}
       {modal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeModal}>
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeModal}
+        >
           <div
             className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            <button onClick={closeModal} className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2" aria-label="Close">
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
+              aria-label="Close"
+            >
               ✕
             </button>
 
@@ -644,7 +611,11 @@ const SOCIAL = [
               </button>
             </div>
 
-            {showBeforeAfter && <div className="py-3 text-center text-white/90 text-sm font-medium select-none">{baLabel}</div>}
+            {showBeforeAfter && (
+              <div className="py-3 text-center text-white/90 text-sm font-medium select-none">
+                {baLabel}
+              </div>
+            )}
 
             <div className="py-2 text-center text-white/70 text-xs">
               {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
