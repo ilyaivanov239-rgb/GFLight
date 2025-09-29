@@ -85,35 +85,29 @@ const PEOPLE: Person[] = [
     },
   },
   {
-    id: 'chochobekov',
-    photo: '/images/team/Ilyas.jpg',
-    imgStyle: { objectPosition: '62% 50%' }, // чуть смещаем вправо
-    name: { ru: 'Ильяс Чожобеков', en: 'Ilyas Chozhobekov', pt: 'Ilyas Chozhobekov' },
-    role: { ru: 'Визуализатор-виртуоз', en: 'Visualization Lead', pt: 'Líder de visualização' },
-    bio: {
-      ru: [
-        'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ–архитектурное проектирование.',
-        'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных 
-рендеров. '
-        'В совершенстве владеет всем инструментарием для этого (3dMAX, Photoshop, Revit, Autocad, 
-After Effects). Может делать как статичные рендеры, так и реалистичные 3D-видеоролики с 
-облетом объекта и различными сценариями освещения.
-',
-      ],
-      en: [
-        'With over 10 years of experience, he holds a degree in architectural design from SPbGASU.',
-        'Thanks to Ilyas, our clients can visualize our ideas and plans through photorealistic renders.',
-        'He excels in using all the necessary tools for this (3ds Max, Photoshop, Revit, AutoCAD, After Effects). 
-He is skilled in creating both static renders and realistic 3D videos, including flyovers of the objects and 
-various lighting scenarios.'
-      ],
-      pt: [
-        'Com mais de 10 anos de experiência, possui uma licenciatura em design arquitetónico pela SPbGASU.',
-        'Graças a Ilyas, os nossos clientes podem visualizar as nossas ideias e planos através de renders fotorrealistas.'
-        'Ele destaca-se na utilização de todas as ferramentas necessárias para isso (3ds Max, Photoshop, Revit, AutoCAD, After Effects). É competente na criação tanto de renders estáticos como de vídeos 3D realistas, incluindo flyovers (sobrevoos) dos objetos e diversos cenários de iluminação.',
-      ],
-    },
+  id: 'chochobekov',
+  photo: '/images/team/Ilyas.jpg',
+  imgStyle: { objectPosition: '62% 50%' }, // слегка смещаем фокус вправо
+  name: { ru: 'Ильяс Чожобеков', en: 'Ilyas Chozhobekov', pt: 'Ilyas Chozhobekov' },
+  role: { ru: 'Визуализатор-виртуоз', en: 'Visualization Lead', pt: 'Líder de visualização' },
+  bio: {
+    ru: [
+      'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ — архитектурное проектирование.',
+      'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных рендеров.',
+      'В совершенстве владеет всем инструментарием для этого (3ds Max, Photoshop, Revit, AutoCAD, After Effects). Может делать как статичные рендеры, так и реалистичные 3D-видеоролики с облётом объекта и различными сценариями освещения.',
+    ],
+    en: [
+      'With over 10 years of experience, he holds a degree in architectural design from SPbGASU.',
+      'Thanks to Ilyas, our clients can visualize our ideas and plans through photorealistic renders.',
+      'He excels in all the necessary tools for this (3ds Max, Photoshop, Revit, AutoCAD, After Effects). He is skilled in creating both static renders and realistic 3D videos, including flyovers of the objects and various lighting scenarios.',
+    ],
+    pt: [
+      'Com mais de 10 anos de experiência, possui uma licenciatura em design arquitetónico pela SPbGASU.',
+      'Graças ao Ilyas, os nossos clientes podem visualizar as nossas ideias e planos através de renders fotorrealistas.',
+      'Ele destaca-se no uso de ferramentas necessárias para isso (3ds Max, Photoshop, Revit, AutoCAD, After Effects). É competente na criação tanto de renders estáticos como de vídeos 3D realistas, incluindo sobrevoos dos objetos e diversos cenários de iluminação.',
+    ],
   },
+},
 ];
 
 const getName = (p: Person, lang: Lang) => p.name[lang] ?? p.name.ru;
