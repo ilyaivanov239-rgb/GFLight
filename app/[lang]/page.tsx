@@ -226,9 +226,6 @@ const [formName, setFormName] = useState('');
 const [formEmail, setFormEmail] = useState('');
 const [formMsg, setFormMsg] = useState('');
 
-const CONTACT_EMAIL = 'studio@gflight.pt';
-const CONTACT_PHONE = '+351910075868';
-
 const submitContact = (e: React.FormEvent) => {
   e.preventDefault();
 
