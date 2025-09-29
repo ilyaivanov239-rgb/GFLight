@@ -227,6 +227,32 @@ export default function Page() {
     { name: 'Hunza', src: '/images/brands/Hunza.png', href: 'https://hunzalighting.com/', scale: 1.25 },
     { name: 'Vibia', src: '/images/brands/vibia.svg', href: 'https://vibia.com/en/int', scale: 1.15 },
   ];
+  // ---------- Contact form state ----------
+const [formName, setFormName] = useState('');
+const [formEmail, setFormEmail] = useState('');
+const [formMsg, setFormMsg] = useState('');
+
+const CONTACT_EMAIL = 'studio@gflight.pt';
+const CONTACT_PHONE = '+351910075868';
+
+const submitContact = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  // подготавливаем письмо
+  const subject = encodeURIComponent('GFLight — Enquiry');
+  const bodyLines = [
+    `Name: ${formName}`,
+    `Email: ${formEmail}`,
+    '',
+    'Message:',
+    formMsg,
+  ];
+  const body = encodeURIComponent(bodyLines.join('\n'));
+
+  // открываем почтовый клиент / веб-почту
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+};
+
 
   const FAQ_ITEMS: { q: string; a: string }[] = Array.isArray((t as any)?.faq?.items)
     ? (t as any).faq.items.slice(0, 5)
@@ -479,41 +505,115 @@ export default function Page() {
       </section>
 
       {/* CONTACT */}
-<section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
-  <h2 className="text-3xl font-bold mb-8">{t?.contact?.title ?? 'Contact Us'}</h2>
-  <p className="mb-6 text-gray-600">
-    {t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}
-  </p>
+<section id="contact" className="py-20 px-6 max-w-3xl mx-auto">
+  <h2 className="text-3xl font-bold mb-8 text-center">
+    {t?.contact?.title ?? (lang === 'pt' ? 'Contactos' : lang === 'en' ? 'Contact' : 'Напишите нам')}
+  </h2>
 
-  {/* Кнопка письма */}
-  <a
-    href={`mailto:studio@gflight.pt?subject=${
-      encodeURIComponent((t?.meta?.title ?? 'GFLight') + ' — Enquiry')
-    }&body=${
-      encodeURIComponent(
-        lang === 'ru'
-          ? 'Здравствуйте! Хочу обсудить проект освещения.'
-          : lang === 'pt'
-          ? 'Olá! Quero falar sobre iluminação para um projeto.'
-          : 'Hello! I\'d like to discuss a lighting project.'
-      )
-    }`}
-    className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition"
-  >
-    Email
-  </a>
+  {/* карточка с явными контактами */}
+  <div className="mb-8 grid gap-4 sm:grid-cols-2">
+    <div className="rounded-2xl border border-gray-200 bg-white p-5">
+      <div className="text-sm text-gray-500 mb-1">{lang === 'ru' ? 'Эл. почта' : lang === 'pt' ? 'Email' : 'Email'}</div>
+      <a
+        href="mailto:studio@gflight.pt"
+        className="text-lg font-medium break-all hover:underline"
+      >
+        studio@gflight.pt
+      </a>
+    </div>
+
+    <div className="rounded-2xl border border-gray-200 bg-white p-5">
+      <div className="text-sm text-gray-500 mb-1">{lang === 'ru' ? 'Телефон / WhatsApp' : lang === 'pt' ? 'Telefone / WhatsApp' : 'Phone / WhatsApp'}</div>
+      <div className="flex items-center gap-3">
+        <a href="tel:+351910075868" className="text-lg font-medium hover:underline">
+          +351 910 075 868
+        </a>
+        <a
+          href="https://wa.me/351910075868"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm px-2 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
+        >
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {/* форма обратной связи */}
+  <form onSubmit={submitContact} className="rounded-2xl border border-gray-200 bg-white p-6">
+    <div className="grid gap-4 sm:grid-cols-2">
+      <div className="sm:col-span-1">
+        <label className="block text-sm text-gray-600 mb-1">
+          {lang === 'ru' ? 'Ваше имя' : lang === 'pt' ? 'O seu nome' : 'Your Name'}
+        </label>
+        <input
+          type="text"
+          required
+          value={formName}
+          onChange={(e) => setFormName(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
+          placeholder={lang === 'ru' ? 'Иван Иванов' : lang === 'pt' ? 'João Silva' : 'John Doe'}
+        />
+      </div>
+
+      <div className="sm:col-span-1">
+        <label className="block text-sm text-gray-600 mb-1">
+          Email
+        </label>
+        <input
+          type="email"
+          required
+          value={formEmail}
+          onChange={(e) => setFormEmail(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
+          placeholder="you@email.com"
+        />
+      </div>
+
+      <div className="sm:col-span-2">
+        <label className="block text-sm text-gray-600 mb-1">
+          {lang === 'ru' ? 'Сообщение' : lang === 'pt' ? 'Mensagem' : 'Message'}
+        </label>
+        <textarea
+          required
+          rows={5}
+          value={formMsg}
+          onChange={(e) => setFormMsg(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
+          placeholder={
+            lang === 'ru'
+              ? 'Коротко о задаче и сроках…'
+              : lang === 'pt'
+              ? 'Conte-nos brevemente sobre o projeto…'
+              : 'Tell us a bit about your project…'
+          }
+        />
+      </div>
+    </div>
+
+    <div className="mt-6 flex justify-center">
+      <button
+        type="submit"
+        className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition"
+      >
+        {lang === 'ru' ? 'Отправить' : lang === 'pt' ? 'Enviar' : 'Send'}
+      </button>
+    </div>
+  </form>
 </section>
+
 
 
       {/* WhatsApp FAB */}
       <a
-        href={`https://wa.me/+351910000000?text=${encodeURIComponent('Olá! Quero falar sobre iluminação para um projeto.')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 md:bottom-8 md:right-8 inline-flex items-center gap-2 px-4 py-2 rounded-2xl shadow-lg bg-emerald-500 hover:bg-emerald-600 text-white"
-      >
-        WhatsApp
-      </a>
+  href="https://wa.me/351910075868?text=Olá! Quero falar sobre iluminação para um projeto."
+  target="_blank"
+  rel="noopener noreferrer"
+  className="fixed bottom-5 right-5 md:bottom-8 md:right-8 inline-flex items-center gap-2 px-4 py-2 rounded-2xl shadow-lg bg-emerald-500 hover:bg-emerald-600 text-white"
+>
+  WhatsApp
+</a>
 
       {/* MODAL */}
       {modal && (
