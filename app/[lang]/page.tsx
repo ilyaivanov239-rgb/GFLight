@@ -567,14 +567,7 @@ const SOCIAL = [
         <a href={`tel:+${CONTACT_PHONE_E164}`} className="font-medium text-lg hover:underline">
           {CONTACT_PHONE_DISPLAY}
         </a>
-        <a
-          href={`https://wa.me/${CONTACT_PHONE_E164}?text=${WA_TEXT}`}
-          target="_blank" rel="noopener noreferrer"
-          className="text-xs px-2 py-1 rounded-md bg-emerald-500 text-white hover:bg-emerald-600"
-          aria-label="Написать в WhatsApp"
-        >
-          WhatsApp
-        </a>
+        
       </div>
     </div>
   </div>
@@ -599,16 +592,7 @@ const SOCIAL = [
 
 
 
-      {/* WhatsApp FAB */}
-      <a
-  href="https://wa.me/351910075868?text=Olá! Quero falar sobre iluminação para um projeto."
-  target="_blank"
-  rel="noopener noreferrer"
-  className="fixed bottom-5 right-5 md:bottom-8 md:right-8 inline-flex items-center gap-2 px-4 py-2 rounded-2xl shadow-lg bg-emerald-500 hover:bg-emerald-600 text-white"
->
-  WhatsApp
-</a>
-
+     
       {/* MODAL */}
       {modal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeModal}>
