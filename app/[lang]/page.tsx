@@ -92,16 +92,25 @@ const PEOPLE: Person[] = [
     role: { ru: 'Визуализатор-виртуоз', en: 'Visualization Lead', pt: 'Líder de visualização' },
     bio: {
       ru: [
-        'Опыт работы более 10-ти лет. В совершенстве владеет инструментарием для статичных и реалистичных 3D-визуализаций (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
-        'Благодаря Ильясу заказчики видят наши идеи в виде фотореалистичных рендеров ещё до монтажа.',
+        'Опыт работы более 10-ти лет. Высшее образование: СПбГАСУ–архитектурное проектирование.',
+        'Благодаря Ильясу наши заказчики могут увидеть наши идеи и планы в виде фотореалистичных 
+рендеров. '
+        'В совершенстве владеет всем инструментарием для этого (3dMAX, Photoshop, Revit, Autocad, 
+After Effects). Может делать как статичные рендеры, так и реалистичные 3D-видеоролики с 
+облетом объекта и различными сценариями освещения.
+',
       ],
       en: [
-        '10+ years of experience. Mastery of static and realistic 3D visualizations (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
-        'Helps clients see our ideas as photorealistic renders long before installation.',
+        'With over 10 years of experience, he holds a degree in architectural design from SPbGASU.',
+        'Thanks to Ilyas, our clients can visualize our ideas and plans through photorealistic renders.',
+        'He excels in using all the necessary tools for this (3ds Max, Photoshop, Revit, AutoCAD, After Effects). 
+He is skilled in creating both static renders and realistic 3D videos, including flyovers of the objects and 
+various lighting scenarios.'
       ],
       pt: [
-        'Mais de 10 anos de experiência. Domínio de visualizações 3D estáticas e realistas (3ds Max, Photoshop, Revit, AutoCAD, After Effects).',
-        'Ajuda os clientes a verem as nossas ideias como renders fotorrealistas muito antes da montagem.',
+        'Com mais de 10 anos de experiência, possui uma licenciatura em design arquitetónico pela SPbGASU.',
+        'Graças a Ilyas, os nossos clientes podem visualizar as nossas ideias e planos através de renders fotorrealistas.'
+        'Ele destaca-se na utilização de todas as ferramentas necessárias para isso (3ds Max, Photoshop, Revit, AutoCAD, After Effects). É competente na criação tanto de renders estáticos como de vídeos 3D realistas, incluindo flyovers (sobrevoos) dos objetos e diversos cenários de iluminação.',
       ],
     },
   },
