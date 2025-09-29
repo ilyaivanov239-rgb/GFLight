@@ -435,10 +435,10 @@ export default function Page() {
             {PEOPLE.map((p) => (
               <article
   key={p.id}
-  className="grid md:grid-cols-[460px,1fr] items-stretch gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+  className="grid md:grid-cols-[400px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
 >
-  {/* Фото: строгая обрезка внутри скругления */}
-  <figure className="relative w-full aspect-[3/4] md:aspect-auto md:h-full overflow-hidden rounded-2xl">
+  {/* Фото: одинаковое окно и одинаковый кроп для всех */}
+  <figure className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl">
     <img
       src={p.photo}
       alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
@@ -449,8 +449,8 @@ export default function Page() {
     />
   </figure>
 
-  {/* Текстовая часть */}
-  <div className="h-full">
+  {/* Текст */}
+  <div>
     <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
     <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
 
@@ -461,6 +461,7 @@ export default function Page() {
     ))}
   </div>
 </article>
+
 
             ))}
           </div>
