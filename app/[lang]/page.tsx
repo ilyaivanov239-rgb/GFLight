@@ -439,15 +439,16 @@ export default function Page() {
 >
   {/* Фото: одинаковое окно и одинаковый кроп для всех */}
   <figure className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl">
-    <img
-      src={p.photo}
-      alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
-      className={`absolute inset-0 h-full w-full object-cover ${p.imgClass ?? ''}`}
-      style={p.imgStyle}
-      loading="lazy"
-      decoding="async"
-    />
-  </figure>
+  <img
+    src={p.photo}
+    alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
+    /* важное: абсолютное позиционирование + небольшой «bleed», чтобы не было полос */
+    className={`absolute inset-0 block h-[101%] w-[101%] -left-[0.5%] -top-[0.5%] object-cover ${p.imgClass ?? ''}`}
+    style={p.imgStyle}
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
 
   {/* Текст */}
   <div>
