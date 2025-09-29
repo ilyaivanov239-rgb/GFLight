@@ -415,7 +415,7 @@ export default function Page() {
       </section>
 
       {/* ABOUT */}
-      <section id="about-section" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
+      <section id="about" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-10 items-start">
           {/* ЛЕВО */}
           <div className="text-left">
