@@ -41,9 +41,22 @@ export const PROJECTS: Project[] = [
       '',
       'Такой свет не слепит, он делает фотографии «инстаграмными», а еду — невероятно аппетитной. Гости чувствуют себя комфортно, а архитектура зала смотрится выразительно, но не теряет своей изысканности.',
     ].join('\n'),
-    en: `Lighting in this restaurant is part of the story...`, // по желанию
-    pt: `A iluminação deste restaurante é parte da história...`,  // по желанию
-  },
+    en: [
+  'Lighting in this restaurant is not just light — it is part of the story. We designed it so that every guest feels special, and the space feels luxurious yet cosy.',
+  'The main goal was to make everything look refined and expensive. To achieve this we used concealed cove lighting that highlights the plaster mouldings and reveals the full grandeur of the ceilings.',
+  'Crystal chandeliers provide a soft, warm glow, creating an intimate, sensual ambience. But the key element is the accent framing light: like stage spotlights, it singles out each table and turns the tableware, silver and flowers into true art objects.',
+  '',
+  'This light does not dazzle; it makes photos Instagram-worthy and the food irresistibly appetising. Guests feel comfortable, and the hall’s architecture looks expressive without losing its sophistication.',
+].join('\n'),
+
+pt: [
+  'A iluminação deste restaurante não é apenas luz — é parte da história. Concebemo-la para que cada cliente se sinta especial e o espaço pareça luxuoso e, ao mesmo tempo, acolhedor.',
+  'O objetivo principal foi que tudo tivesse um aspeto elegante e de alto nível. Para isso utilizámos iluminação embutida/indireta (luz de sancas) que realça os estuques e revela toda a imponência dos tetos.',
+  'Os lustres de cristal dão uma luz suave e quente, criando um ambiente íntimo e envolvente. Mas o elemento-chave é a iluminação de acento com framing: como refletores de palco, destaca cada mesa e transforma a loiça, a prata e as flores em verdadeiros objetos de arte.',
+  '',
+  'Esta luz não encandeia; torna as fotos dignas de Instagram e a comida irresistivelmente apetitosa. Os convidados sentem-se confortáveis e a arquitetura da sala fica expressiva sem perder a sua sofisticação.',
+].join('\n'),
+
 },
   {
     slug: 'cosmonautics',
