@@ -556,13 +556,7 @@ const SOCIAL = [
         <div className="text-2xl md:text-3xl font-semibold tracking-tight break-all">
           {CONTACT_EMAIL}
         </div>
-        <button
-          onClick={copyEmail}
-          className="px-4 py-2 rounded-xl border border-gray-300 hover:bg-gray-50 active:bg-gray-100 text-sm"
-        >
-          Copy
-        </button>
-      </div>
+              </div>
     </div>
 
     {/* Phone */}
