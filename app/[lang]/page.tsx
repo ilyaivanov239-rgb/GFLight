@@ -437,16 +437,16 @@ export default function Page() {
                 key={p.id}
                 className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
               >
-                <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
-                  <img
-                    src={p.photo}
-                    alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
-                    className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
-                    style={p.imgStyle}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
+                <figure className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl">
+  <img
+    src={p.photo}
+    alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
+    className={`absolute inset-0 size-full object-cover block ${p.imgClass ?? ''}`}
+    style={p.imgStyle}
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
 
                 <div className="h-full">
                   <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
