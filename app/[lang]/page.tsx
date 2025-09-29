@@ -249,7 +249,11 @@ const CONTACT_EMAIL = 'studio@gflight.pt';
 const CONTACT_PHONE_E164 = '351910075868'; // без '+' для wa.me
 const CONTACT_PHONE_DISPLAY = '+351 910 075 868';
 const WA_TEXT = encodeURIComponent('Olá! Quero falar sobre iluminação para um projeto.');
-
+const CONTACT_UI = {
+  ru: { title: 'Как с нами связаться', email: 'Эл. почта', phone: 'Телефон' },
+  en: { title: 'How to reach us',      email: 'Email',     phone: 'Phone'   },
+  pt: { title: 'Como contactar-nos',   email: 'E-mail',    phone: 'Telefone'}
+} as const;
 const SOCIAL = [
   {
     name: 'WhatsApp',
@@ -534,60 +538,61 @@ const SOCIAL = [
         </div>
       </section>
 
-      {/* CONTACT */}
-<section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
-  <h2 className="text-3xl font-bold mb-6">
-    {t?.contact?.title ?? 'Напишите нам'}
+      {/* ---------- CONTACT ---------- */}
+<section id="contact" className="py-20 px-6 max-w-6xl mx-auto text-center">
+  {/* Заголовок (локализованный) */}
+  <h2 className="text-3xl md:text-4xl font-bold mb-10">
+    {CONTACT_UI[lang]?.title ?? CONTACT_UI.en.title}
   </h2>
-  <p className="mb-10 text-gray-600">
-    {t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}
-  </p>
 
-  {/* Почта и телефон */}
-  <div className="grid md:grid-cols-2 gap-4 mb-8 text-left">
-    <div className="rounded-2xl border border-gray-200 bg-white p-5">
-      <div className="text-sm text-gray-500 mb-1">Эл. почта</div>
-      <div className="flex items-center justify-between gap-3">
-        <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-lg hover:underline">
+  {/* Две карточки: Email + Phone */}
+  <div className="grid md:grid-cols-2 gap-6 mb-10">
+    {/* Email */}
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
+      <div className="text-gray-500 mb-2">
+        {CONTACT_UI[lang]?.email ?? CONTACT_UI.en.email}
+      </div>
+      <div className="flex items-center justify-between gap-4">
+        <div className="text-2xl md:text-3xl font-semibold tracking-tight break-all">
           {CONTACT_EMAIL}
-        </a>
+        </div>
         <button
-          onClick={() => navigator.clipboard?.writeText(CONTACT_EMAIL)}
-          className="text-xs px-2 py-1 rounded-md bg-gray-100 hover:bg-gray-200"
-          aria-label="Скопировать email"
+          onClick={copyEmail}
+          className="px-4 py-2 rounded-xl border border-gray-300 hover:bg-gray-50 active:bg-gray-100 text-sm"
         >
           Copy
         </button>
       </div>
     </div>
 
-    <div className="rounded-2xl border border-gray-200 bg-white p-5">
-      <div className="text-sm text-gray-500 mb-1">Телефон / WhatsApp</div>
-      <div className="flex items-center justify-between gap-3">
-        <a href={`tel:+${CONTACT_PHONE_E164}`} className="font-medium text-lg hover:underline">
-          {CONTACT_PHONE_DISPLAY}
-        </a>
-        
+    {/* Phone */}
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
+      <div className="text-gray-500 mb-2">
+        {CONTACT_UI[lang]?.phone ?? CONTACT_UI.en.phone}
+      </div>
+      <div className="text-2xl md:text-3xl font-semibold tracking-tight">
+        {CONTACT_PHONE_DISPLAY}
       </div>
     </div>
   </div>
 
-  {/* Соц-кнопки */}
-  <div className="flex items-center justify-center gap-3">
-    {SOCIAL.map(s => (
+  {/* Социальные кнопки */}
+  <div className="flex flex-wrap items-center justify-center gap-4">
+    {SOCIAL.map((s) => (
       <a
         key={s.name}
         href={s.href}
-        target="_blank" rel="noopener noreferrer nofollow"
-        className={`inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-white shadow ${s.bg} transition hover:scale-[1.02]`}
-        aria-label={s.name}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-white ${s.bg} shadow`}
       >
         {s.icon}
-        <span className="font-medium">{s.name}</span>
+        <span className="text-lg font-medium">{s.name}</span>
       </a>
     ))}
   </div>
 </section>
+
 
 
 
