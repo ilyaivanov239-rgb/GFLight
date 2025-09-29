@@ -470,13 +470,31 @@ export default function Page() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-8">{t?.contact?.title ?? 'Contact Us'}</h2>
-        <p className="mb-6 text-gray-600">{t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}</p>
-        <Link href="mailto:hello@glarefreelight.com" className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition">
-          Email
-        </Link>
-      </section>
+<section id="contact" className="py-20 px-6 max-w-3xl mx-auto text-center">
+  <h2 className="text-3xl font-bold mb-8">{t?.contact?.title ?? 'Contact Us'}</h2>
+  <p className="mb-6 text-gray-600">
+    {t?.contact?.desc ?? 'Leave a request and we will contact you soon.'}
+  </p>
+
+  {/* Кнопка письма */}
+  <a
+    href={`mailto:studio@gflight.pt?subject=${
+      encodeURIComponent((t?.meta?.title ?? 'GFLight') + ' — Enquiry')
+    }&body=${
+      encodeURIComponent(
+        lang === 'ru'
+          ? 'Здравствуйте! Хочу обсудить проект освещения.'
+          : lang === 'pt'
+          ? 'Olá! Quero falar sobre iluminação para um projeto.'
+          : 'Hello! I\'d like to discuss a lighting project.'
+      )
+    }`}
+    className="px-6 py-3 bg-black text-white rounded-xl shadow hover:bg-gray-800 transition"
+  >
+    Email
+  </a>
+</section>
+
 
       {/* WhatsApp FAB */}
       <a
