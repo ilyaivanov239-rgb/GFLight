@@ -569,11 +569,11 @@ export default function Page() {
           onClick={closeModal}
         >
           <div
-            className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
+  className="relative max-w-5xl w-full bg-black rounded-2xl flex flex-col max-h-[92vh] overflow-auto md:overflow-hidden"
+  onClick={(e) => e.stopPropagation()}
+  onTouchStart={onTouchStart}
+  onTouchEnd={onTouchEnd}
+>
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
@@ -582,13 +582,15 @@ export default function Page() {
               ✕
             </button>
 
-            <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
+            <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90 max-h-40 md:max-h-none overflow-y-auto"
+>
+
               <p className="whitespace-pre-line leading-relaxed">
                 {PROJECTS[modal.projectIndex].desc?.[lang] ?? PROJECTS[modal.projectIndex].blurb[lang]}
               </p>
             </div>
 
-            <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
+            <div className="relative flex-1 min-h-[50vh] flex items-center justify-center">
               <img
                 src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
                 alt={PROJECTS[modal.projectIndex].title[lang]}
