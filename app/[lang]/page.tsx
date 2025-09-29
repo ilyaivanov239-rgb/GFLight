@@ -484,59 +484,57 @@ const SOCIAL = [
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="scroll-mt-24 py-20 px-6 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-10 items-start">
-          {/* ЛЕВО */}
-          <div className="text-left">
-            <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}</h2>
-            <p className="text-gray-700 text-lg leading-relaxed">
-              {lang === 'en' &&
-                'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'}
-              {lang === 'pt' &&
-                'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'}
-              {lang === 'ru' &&
-                'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+<section id="about-section" className="scroll-mt-24 py-20 px-6">
+  {/* Вступление сверху по центру */}
+  <div className="max-w-3xl mx-auto text-center mb-12">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre' : 'О нас'}
+    </h2>
+    <p className="text-gray-700 text-lg leading-relaxed">
+      {lang === 'en' &&
+        'For over 15 years we have been designing and delivering luxury-class lighting projects for interiors and palace-scale façades.'}
+      {lang === 'pt' &&
+        'Há mais de 15 anos projetamos e realizamos projetos de iluminação de classe premium para interiores e fachadas de escala palaciana.'}
+      {lang === 'ru' &&
+        'Более 15 лет мы проектируем и реализуем световые проекты класса люкс как в интерьерах, так и на фасадах масштаба дворцовых ансамблей.'}
+    </p>
+  </div>
+
+  {/* Карточки команды */}
+  <div className="space-y-8 max-w-6xl mx-auto">
+    {PEOPLE.map((p) => (
+      <article
+        key={p.id}
+        className="grid md:grid-cols-[420px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
+      >
+        {/* Фото со строгим кропом внутри скруглений */}
+        <figure className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl">
+          <img
+            src={p.photo}
+            alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
+            className={`h-full w-full object-cover ${p.imgClass ?? ''}`}
+            style={p.imgStyle}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+
+        {/* Текстовая часть */}
+        <div>
+          <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
+          <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
+
+          {getBio(p, lang).map((paragraph, i) => (
+            <p key={i} className="mb-3 leading-relaxed">
+              {paragraph}
             </p>
-          </div>
-
-          {/* ПРАВО */}
-          <div className="space-y-8">
-            {PEOPLE.map((p) => (
-              <article
-  key={p.id}
-  className="grid md:grid-cols-[400px,1fr] gap-6 bg-white text-zinc-900 rounded-2xl p-5 md:p-6 shadow"
->
-  {/* Фото: одинаковое окно и одинаковый кроп для всех */}
-  <figure className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl">
-  <img
-    src={p.photo}
-    alt={`${getName(p, lang)}, ${getRole(p, lang)}`}
-    /* важное: абсолютное позиционирование + небольшой «bleed», чтобы не было полос */
-    className={`absolute inset-0 block h-[101%] w-[101%] -left-[0.5%] -top-[0.5%] object-cover ${p.imgClass ?? ''}`}
-    style={p.imgStyle}
-    loading="lazy"
-    decoding="async"
-  />
-</figure>
-
-  {/* Текст */}
-  <div>
-    <h3 className="text-2xl font-semibold mb-1">{getName(p, lang)}</h3>
-    <div className="text-sm text-gray-500 mb-5">{getRole(p, lang)}</div>
-
-    {getBio(p, lang).map((paragraph, i) => (
-      <p key={i} className="mb-3 leading-relaxed">
-        {paragraph}
-      </p>
+          ))}
+        </div>
+      </article>
     ))}
   </div>
-</article>
+</section>
 
-
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ---------- CONTACT ---------- */}
 <section id="contact" className="py-20 px-6 max-w-6xl mx-auto text-center">
