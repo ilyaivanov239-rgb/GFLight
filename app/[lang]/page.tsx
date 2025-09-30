@@ -563,75 +563,71 @@ export default function Page() {
       </section>
 
            {/* MODAL */}
-      {modal && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm grid place-items-center p-4"
-          onClick={closeModal}
+{modal && (
+  <div
+    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+    onClick={closeModal}
+  >
+    <div
+      className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
+      onClick={(e) => e.stopPropagation()}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* Close */}
+      <button
+        onClick={closeModal}
+        className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+
+      {/* Краткий текст сверху (без скролла) */}
+      <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
+        <p className="whitespace-pre-line leading-relaxed">
+          {PROJECTS[modal.projectIndex].desc?.[lang] ??
+           PROJECTS[modal.projectIndex].blurb[lang]}
+        </p>
+      </div>
+
+      {/* Фото — большое, по центру */}
+      <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
+        <img
+          src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
+          alt={PROJECTS[modal.projectIndex].title[lang]}
+          className="max-h-[70vh] w-auto object-contain"
+        />
+
+        {/* Prev / Next */}
+        <button
+          onClick={prevImage}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+          aria-label="Prev"
         >
-          <div
-            className="relative max-w-5xl w-full bg-black rounded-2xl flex md:flex-row md:max-h-[90vh] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            {/* Close */}
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-3 z-20 rounded-full bg-white/90 hover:bg-white p-2"
-              aria-label="Close"
-            >
-              ✕
-            </button>
+          ‹
+        </button>
+        <button
+          onClick={nextImage}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
+          aria-label="Next"
+        >
+          ›
+        </button>
+      </div>
 
-            {/* LEFT: text (independent scroll) */}
-            <div className="md:w-[42%] shrink-0 px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90 overflow-y-auto max-h-[38vh] md:max-h-[90vh]">
-              <p className="whitespace-pre-line leading-relaxed">
-                {PROJECTS[modal.projectIndex].desc?.[lang] ??
-                  PROJECTS[modal.projectIndex].blurb[lang]}
-              </p>
-            </div>
-
-            {/* RIGHT: image area */}
-            <div className="relative flex-1 grid place-items-center min-h-[50vh] p-2 overflow-auto md:overflow-hidden">
-              <img
-                src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
-                alt={PROJECTS[modal.projectIndex].title[lang]}
-                className="max-h-[60vh] md:max-h-[88vh] w-auto max-w-full object-contain"
-              />
-
-              {/* Prev */}
-              <button
-                onClick={prevImage}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
-                aria-label="Prev"
-              >
-                ‹
-              </button>
-
-              {/* Next */}
-              <button
-                onClick={nextImage}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 hover:bg-white p-2 shadow"
-                aria-label="Next"
-              >
-                ›
-              </button>
-            </div>
-
-            {/* Bottom bar: Before/After + counter */}
-            <div className="absolute inset-x-0 bottom-0">
-              {showBeforeAfter && (
-                <div className="py-2 text-center text-white/90 text-sm font-medium select-none">
-                  {baLabel}
-                </div>
-              )}
-              <div className="py-2 text-center text-white/70 text-xs">
-                {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
-              </div>
-            </div>
-          </div>
+      {/* Before/After + счётчик снизу */}
+      {showBeforeAfter && (
+        <div className="py-3 text-center text-white/90 text-sm font-medium select-none">
+          {baLabel}
         </div>
       )}
-    </main>
+      <div className="py-2 text-center text-white/70 text-xs">
+        {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
+      </div>
+    </div>
+  </div>
+)}
+</main>
   );
 }
