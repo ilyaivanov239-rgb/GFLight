@@ -222,8 +222,18 @@ Como resultado, graças à combinação destas abordagens, cada elemento — da 
 Синяя подсветка понтонов и моста в вечернее время придаёт пространству таинственную глубину и визуально расширяет водную гладь, создавая ощущение безмятежности и роскоши. Этот приём помог нам связать архитектуру здания с прилегающей водной территорией.
 
 На прилегающей территории мы использовали светильники малой высоты, чтобы создать уютное освещение прогулочных зон, а акцентная подсветка деревьев и кустарников подчеркнула красоту ландшафтного дизайна. В результате, благодаря продуманному световому дизайну, мы объединили все элементы в единый, гармоничный и выразительный образ.`,
-  en: '',
-  pt: '',
+  en: `We sought to highlight the uniqueness of the yacht club’s complex curved façades, its dynamic lines and smooth transitions. To achieve this, we used luminaires that gently trace the contours, creating a sense of lightness and harmony. For the building plinth we applied RGBW projectors, which added dynamism and enabled flexible colour scenarios. Special attention was paid to accenting the mast weathervanes, which became the focal element of the composition, evoking the image of a sailboat.
+
+Blue lighting of the pontoons and the bridge in the evening lends the space a mysterious depth and visually broadens the water surface, creating a feeling of serenity and luxury. This solution helped us link the building’s architecture with the adjacent water area.
+
+On the surrounding grounds we used low-height luminaires to create cosy lighting for walkways, while accent lighting of trees and shrubs emphasised the landscape design. As a result, thanks to the thoughtful lighting concept, we unified all elements into a single, harmonious and expressive whole.`,
+
+  pt: `Procurámos realçar a singularidade das fachadas curvas e complexas do edifício do iate-clube, as suas linhas dinâmicas e transições suaves. Para isso, utilizámos luminárias que desenham suavemente os contornos, criando uma sensação de leveza e harmonia. Para o plinto (embasamento) do edifício recorremos a projetores RGBW, o que permitiu acrescentar dinamismo e gerir de forma flexível os cenários de cor. Demos especial atenção ao destaque das mastas com cata-ventos, que se tornaram o elemento central da composição, evocando a imagem de um veleiro.
+
+A iluminação azul dos pontões e da ponte ao anoitecer confere ao espaço uma profundidade misteriosa e amplia visualmente a lâmina de água, criando uma sensação de serenidade e luxo. Esta solução ajudou-nos a ligar a arquitetura do edifício à zona aquática adjacente.
+
+Nos espaços exteriores utilizámos luminárias de baixa altura para criar uma iluminação acolhedora nas zonas de passeio, enquanto a luz de acento em árvores e arbustos destacou a qualidade do desenho paisagístico. Como resultado, graças a um conceito de iluminação bem pensado, unimos todos os elementos num conjunto único, harmonioso e expressivo.`,
+
 },
   },
   {
@@ -242,8 +252,18 @@ Como resultado, graças à combinação destas abordagens, cada elemento — da 
 Особая роль в проекте отведена световому дизайну, который подчеркивает каждую зону. Центральным акцентом в обеденной зоне стали массивные черные подвесные светильники Flos Skygarden, которые создают визуальный якорь и наполняют пространство мягким, рассеянным светом. Многоуровневое освещение дополняется точечными светильниками, скрытой подсветкой и бра в зоне для чтения, что позволяет легко менять атмосферу.
 
 Гармоничное сочетание натурального дерева, бетона и кирпичной кладки делает интерьер уникальным. Эти фактуры по-настоящему раскрываются благодаря грамотному освещению, которое выделяет их текстуру и глубину, создавая ощущение тепла и уюта.`,
-  en: '',
-  pt: '',
+  en: `This interior combines warmth with contemporary minimalism, where every detail is considered to create a comfortable and functional space.
+
+Lighting design plays a special role, articulating each zone. The dining area is anchored by bold black Flos Skygarden pendants that create a visual focal point and fill the space with soft, diffused light. Layered lighting is complemented by downlights, concealed cove lighting, and a reading-area wall lamp, making it easy to shift the ambience.
+
+The harmonious mix of natural wood, concrete, and brick gives the interior its character. These materials truly come to life thanks to well-planned lighting that highlights their texture and depth, creating a sense of warmth and comfort.`,
+
+  pt: `Este interior combina calor com um minimalismo contemporâneo, onde cada detalhe é pensado para criar um espaço confortável e funcional.
+
+A iluminação tem um papel especial, a delinear cada zona. A área de jantar é ancorada pelos imponentes pendentes pretos Flos Skygarden, que criam um ponto focal e preenchem o espaço com uma luz suave e difusa. A iluminação em camadas é complementada por focos, luz indireta embutida e um aplique na zona de leitura, permitindo mudar facilmente a atmosfera.
+
+A combinação harmoniosa de madeira natural, betão e alvenaria confere identidade ao interior. Estes materiais ganham vida graças a um projeto de iluminação bem planeado, que realça a textura e a profundidade, criando uma sensação de aconchego e conforto.`,
+
 },
   },
   {
@@ -260,8 +280,14 @@ Como resultado, graças à combinação destas abordagens, cada elemento — da 
   ru: `Иногда, прежде чем начинать полноценное проектирование, важно убедиться, что видение проекта совпадает. Мы предлагаем уникальную услугу, которая позволяет визуально оценить возможную фасадную подсветку на основе уже существующих рендеров от архитектора.
 
 Это помогает клиентам увидеть, как преобразится их дом в вечернее время, еще до начала детальной проработки. Используя эти рендеры, мы представляем наше видение освещения, показывая, как мы можем подчеркнуть архитектурные линии и формы, выделить текстуру фасада и создать особую атмосферу. Такой подход позволяет на раннем этапе согласовать концепцию и убедиться, что результат будет соответствовать ожиданиям.`,
-  en: '',
-  pt: '',
+  en: `Sometimes, before starting full-scale design, it’s important to make sure the project vision is aligned. We offer a unique service that lets you visually assess potential façade lighting based on the architect’s existing renders.
+
+This helps clients see how their home will transform in the evening even before detailed development begins. Using these renders, we present our lighting vision—showing how we can emphasize architectural lines and forms, highlight the façade texture, and create a special atmosphere. This approach allows us to align the concept early and ensure the result meets expectations.`,
+
+  pt: `Por vezes, antes de iniciar o projeto completo, é importante garantir que a visão do projeto está alinhada. Oferecemos um serviço único que permite avaliar visualmente a iluminação de fachada com base nos renders já existentes do arquiteto.
+
+Isto ajuda os clientes a ver como a casa se transformará ao anoitecer, mesmo antes do desenvolvimento detalhado. Com base nesses renders, apresentamos a nossa visão de iluminação—mostrando como podemos sublinhar as linhas e formas arquitetónicas, realçar a textura da fachada e criar uma atmosfera especial. Esta abordagem permite acertar a conceção numa fase precoce e assegurar que o resultado corresponderá às expectativas.`,
+
 },
   },
 ];
