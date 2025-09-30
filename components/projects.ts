@@ -121,21 +121,12 @@ pt: [
   },
   // длинное описание (то, что показываем вверху модалки) — по желанию
   desc: {
-  ru: `При проектировании освещения для бьюти-коворкинга основной задачей было создание идеальных условий для работы мастеров. Главным требованием стала высокая степень цветопередачи (CRI не ниже 95), чтобы при окрашивании волос, макияже или маникюре цвета выглядели максимально естественно, как при дневном свете.
-
-Мы подобрали светильники, которые не только обеспечивают достаточную освещённость для точной работы, но и имеют комфортные углы засветки, исключающие блики. Для этого в прожекторах мы использовали хоникомбы, которые создают визуальный комфорт. Подвесные светильники с матовым стеклом дают мягкий, рассеянный свет, который заполняет пространство, делая его более уютным. Для каждой рабочей зоны — будь то парикмахерское кресло, стол для маникюра или зона визажиста — свет был настроен с учётом специфики, обеспечивая оптимальное освещение поверхностей, полок и шкафов.
-
-В итоге, каждый элемент освещения гармонично дополняет друг друга, создавая не просто функциональное, но и эстетически привлекательное пространство, где каждый чувствует себя комфортно.`,
-  en: `When designing the lighting for a beauty co-working space, the main task was to create perfect conditions for the professionals. The key requirement was a high colour rendering index (CRI of at least 95) so that hair colouring, make-up and manicure tones look as natural as they do in daylight.
-
-We selected luminaires that not only provide sufficient illuminance for precise work, but also have comfortable cut-off angles to eliminate glare. For the spotlights we used honeycombs to increase visual comfort. Pendant fixtures with matte glass deliver soft, diffused light that fills the space and makes it feel more welcoming. For every work area—whether a hairdresser’s chair, a manicure desk or a make-up station—the lighting was tuned to its specifics, ensuring optimal illumination of surfaces, shelves and cabinets.
-
-As a result, every lighting element complements the others, creating not just a functional but also an aesthetically pleasing environment where everyone feels comfortable.`,
- pt: `Ao projetar a iluminação para um espaço de co-working de beleza, a principal tarefa foi criar condições ideais para os profissionais. O requisito principal foi um elevado índice de reprodução de cor (CRI de pelo menos 95), para que as cores em coloração de cabelo, maquilhagem ou manicure pareçam o mais naturais possível, como à luz do dia.
-
-Selecionámos luminárias que não só garantem iluminância suficiente para um trabalho preciso, como também apresentam ângulos de cut-off confortáveis, eliminando o encandeamento. Nos projetores utilizámos honeycombs (colmeias) para aumentar o conforto visual. As luminárias suspensas com vidro mate fornecem uma luz suave e difusa que preenche o espaço, tornando-o mais acolhedor. Para cada zona de trabalho — seja a cadeira de cabeleireiro, a mesa de manicure ou a área de maquilhagem — a luz foi ajustada às suas especificidades, assegurando iluminação ideal de superfícies, prateleiras e armários.
-
-Como resultado, cada elemento de iluminação complementa os demais, criando não apenas um espaço funcional, mas também esteticamente agradável, onde todos se sentem confortáveis.`,
+  ru: `Основная задача — комфортная работа мастеров: высокая цветопередача (CRI ≥ 95) и отсутствие бликов. В прожекторах применили хоникомбы; подвесные светильники с матовым стеклом дают мягкий общий свет. Для каждого рабочего места настроили уровни и углы засветки — столы, полки, шкафы. Пространство получилось функциональным и визуально комфортным.
+`,
+  en: `The goal was a comfortable workspace for professionals: high color rendering (CRI ≥ 95) with no glare. Track spotlights use honeycombs; matte-glass pendants provide soft ambient light. Each workstation received its own levels and beam angles—tables, shelves and cabinets. The result is both functional and visually comfortable.
+`,
+ pt: `O objetivo foi criar um espaço confortável para os profissionais: alta reprodução de cor (CRI ≥ 95) e zero ofuscamento. Nos projetores usamos honeycombs; pendentes com vidro fosco dão luz difusa suave. Cada posto recebeu níveis e ângulos de feixe próprios—mesas, prateleiras e armários. O resultado é funcional e visualmente confortável.
+`,
 
 },
 
