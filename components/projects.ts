@@ -156,8 +156,18 @@ Como resultado, cada elemento de iluminação complementa os demais, criando nã
 Для максимального визуального комфорта были выбраны светильники с оптикой Dark-Light. Несмотря на высокую освещённость, они кажутся выключенными, что полностью устраняет слепящий эффект и позволяет создать идеальную рабочую среду. Чтобы сохранить единый дизайн, мы использовали светильники одной формы и размера, но с разной оптикой: овальной — для длинных коридоров, Wallwasher — для подсветки картин, и Spot/Narrowspot — для расстановки акцентов.
 
 В итоге, нам удалось гармонично сочетать эстетику и функциональность, создав профессиональную, но при этом комфортную и запоминающуюся атмосферу, которая полностью соответствует уровню компании.`,
-  en: '',
-  pt: '',
+  en: `When designing the lighting for this office, our goal was not only to ensure functionality but also to create a unique atmosphere that underlines its status. The Philips dynamic-lighting installation above the executive desk immediately catches the eye, creating a “wow” effect and becoming the focal point of the whole space.
+
+For maximum visual comfort we selected luminaires with Dark-Light optics. Despite the high illuminance, they appear almost switched off, which completely eliminates glare and provides an ideal working environment. To preserve a unified design, we used fixtures of the same shape and size but with different optics: oval for long corridors, wallwasher for illuminating artworks, and spot/narrow spot to place accents.
+
+As a result, we managed to harmoniously combine aesthetics and functionality, creating a professional yet comfortable and memorable atmosphere that fully matches the company’s level.`,
+
+  pt: `Ao conceber a iluminação deste escritório, o objetivo foi não só garantir a funcionalidade, mas também criar uma atmosfera única que realçasse o seu estatuto. A instalação de luz dinâmica da Philips sobre a secretária do diretor atrai imediatamente o olhar, gera um “efeito wow” e torna-se o ponto focal de todo o espaço.
+
+Para máximo conforto visual, optámos por luminárias com ótica Dark-Light. Apesar da elevada iluminância, parecem quase desligadas, o que elimina totalmente o encandeamento e proporciona um ambiente de trabalho ideal. Para manter um design unificado, utilizámos luminárias da mesma forma e dimensão, mas com óticas diferentes: oval para corredores compridos, wallwasher para iluminar quadros e spot/narrow spot para criar acentos.
+
+Como resultado, conseguimos combinar harmoniosamente estética e funcionalidade, criando uma atmosfera profissional, confortável e memorável que corresponde plenamente ao nível da empresa.`,
+
 },
   },
   {
