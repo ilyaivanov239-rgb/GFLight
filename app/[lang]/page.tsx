@@ -562,14 +562,15 @@ export default function Page() {
         </div>
       </section>
 
-           {/* MODAL */}
+          {/* MODAL */}
 {modal && (
   <div
     className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
     onClick={closeModal}
   >
+    {/* ВАЖНО: прокручивается вся модалка целиком */}
     <div
-      className="relative max-w-5xl w-full bg-black rounded-2xl overflow-hidden flex flex-col"
+      className="relative max-w-5xl w-full bg-black rounded-2xl overflow-y-auto max-h-[90vh]"
       onClick={(e) => e.stopPropagation()}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -583,20 +584,20 @@ export default function Page() {
         ✕
       </button>
 
-      {/* Краткий текст сверху (без скролла) */}
-      <div className="px-4 pt-3 pb-4 text-sm bg-black/70 text-white/90">
+      {/* Сначала текст (без отдельного скролла) */}
+      <div className="px-4 pt-4 pb-5 text-sm text-white/90">
         <p className="whitespace-pre-line leading-relaxed">
           {PROJECTS[modal.projectIndex].desc?.[lang] ??
-           PROJECTS[modal.projectIndex].blurb[lang]}
+            PROJECTS[modal.projectIndex].blurb[lang]}
         </p>
       </div>
 
-      {/* Фото — большое, по центру */}
-      <div className="relative flex-1 min-h-[60vh] flex items-center justify-center">
+      {/* Затем фото — крупное, по центру */}
+      <div className="relative grid place-items-center p-2">
         <img
           src={PROJECTS[modal.projectIndex].images[modal.imageIndex]}
           alt={PROJECTS[modal.projectIndex].title[lang]}
-          className="max-h-[70vh] w-auto object-contain"
+          className="max-h-[72vh] w-auto max-w-full object-contain"
         />
 
         {/* Prev / Next */}
@@ -616,18 +617,21 @@ export default function Page() {
         </button>
       </div>
 
-      {/* Before/After + счётчик снизу */}
+      {/* Before/After (если нужно) */}
       {showBeforeAfter && (
         <div className="py-3 text-center text-white/90 text-sm font-medium select-none">
           {baLabel}
         </div>
       )}
+
+      {/* Счётчик кадров */}
       <div className="py-2 text-center text-white/70 text-xs">
         {modal.imageIndex + 1}/{PROJECTS[modal.projectIndex].images.length}
       </div>
     </div>
   </div>
 )}
+
 </main>
   );
 }
