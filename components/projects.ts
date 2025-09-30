@@ -110,8 +110,8 @@ pt: [
   ],
   title: {
     ru: 'Бьюти-коворкинг',
-    en: 'OnePoint Office',
-    pt: 'Escritório OnePoint',
+    en: 'Beauty Coworking',
+    pt: 'Coworking de Beleza',
   },
   // краткий анонс можно оставить пустым, мы его на карточке больше не показываем
   blurb: {
@@ -126,8 +126,17 @@ pt: [
 Мы подобрали светильники, которые не только обеспечивают достаточную освещённость для точной работы, но и имеют комфортные углы засветки, исключающие блики. Для этого в прожекторах мы использовали хоникомбы, которые создают визуальный комфорт. Подвесные светильники с матовым стеклом дают мягкий, рассеянный свет, который заполняет пространство, делая его более уютным. Для каждой рабочей зоны — будь то парикмахерское кресло, стол для маникюра или зона визажиста — свет был настроен с учётом специфики, обеспечивая оптимальное освещение поверхностей, полок и шкафов.
 
 В итоге, каждый элемент освещения гармонично дополняет друг друга, создавая не просто функциональное, но и эстетически привлекательное пространство, где каждый чувствует себя комфортно.`,
-  en: '',
-  pt: '',
+  en: `When designing the lighting for a beauty co-working space, the main task was to create perfect conditions for the professionals. The key requirement was a high colour rendering index (CRI of at least 95) so that hair colouring, make-up and manicure tones look as natural as they do in daylight.
+
+We selected luminaires that not only provide sufficient illuminance for precise work, but also have comfortable cut-off angles to eliminate glare. For the spotlights we used honeycombs to increase visual comfort. Pendant fixtures with matte glass deliver soft, diffused light that fills the space and makes it feel more welcoming. For every work area—whether a hairdresser’s chair, a manicure desk or a make-up station—the lighting was tuned to its specifics, ensuring optimal illumination of surfaces, shelves and cabinets.
+
+As a result, every lighting element complements the others, creating not just a functional but also an aesthetically pleasing environment where everyone feels comfortable.`,
+ pt: `Ao projetar a iluminação para um espaço de co-working de beleza, a principal tarefa foi criar condições ideais para os profissionais. O requisito principal foi um elevado índice de reprodução de cor (CRI de pelo menos 95), para que as cores em coloração de cabelo, maquilhagem ou manicure pareçam o mais naturais possível, como à luz do dia.
+
+Selecionámos luminárias que não só garantem iluminância suficiente para um trabalho preciso, como também apresentam ângulos de cut-off confortáveis, eliminando o encandeamento. Nos projetores utilizámos honeycombs (colmeias) para aumentar o conforto visual. As luminárias suspensas com vidro mate fornecem uma luz suave e difusa que preenche o espaço, tornando-o mais acolhedor. Para cada zona de trabalho — seja a cadeira de cabeleireiro, a mesa de manicure ou a área de maquilhagem — a luz foi ajustada às suas especificidades, assegurando iluminação ideal de superfícies, prateleiras e armários.
+
+Como resultado, cada elemento de iluminação complementa os demais, criando não apenas um espaço funcional, mas também esteticamente agradável, onde todos se sentem confortáveis.`,
+
 },
 
 },
