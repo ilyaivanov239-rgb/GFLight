@@ -174,7 +174,7 @@ Como resultado, conseguimos combinar harmoniosamente estética e funcionalidade,
     slug: 'hotel',
     cover: '/projects/hotel/cover.jpg',
     images: seq('hotel', 12),
-    title: { ru: 'Отель с комплексом СПА', en: 'Hotel', pt: 'Hotel' },
+    title: { ru: 'Отель с комплексом СПА', en: 'Spa Hotel', pt: 'Hotel com Spa' },
     blurb: {
       ru: 'Интимная световая атмосфера для лобби и номеров — баланс теплоты и читаемости.',
       en: 'Warm, intimate lighting for lobby and rooms with clear visual hierarchy.',
@@ -188,8 +188,22 @@ Como resultado, conseguimos combinar harmoniosamente estética e funcionalidade,
 Цветодинамическая подсветка деревьев и водоема создала в парке загадочную атмосферу.
 
 В результате, благодаря сочетанию различных приемов, каждый элемент — от фасада до ландшафта — был гармонично подсвечен, что создало запоминающийся и живой образ всего архитектурного ансамбля.`,
-  en: '',
-  pt: '',
+  en: `To illuminate a complex architectural space with an adjacent park, we used a mix of optical solutions: accent spot projectors, oval-beam luminaires and wallwashers. This made it possible to emphasise architectural details and façade finishes while providing even lighting without overexposed areas.
+
+Luminaires with different colour temperatures broke the façade’s monotony, and the light directions were carefully designed to minimise spill into the windows, keeping the interior comfortable.
+
+Colour-dynamic lighting of the trees and the pond created a mysterious atmosphere in the park.
+
+As a result, thanks to the combination of techniques, every element — from the façade to the landscape — was lit harmoniously, forming a memorable and vivid image of the entire architectural ensemble.`,
+
+  pt: `Para iluminar um espaço arquitetónico complexo com parque adjacente, utilizámos várias soluções óticas: projetores de acento, luminárias de feixe oval e wallwashers (lava-paredes). Isto permitiu realçar os detalhes arquitetónicos e os acabamentos da fachada, garantindo uma iluminação uniforme sem zonas sobre-expostas.
+
+Luminárias com diferentes temperaturas de cor quebraram a monotonia da fachada, e a orientação dos feixes foi pensada para minimizar o derrame de luz para as janelas, tornando o interior confortável.
+
+A iluminação dinâmica de cor das árvores e do espelho de água criou no parque uma atmosfera envolvente e misteriosa.
+
+Como resultado, graças à combinação destas abordagens, cada elemento — da fachada à paisagem — ficou iluminado de forma harmoniosa, criando uma imagem marcante e viva de todo o conjunto arquitetónico.`,
+
 },
   },
   {
